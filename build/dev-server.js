@@ -1,6 +1,6 @@
 var express = require('express')
 var webpack = require('webpack')
-var config = require('./webpack.base.conf')
+var config = require('./webpack.dev.conf')
 var proxyMiddleware = require('http-proxy-middleware')
 
 // default port where dev server listens for incoming traffic
@@ -11,7 +11,6 @@ var compiler = webpack(config)
 
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-/*
 var proxyTable = {
     '/api': {
         target: 'http://apptest.zsgjs.com/X0-Testing/Testing/rabbitmq-stomp/',
@@ -21,8 +20,7 @@ var proxyTable = {
         }
     }
 }
-*/
-
+// console.log('dev config:::', config);
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,
   stats: {
@@ -41,7 +39,6 @@ compiler.plugin('compilation', function (compilation) {
 })
 
 // proxy api requests
-/*
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
@@ -49,7 +46,6 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(context, options))
 })
-*/
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
@@ -62,7 +58,7 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 // serve pure static assets
-app.use('/dist', express.static('./dist'))
+app.use('/static', express.static('./static'))
 
 module.exports = app.listen(port, function (err) {
   if (err) {

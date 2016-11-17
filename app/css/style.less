@@ -1,0 +1,364 @@
+//out: null
+@main-color: red;
+
+/*
+    公共头部
+*/
+
+.common-header {
+    height: 50px;
+    z-index: 999;
+    position: relative;
+    background: @main-color;
+    animation: move-down 0.3s ease-out;
+    .icon {
+        width: 50px;
+        height: 50px;
+        a {
+            display: block;
+            color: #fff;
+        }
+    }
+    .iconfont {
+        font-size: 24px;
+    }
+    .title {
+        line-height: 50px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+    }
+}
+
+@keyframes move-down {
+    0% {
+        transform: translate(0, -10px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/*
+    文章列表
+*/
+
+.article-list {
+    li {
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 1px 1px 3px #ccc;
+        background: #fff;
+        &+li {
+            border-top: 1px solid #eee;
+        }
+    }
+    h3 {
+        color: #222;
+    }
+    .content {
+        font-size: 13px;
+        color: #999;
+    }
+    .bottom {
+        padding-top: 5px;
+        .click {
+            font-size: 12px;
+            color: #ccc;
+        }
+        .to {
+            a {
+                font-size: 12px;
+                color: #1a43a8;
+            }
+        }
+    }
+    .pictrue {
+        // height: 160px;
+        margin-bottom: 10px;
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+
+/*
+    数据正在加载中
+*/
+
+.data-load-0 {
+    margin: 20px auto 20px auto;
+    position: relative;
+    animation: rotate-forever 1s infinite linear;
+    height: 30px;
+    width: 30px;
+    border: 4px solid @main-color;
+    border-right-color: transparent;
+    border-radius: 50%;
+    .msg {
+        display: none;
+    }
+}
+
+.data-load {
+    .msg {
+        line-height: 70px;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+@keyframes rotate-forever {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+/*
+    分类
+*/
+
+.class {
+    overflow: hidden;
+    background: #fff;
+    ul {
+        overflow: hidden;
+        padding: 10px 10px 0 10px;
+    }
+    li {
+        float: left;
+        width: 25%;
+        margin-bottom: 10px;
+        a {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bolder;
+            color: #222;
+        }
+    }
+}
+
+
+/*
+    文章详情
+*/
+
+.article-view {
+    padding: 10px;
+    h2 {
+        font-weight: bolder;
+        font-size: 16px;
+        color: #222;
+    }
+    .yue {
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+    }
+    article {
+        padding: 10px 0;
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+
+/*
+    关于我们
+*/
+
+.about {
+    padding: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    .pictrue {
+        overflow: hidden;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        img {
+            width: inherit;
+            height: inherit;
+            border: none;
+        }
+    }
+    .info {
+        padding-top: 20px;
+    }
+    a {
+        color: #3290e6;
+    }
+}
+
+
+/*
+    底部菜单栏
+*/
+
+.common-footer {
+    .zhanwei {
+        height: 50px;
+    }
+    .menu {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        z-index: 999;
+        background: @main-color;
+        a {
+            padding: 5px 0;
+            font-size: 14px;
+            display: block;
+            line-height: 20px;
+            text-align: center;
+            color: #fff;
+            opacity: 0.8;
+            text-align: center;
+        }
+        .on {
+            a {
+                opacity: 1;
+                color: #ebff00;
+            }
+        }
+        .iconfont {
+            display: block;
+        }
+    }
+}
+
+
+/*
+    登录注册
+*/
+
+.login {
+    padding: 100px 0;
+    .line {
+        padding: 10px 10%;
+        .key {
+            width: 50px;
+            padding-right: 10px;
+            line-height: 34px;
+            font-size: 14px;
+        }
+        .value {
+            font-size: 14px;
+            overflow: hidden;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #fff;
+            input {
+                width: 100%;
+                line-height: 24px;
+                background: transparent;
+            }
+        }
+        .select {
+            line-height: 34px;
+            .iconfont {
+                display: inline-block;
+                width: 26px;
+                font-size: 24px;
+            }
+            .icon-xuanzhong {
+                color: @main-color;
+            }
+        }
+    }
+    .btn {
+        margin: 50px 10%;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 38px;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        background: @main-color;
+    }
+}
+
+
+/*
+    个人中心
+*/
+
+.user {
+    .head {
+        margin: -50px 0 0 0;
+        .headimg {
+            height: 250px;
+            padding-top: 50px;
+            background-image: url(images/user-bg.jpg);
+            background-size: cover;
+            background-position: center center;
+            .pictrue {
+                overflow: hidden;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                box-shadow: 0 0 10px #fff, 0 0 20px #000;
+                background-size: cover;
+                background-position: center center;
+            }
+            .name {
+                padding-top: 10px;
+                font-size: 16px;
+                font-weight: bolder;
+                color: rgba(255, 255, 255, 0.9);
+            }
+        }
+    }
+    .logins {
+        margin-top: 20px;
+        height: 38px;
+        .item {
+            padding: 0 20px;
+            a {
+                display: block;
+                line-height: 38px;
+                font-size: 14px;
+                font-weight: bolder;
+                text-align: center;
+                border-radius: 8px;
+                color: #fff;
+                background: @main-color;
+            }
+        }
+    }
+    .nav {
+        overflow: hidden;
+        margin: 20px 0;
+        background: #fff;
+        li {
+            padding: 5px 10px;
+            &+li {
+                border-top: 1px solid #eee;
+            }
+            a {
+                height: 38px;
+                line-height: 38px;
+                font-size: 14px;
+                color: #666;
+                .font {
+                    width: 40px;
+                    .iconfont {
+                        font-size: 24px;
+                    }
+                }
+                .arrow {
+                    color: #ddd;
+                }
+            }
+        }
+    }
+}
