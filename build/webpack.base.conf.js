@@ -47,7 +47,7 @@ module.exports = {
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: /^node_modules$/,
-                loader: 'url?limit=20000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                loader: 'url?limit=220000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             }, {
                 test: /\.js[x]?$/,
                 exclude: /^node_modules$/,
@@ -55,8 +55,6 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'react']
                 }
-                // loaders: ['jsx', 'babel?presets[]=es2015,presets[]=react']
-                // loader: 'babel-loader?presets[]=es2015&presets[]=react',
             }
         ]
     }

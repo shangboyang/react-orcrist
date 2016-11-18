@@ -9,6 +9,7 @@
   "author": "Mengwen Li <yang8701@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "antd": "^2.4.3",
     "babel-runtime": "^6.18.0",
     "express": "^4.14.0",
     "flex-css-layout": "^1.2.8",
