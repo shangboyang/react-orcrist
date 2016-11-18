@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import route from './config/route';
+import ListView from './containers/ListView/ListView';
 
 // import store from './config/store';
 
@@ -19,9 +20,11 @@ store.subscribe(function () {
 */
 
 ReactDOM.render(
+
     <div className='common-header'>
         React react react
         <img src={IMG_TIMEG} width="100" height="100"/>
+        <ListView/>
     </div>,
     document.body.appendChild(document.getElementById('app'))
 );
