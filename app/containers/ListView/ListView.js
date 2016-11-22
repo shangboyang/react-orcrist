@@ -36,8 +36,7 @@ export default class ListView extends Component {
                     title='智慧人社通'
                     backHandler={this.backHandler}
                     optionHandler={this.optionHandler}
-                >
-                </Header>
+                />
                 <ul>
                     {
                         data.map((val, idx) => {
