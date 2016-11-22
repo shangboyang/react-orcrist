@@ -39,7 +39,7 @@ module.exports = {
             }, {
                 test: /\.less/,
                 exclude: /^node_modules$/,
-                loader: 'style-loader!css-loader'
+                loader: 'style-loader!css-loader!less-loader'
             }, {
                 test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
                 exclude: /^node_modules$/,
