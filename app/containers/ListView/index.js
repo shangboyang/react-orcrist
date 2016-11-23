@@ -2,6 +2,15 @@ import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
 
 const data = [1,3,4,5,5,6,67,7];
+const headerCfg = {
+    optionFlag: false,
+    backHandler: () => {
+        console.log('backHandler for ListView');
+    },
+    optionHandler: () => {
+        console.log('optionHandler for ListView');
+    }
+}
 
 export default class ListView extends Component {
 
@@ -20,14 +29,6 @@ export default class ListView extends Component {
         console.log('componentWillUnmount:::::');
     }
 
-    backHandler() {
-        console.log('backHandler for ListView');
-    }
-
-    optionHandler() {
-        console.log('optionHandler for ListView');
-    }
-
     render() {
         console.log('render::::');
         return (
@@ -36,6 +37,7 @@ export default class ListView extends Component {
                     title='智慧人社通'
                     backHandler={this.backHandler}
                     optionHandler={this.optionHandler}
+                    optionFlag={false}
                 />
                 <ul>
                     {

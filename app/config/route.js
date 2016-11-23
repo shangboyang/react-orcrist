@@ -1,23 +1,26 @@
 import React, {Component } from 'react';
 import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
-import ListView from '../containers/ListView/ListView';
-import Loading from '../containers/Loading/Loading';
+import App from '../containers/App/index';
+import ListView from '../containers/ListView/index';
+import Loading from '../containers/Loading/index';
 
-class Main extends Component {
-    render() {
-        return (
-            <div>{this.props.children}</div>
-        );
+const config = [
+    {
+        path: '/',
+        component: App,
+        // default index
+        indexRoute: {
+            component: Loading
+        },
+        childRoutes: [
+            { path: '/list', name: 'list', component: ListView },
+            { path: '/load', name: 'load', component: Loading }
+        ]
     }
-};
+];
 
 const route = (
-	<Router history={hashHistory}>
-		<Route path="/" component={Main}>
-            <IndexRoute component={Loading}/>
-			<Route path="ListView" component={ListView} />
-		</Route>
-	</Router>
+    <Router history={browserHistory} routes={config}></Router>
 );
 
 

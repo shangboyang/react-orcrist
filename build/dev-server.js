@@ -39,6 +39,7 @@ compiler.plugin('compilation', function (compilation) {
 })
 
 // proxy api requests
+/*
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
@@ -46,6 +47,7 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(context, options))
 })
+*/
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())

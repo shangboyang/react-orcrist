@@ -3,8 +3,8 @@ var path = require("path");
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var projectRoot = path.resolve(__dirname, '../');
 
-console.log('ProjectRoot', projectRoot);
-console.log('output PATH:::' + path.resolve(__dirname, '../dist/static'));
+// console.log('ProjectRoot', projectRoot);
+// console.log('output PATH:::' + path.resolve(__dirname, '../dist/static'));
 
 module.exports = {
     entry: {
@@ -27,7 +27,10 @@ module.exports = {
         }
     },
     resolveLoader: {
-        fallback: [path.join(__dirname, '../node_modules'), path.join(__dirname, '../app/css')]
+        fallback: [
+            path.join(__dirname, '../node_modules'),
+            path.join(__dirname, '../app/css')
+        ]
     },
     module: {
         // Different loaders are linked by exclamation mark(!)
