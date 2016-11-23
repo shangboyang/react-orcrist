@@ -1,5 +1,6 @@
 import React, {Component } from 'react';
-import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router';
+import { useScroll } from 'react-router-scroll';
 import App from '../containers/App/index';
 import ListView from '../containers/ListView/index';
 import Loading from '../containers/Loading/index';
@@ -20,7 +21,11 @@ const config = [
 ];
 
 const route = (
-    <Router history={browserHistory} routes={config}></Router>
+    <Router
+        history={hashHistory}
+        routes={config}
+        render={applyRouterMiddleware(useScroll())}>
+    </Router>
 );
 
 
