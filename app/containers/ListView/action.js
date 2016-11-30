@@ -1,4 +1,8 @@
-// Action 是一个对象。其中的type属性是必须的，表示 Action 的名称。
+// Action 是一个对象。其中的type属性是必须的，表示 Action 的名称。 TYPE唯一
+import {
+    LIST_ADD,
+    LIST_DEL
+} from './constant';
 /*
 const action = {
     type: 'ADD_TODO',
@@ -9,15 +13,15 @@ const action = {
 
 export function addTodo(text) {
     return {
-        type: 'ADD_TODO',
+        type: LIST_ADD,
         text,
-        payload: 1
+        payload: 5
     }
 }
 
 export function delTodo(text) {
     return {
-        type: 'DEL_TODO',
+        type: LIST_DEL,
         text,
         payload: 2
     }

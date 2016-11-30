@@ -16,7 +16,6 @@ store.subscribe(function () {
     console.log('subscribe...::::....' + store.getState());
 });
 
-
 ReactDOM.render(
     <div className="common-root">{route}</div>,
     document.getElementById('app')

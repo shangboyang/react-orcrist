@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
 import request from '../../utils/request';
 import IMG_ACE from '../Loading/images/ace.jpg';
-import action from './action';
-import reducer from './reducer';
+import store from '../../config/store';
+import {addTodo} from './action';
+import './style.less';
+
+console.log('addTodo', addTodo);
 
 const data = [1,3,4,5,5,6,67,7];
 const headerCfg = {
@@ -36,10 +39,15 @@ export default class ListView extends Component {
                     loading: false,
                     value
                 });
+                console.log('ddddddd');
+                console.log(this.getState);
+                store.dispatch(addTodo('what a shit~'));
                 return this;
             })
             .then((listView) => {
-                console.log('listView', listView);
+                console.log('ListView Store', store);
+                store.dispatch(addTodo('what a shit~'));
+                console.log(store.getState());;
             })
             .catch((err) => new Error('wrong'))
             .done();
@@ -68,6 +76,10 @@ export default class ListView extends Component {
         console.log('componentWillUnmount:::::');
     }
 
+    clickImageHandler(e) {
+        console.log(this);
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -90,7 +102,8 @@ export default class ListView extends Component {
                         optionHandler={this.optionHandler}
                         rightText={'Option'}
                     />
-                    <img className="loading-ace" src={IMG_ACE}/>
+                    <img className="loading-ace" src={IMG_ACE} onClick={this.clickImageHandler}/>
+                    <div className="button">ADD_TODO</div>
                     <ul>
                         {
                             this.state.value.map((val, idx) => {
