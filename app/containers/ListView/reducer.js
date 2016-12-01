@@ -9,6 +9,12 @@ import {
 } from './constant';
 
 const initialState = 0; // 可以是Number 或者字符串 或对象
+/*
+let state = {
+    isFetching: false,
+    lastUpdated: 'xxx'
+}
+*/
 const listViewReducer = (state = initialState, action) => {
     console.log('init reducer', action);
     switch (action.type) {

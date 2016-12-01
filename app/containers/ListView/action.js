@@ -9,8 +9,14 @@ const action = {
     payload: 'Learn Redux'
 };
 */
-// action Creator
+// action Creator 包含编写所有action同步请求等动作
 
+
+/************************************************************/
+/* Action Creator 包含编写所有action同步请求等动作 */
+/* Normal ActionCreater return {}，Special ActionCreater return function */
+/* 使用redux-thunk polyfill
+/************************************************************/
 export function addTodo(text) {
     return {
         type: LIST_ADD,

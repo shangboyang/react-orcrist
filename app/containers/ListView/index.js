@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
 import request from '../../utils/request';
-import IMG_ACE from '../Loading/images/ace.jpg';
+import IMG_LUFFY from './images/luffy.jpg';
 import store from '../../config/store';
 import {addTodo} from './action';
 import './style.less';
@@ -28,6 +28,11 @@ export default class ListView extends Component {
             error: null,
             value: null,
         }
+
+        store.subscribe(function() {
+            console.log('ListView subscribe::::' + this);
+        })
+        this.clickImageHandler = this.clickImageHandler.bind(this);
         // console.log('ListView props', props);
     }
 
@@ -39,7 +44,6 @@ export default class ListView extends Component {
                     loading: false,
                     value
                 });
-                console.log('ddddddd');
                 console.log(this.getState);
                 store.dispatch(addTodo('what a shit~'));
                 return this;
@@ -71,12 +75,39 @@ export default class ListView extends Component {
         console.log('componentDidMount::::');
         */
     }
-    // render()前最后一次机会改变组件state
-    componentWillUnmount() {
-        console.log('componentWillUnmount:::::');
-    }
 
     clickImageHandler(e) {
+        const value = this.state.value;
+
+        value.push({
+            name: 'Saint Seiya'
+        });
+
+        this.setState({
+            loading: false,
+            value
+        });
+        /*
+        request('get', '/api/groupRT.php')
+            .then((value) => {
+
+                console.log('value', value);
+
+                value.push({
+                    name: 'Saint Seiya'
+                });
+
+                this.setState({
+                    loading: false,
+                    value
+                });
+                console.log(value);
+                store.dispatch(addTodo('what a shit~'));
+                return this;
+            })
+            .catch((err) => new Error('wrong'))
+            .done();
+        */
         console.log(this);
     }
 
@@ -102,8 +133,8 @@ export default class ListView extends Component {
                         optionHandler={this.optionHandler}
                         rightText={'Option'}
                     />
-                    <img className="loading-ace" src={IMG_ACE} onClick={this.clickImageHandler}/>
-                    <div className="button">ADD_TODO</div>
+                    <img className="loading-ace" src={IMG_LUFFY}/>
+                    <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
                     <ul>
                         {
                             this.state.value.map((val, idx) => {
