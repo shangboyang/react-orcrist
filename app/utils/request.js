@@ -1,3 +1,5 @@
+import Promise from 'es6-promise';
+
 /**
  * 为Promise扩充done 总是处于回调链最底端 保证抛出任何可能出现的异常
  * @param  {[type]} onFulfilled [description]
@@ -13,7 +15,7 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
     })
 };
 
-const fetch = (type, url) => {
+const request = (type, url) => {
 
     let promise = new Promise((resolve, reject) => {
 
@@ -22,7 +24,7 @@ const fetch = (type, url) => {
             if (this.readyState !== 4) {
                 return;
             }
-            
+
             if (this.status === 200) {
                 resolve(this.response);
             }
@@ -42,4 +44,4 @@ const fetch = (type, url) => {
 
 }
 
-export default fetch;
+export default request;

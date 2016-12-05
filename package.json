@@ -11,6 +11,7 @@
   "dependencies": {
     "antd": "^2.4.3",
     "babel-runtime": "^6.18.0",
+    "es5-shim": "^4.5.9",
     "express": "^4.14.0",
     "flex-css-layout": "^1.2.8",
     "history": "^3.2.1",
@@ -23,7 +24,6 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "lodash": "^4.16.6",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
@@ -31,6 +31,7 @@
     "body-parser": "^1.15.2",
     "connect-history-api-fallback": "^1.3.0",
     "css-loader": "^0.25.0",
+    "es6-promise": "^4.0.5",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
@@ -41,6 +42,7 @@
     "jsx-loader": "^0.13.2",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lodash": "^4.16.6",
     "ora": "^0.3.0",
     "postcss-loader": "^1.1.0",
     "request": "^2.76.0",

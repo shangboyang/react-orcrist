@@ -32,6 +32,7 @@ export default class ListView extends Component {
         store.subscribe(function() {
             console.log('ListView subscribe::::' + this);
         })
+        // alert('map:::' + Array.prototype.map);
         this.clickImageHandler = this.clickImageHandler.bind(this);
         // console.log('ListView props', props);
     }
@@ -40,12 +41,19 @@ export default class ListView extends Component {
     componentDidMount() {
         request('get', '/api/groupRT.php')
             .then((value) => {
-                this.setState({
-                    loading: false,
-                    value
-                });
-                console.log(this.getState);
-                store.dispatch(addTodo('what a shit~'));
+                try {
+                    if (typeof value === 'string') {
+                        value = JSON.parse(value);
+                    }
+                    this.setState({
+                        loading: false,
+                        value
+                    });
+                    store.dispatch(addTodo('what a shit~'));
+                } catch(e) {
+                    alert(e);
+                }
+
                 return this;
             })
             .then((listView) => {
@@ -55,6 +63,7 @@ export default class ListView extends Component {
             })
             .catch((err) => new Error('wrong'))
             .done();
+
 
         /*
         fetch('/api/groupRT.php')
@@ -72,13 +81,15 @@ export default class ListView extends Component {
                     error
                 })
             })
-        console.log('componentDidMount::::');
         */
+        console.log('componentDidMount::::');
+
     }
 
     clickImageHandler(e) {
-        const value = this.state.value;
 
+        const value = this.state.value;
+        console.log('hello', value);
         value.push({
             name: 'Saint Seiya'
         });
@@ -87,10 +98,13 @@ export default class ListView extends Component {
             loading: false,
             value
         });
+
         /*
         request('get', '/api/groupRT.php')
             .then((value) => {
-
+                if (typeof value === 'string') {
+                    value = JSON.parse(value);
+                }
                 console.log('value', value);
 
                 value.push({
@@ -105,13 +119,24 @@ export default class ListView extends Component {
                 store.dispatch(addTodo('what a shit~'));
                 return this;
             })
-            .catch((err) => new Error('wrong'))
+            .catch((err) => {
+                alert(err);
+                new Error('wrong')
+            })
             .done();
+        */
+        /*
+        this.state.value.map((val, idx) => {
+            return (
+                <li key={idx}>{val.name}</li>
+            )
+        })
         */
         console.log(this);
     }
 
     render() {
+
         if (this.state.loading) {
             return (
                 <div>
@@ -125,6 +150,18 @@ export default class ListView extends Component {
                 </div>
             )
         } else {
+            try {
+                if (typeof this.state.value === 'string') {
+                    // this.state.value = this.state.value.split(',');
+                }
+                // alert('ddd this.state.value :::' + this.state.value);
+                // alert('[] type is :::' + Object.prototype.toString.call([1, 3, 4]));
+                // alert('this.state.value type is :::' + Object.prototype.toString.call(this.state.value));
+                // alert(typeof this.state.value);
+            } catch(e) {
+                alert('ddd map:::' + e);
+            }
+
             return (
                 <div>
                     <Header
@@ -143,7 +180,6 @@ export default class ListView extends Component {
                                 )
                             })
                         }
-
                     </ul>
                 </div>
             )

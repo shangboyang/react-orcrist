@@ -4,7 +4,7 @@ export default class Main extends Component {
 
     constructor(props) {
         super(props);
-        console.log('App', props);
+        console.log('App', this);
     }
 
     render() {
