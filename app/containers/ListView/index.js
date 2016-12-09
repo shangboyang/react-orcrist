@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
 import request from '../../utils/request';
-import IMG_LUFFY from './images/luffy.jpg';
+import Pager from '../../utils/pager';
 import store from '../../config/store';
 import {addTodo} from './action';
 import './style.less';
+// images
+import IMG_LUFFY from './images/luffy.jpg';
+import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
+import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
+import IMG_DAO from './images/dao.jpg';
 
-console.log('addTodo', addTodo);
 
-const data = [1,3,4,5,5,6,67,7];
 const headerCfg = {
     optionFlag: false,
     backHandler: () => {
@@ -18,6 +21,8 @@ const headerCfg = {
         console.log('optionHandler for ListView');
     }
 }
+
+console.log('pager', Pager);
 
 export default class ListView extends Component {
 
@@ -30,7 +35,7 @@ export default class ListView extends Component {
         }
 
         store.subscribe(function() {
-            console.log('ListView subscribe::::' + this);
+            // console.log('ListView subscribe::::' + this);
         })
         // alert('map:::' + Array.prototype.map);
         this.clickImageHandler = this.clickImageHandler.bind(this);
@@ -39,6 +44,7 @@ export default class ListView extends Component {
 
     // render()调用后执行
     componentDidMount() {
+
         request('get', '/api/groupRT.php')
             .then((value) => {
                 try {
@@ -49,17 +55,19 @@ export default class ListView extends Component {
                         loading: false,
                         value
                     });
+                    let pager = new Pager(this.refs.pager);
                     store.dispatch(addTodo('what a shit~'));
+
                 } catch(e) {
+
                     alert(e);
+
                 }
 
                 return this;
             })
             .then((listView) => {
-                console.log('ListView Store', store);
                 store.dispatch(addTodo('what a shit~'));
-                console.log(store.getState());;
             })
             .catch((err) => new Error('wrong'))
             .done();
@@ -82,7 +90,7 @@ export default class ListView extends Component {
                 })
             })
         */
-        console.log('componentDidMount::::');
+
 
     }
 
@@ -146,6 +154,7 @@ export default class ListView extends Component {
                         optionHandler={this.optionHandler}
                         rightText={'Option'}
                     />
+                    <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
                     <div>Loading</div>
                 </div>
             )
@@ -170,7 +179,12 @@ export default class ListView extends Component {
                         optionHandler={this.optionHandler}
                         rightText={'Option'}
                     />
+                    <img className="loading-ace" src={IMG_YOUR_NAME_2}/>
+                    <div>你的名字</div>
+                    <img className="loading-ace" src={IMG_DAO}/>
+                    <div>道</div>
                     <img className="loading-ace" src={IMG_LUFFY}/>
+                    <div>路飞</div>
                     <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
                     <ul>
                         {
@@ -181,6 +195,9 @@ export default class ListView extends Component {
                             })
                         }
                     </ul>
+                    <div ref="pager" className="pager-line">
+
+                    </div>
                 </div>
             )
         }

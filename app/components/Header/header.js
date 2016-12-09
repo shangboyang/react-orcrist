@@ -5,14 +5,13 @@ export default class Header extends Component {
 
     constructor(props) {
         super(props);
-        // console.log('this.props', this.props);
-        this.state = {};
         this.optionHandler = this.optionHandler.bind(this); // 1 selector
         this.backHandler = this.backHandler.bind(this); // 1 selector
 
     }
 
     componentDidMount() {
+        console.log('Header', this);
         // console.log('Header:::componentDidMount', this);
     }
 

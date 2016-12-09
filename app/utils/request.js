@@ -1,3 +1,4 @@
+// es6 Promise polyfill
 import Promise from 'es6-promise';
 
 /**

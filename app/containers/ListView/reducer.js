@@ -16,7 +16,7 @@ let state = {
 }
 */
 const listViewReducer = (state = initialState, action) => {
-    console.log('init reducer', action);
+    // console.log('init reducer', action);
     switch (action.type) {
         case LIST_ADD:
             return state + action.payload;
