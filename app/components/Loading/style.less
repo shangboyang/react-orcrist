@@ -1,0 +1,32 @@
+/* BottomLoading 数据正在加载中 */
+.load-status-1 {
+    margin: 20px auto 20px auto;
+    position: relative;
+    animation: rotate-forever 1s infinite linear;
+    height: 30px;
+    width: 30px;
+    border: 4px solid #54caff;
+    border-right-color: transparent;
+    border-radius: 50%;
+
+    .load-msg {
+        display: none;
+    }
+}
+
+.load {
+    .load-msg {
+        line-height: 70px;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+@keyframes rotate-forever {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}

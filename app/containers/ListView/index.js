@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
+import {BottomLoading} from '../../components/Loading/index';
+import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
@@ -11,7 +13,6 @@ import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
 
-
 const headerCfg = {
     optionFlag: false,
     backHandler: () => {
@@ -22,7 +23,7 @@ const headerCfg = {
     }
 }
 
-console.log('pager', Pager);
+console.log('Pagination', Pagination);
 
 export default class ListView extends Component {
 
@@ -34,9 +35,6 @@ export default class ListView extends Component {
             value: null,
         }
 
-        store.subscribe(function() {
-            // console.log('ListView subscribe::::' + this);
-        })
         // alert('map:::' + Array.prototype.map);
         this.clickImageHandler = this.clickImageHandler.bind(this);
         // console.log('ListView props', props);
@@ -55,7 +53,7 @@ export default class ListView extends Component {
                         loading: false,
                         value
                     });
-                    let pager = new Pager(this.refs.pager);
+                    // let pager = new Pager(this.refs.pager);
                     store.dispatch(addTodo('what a shit~'));
 
                 } catch(e) {
@@ -195,9 +193,8 @@ export default class ListView extends Component {
                             })
                         }
                     </ul>
-                    <div ref="pager" className="pager-line">
+                    <Pagination uri="getArticles" text="what is the fuck"></Pagination>
 
-                    </div>
                 </div>
             )
         }

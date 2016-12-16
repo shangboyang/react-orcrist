@@ -14,7 +14,7 @@
 })(function() {
 
     function Pager(selector, option) {
-console.log('Enter Pager~~~~~~~~~~~~~~~~~~ ');
+
         this.el = this.queryElements(selector);
 
         this.isLoading = false;
@@ -60,18 +60,25 @@ console.log('Enter Pager~~~~~~~~~~~~~~~~~~ ');
         self.eachDOM();
     };
 
+    Pager.prototype.removeEventsListener = function() {
+        var eventList = this.monitorEvent;
+        for (let i = 0; i < eventList.length; i++) {
+            window.removeEventListener(eventList[i], this.eachDOM, false);
+        }
+    };
+
     /**
      * 遍历DOM是否符合加载条件
      * @return {[type]} [description]
      */
     Pager.prototype.eachDOM = function() {
-        console.log('start:::::::::::::eachDOM');
-        // if (this.testXhrStart()) return;
+        if (this.isLoading) return;
 
         for (var i = 0, len = this.el.length; i < len; i++) {
             if (this.isInCurrentScreen(this.el[i])) {
                 // this.getNextData(this.el[i]);
                 console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
+                this.execute();
                 return;
             }
         }
@@ -79,16 +86,27 @@ console.log('Enter Pager~~~~~~~~~~~~~~~~~~ ');
 
     }
 
-
-
     Pager.prototype.execute = function() {
-
+        var self = this;
+        self.isLoading = true; // 开始执行execute
+        clearTimeout(self.timer);
+        self.timer = setTimeout(function() {
+            console.log('loading::::::::::::start');
+            console.log('loading::::::::::::1');
+            console.log('loading::::::::::::2');
+            console.log('loading::::::::::::3');
+            console.log('loading::::::::::::end');
+            self.isLoading = false;
+            clearTimeout(self.timer);
+        }, 5000);
     };
 
-    Pager.prototype.removeEventsListener = function() {
 
-    };
-
+    /**
+     * 判断元素是否在可视区
+     * @param  {[type]} el [description]
+     * @return {[type]}    [description]
+     */
     Pager.prototype.isInCurrentScreen = function(el) {
 
         let bcr = el.getBoundingClientRect(); //取得元素在可视区的位置
