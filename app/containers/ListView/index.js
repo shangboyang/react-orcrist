@@ -5,7 +5,7 @@ import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
-import {addTodo} from './action';
+import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
 import './style.less';
 // images
 import IMG_LUFFY from './images/luffy.jpg';
@@ -14,191 +14,180 @@ import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
 
 const headerCfg = {
-    optionFlag: false,
-    backHandler: () => {
-        console.log('backHandler for ListView');
-    },
-    optionHandler: () => {
-        console.log('optionHandler for ListView');
-    }
+  optionFlag: false,
+  backHandler: () => {
+    console.log('backHandler for ListView');
+  },
+  optionHandler: () => {
+    console.log('optionHandler for ListView');
+  }
 }
 
-console.log('Pagination', Pagination);
+// console.log('Pagination', Pagination);
 
 export default class ListView extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true,
-            error: null,
-            value: null,
-        }
-
-        // alert('map:::' + Array.prototype.map);
-        this.clickImageHandler = this.clickImageHandler.bind(this);
-        // console.log('ListView props', props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      error: null,
+      value: null,
     }
 
-    // render()调用后执行
-    componentDidMount() {
+    this.clickImageHandler = this.clickImageHandler.bind(this);
+    this.getArticleList = this.getArticleList.bind(this);
+  }
 
-        request('get', '/api/groupRT.php')
-            .then((value) => {
-                try {
-                    if (typeof value === 'string') {
-                        value = JSON.parse(value);
-                    }
-                    this.setState({
-                        loading: false,
-                        value
-                    });
-                    // let pager = new Pager(this.refs.pager);
-                    store.dispatch(addTodo('what a shit~'));
+  // render()调用后执行
+  componentDidMount() {
 
-                } catch(e) {
+    this.getArticleList(1);
 
-                    alert(e);
-
-                }
-
-                return this;
-            })
-            .then((listView) => {
-                store.dispatch(addTodo('what a shit~'));
-            })
-            .catch((err) => new Error('wrong'))
-            .done();
-
-
-        /*
-        fetch('/api/groupRT.php')
-            .then(response => response.json)
-            .then(value => {
-                console.log(value);
-                this.setState({
-                    loading: false,
-                    value
-                })
-            })
-            .catch(error => {
-                this.setState({
-                    loading: false,
-                    error
-                })
-            })
-        */
-
-
-    }
-
-    clickImageHandler(e) {
-
-        const value = this.state.value;
-        console.log('hello', value);
-        value.push({
-            name: 'Saint Seiya'
-        });
-
+    /*
+    fetch('/api/groupRT.php')
+      .then(response => response.json)
+      .then(value => {
+        console.log(value);
         this.setState({
-            loading: false,
-            value
-        });
-
-        /*
-        request('get', '/api/groupRT.php')
-            .then((value) => {
-                if (typeof value === 'string') {
-                    value = JSON.parse(value);
-                }
-                console.log('value', value);
-
-                value.push({
-                    name: 'Saint Seiya'
-                });
-
-                this.setState({
-                    loading: false,
-                    value
-                });
-                console.log(value);
-                store.dispatch(addTodo('what a shit~'));
-                return this;
-            })
-            .catch((err) => {
-                alert(err);
-                new Error('wrong')
-            })
-            .done();
-        */
-        /*
-        this.state.value.map((val, idx) => {
-            return (
-                <li key={idx}>{val.name}</li>
-            )
+          loading: false,
+          value
         })
-        */
-        console.log(this);
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error
+        })
+      })
+    */
+
+
+  }
+
+  clickImageHandler(e) {
+
+    const value = this.state.value;
+    // console.log('hello', value);
+    value.push({
+      name: 'Saint Seiya'
+    });
+
+    this.setState({
+      loading: false,
+      value
+    });
+
+  }
+
+  getArticleList(pageNo) {
+
+    console.log('getMoreData handler ++++++++++++++++++');
+
+    let data = this.state.value || [];
+    pageNo = this.state.pageNo || 0;
+
+    request('get', '/api/groupRT.php', {
+      pageNo
+    })
+    .then((value) => {
+
+      if (typeof value === 'string') {
+        value = JSON.parse(value);
+      }
+
+      this.setState({
+        loading: false,
+        value: data.concat(value),
+        pageNo: pageNo + 1
+      });
+
+      if (pageNo === 1) {
+        store.dispatch(articleListInit(this.state.pageNo));
+      } else {
+        store.dispatch(articleListLoad(this.state.pageNo));
+      }
+
+      store.dispatch(articleListInit(this.state.pageNo));
+      console.log('Store', store.getState());
+
+      return this;
+    })
+    .then((listView) => {
+      store.dispatch(addTodo('what a shit~'));
+    })
+    .catch((err) => {
+      store.dispatch(articleListError(this.state.pageNo));
+    })
+    .done();
+  }
+
+  render() {
+    console.log('listView:::render++++++++++++++++++++++++++++++++++');
+    if (this.state.loading) {
+    /* loading 展示页 */
+      return (
+        <div>
+          <Header
+          title='Loading'
+          backHandler={this.backHandler}
+          optionHandler={this.optionHandler}
+          rightText={'Option'}
+          ></Header>
+          <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
+          <div>Loading</div>
+        </div>
+      )
+    } else {
+
+      let list = this.state.value;
+      let loadStatus = this.state.loadStatus;
+      let pageNo = this.state.pageNo;
+
+      return (
+        <div>
+          <Header
+            title='智慧人社通1111'
+            backHandler={this.backHandler}
+            optionHandler={this.optionHandler}
+            rightText={'Option'}
+          />
+          <img className="loading-ace" src={IMG_DAO}/>
+          <div>道</div>
+          <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
+
+          <ArticleList articles={list}></ArticleList>
+          <Pagination loadStatus={loadStatus} callback={this.getArticleList} pageNo={pageNo}></Pagination>
+
+        </div>
+      )
     }
+  }
+}
 
-    render() {
+class ArticleList extends Component {
 
-        if (this.state.loading) {
+  constructor(props) {
+    super(props);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('ArticleList::: shouldComponentUpdate~~~~~');
+    return !(this.props == nextProps);
+  }
+
+  render() {
+    let { articles } = this.props;
+    return (
+      <ul>
+        {
+          articles.map((val, idx) => {
             return (
-                <div>
-                    <Header
-                        title='Loading'
-                        backHandler={this.backHandler}
-                        optionHandler={this.optionHandler}
-                        rightText={'Option'}
-                    />
-                    <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
-                    <div>Loading</div>
-                </div>
+              <li className="arcticle-item" key={idx}>{val.name}</li>
             )
-        } else {
-            try {
-                if (typeof this.state.value === 'string') {
-                    // this.state.value = this.state.value.split(',');
-                }
-                // alert('ddd this.state.value :::' + this.state.value);
-                // alert('[] type is :::' + Object.prototype.toString.call([1, 3, 4]));
-                // alert('this.state.value type is :::' + Object.prototype.toString.call(this.state.value));
-                // alert(typeof this.state.value);
-            } catch(e) {
-                alert('ddd map:::' + e);
-            }
-
-            return (
-                <div>
-                    <Header
-                        title='智慧人社通1111'
-                        backHandler={this.backHandler}
-                        optionHandler={this.optionHandler}
-                        rightText={'Option'}
-                    />
-                    <img className="loading-ace" src={IMG_YOUR_NAME_2}/>
-                    <div>你的名字</div>
-                    <img className="loading-ace" src={IMG_DAO}/>
-                    <div>道</div>
-                    <img className="loading-ace" src={IMG_LUFFY}/>
-                    <div>路飞</div>
-                    <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
-                    <ul>
-                        {
-                            this.state.value.map((val, idx) => {
-                                return (
-                                    <li key={idx}>{val.name}</li>
-                                )
-                            })
-                        }
-                    </ul>
-                    <Pagination uri="getArticles" text="what is the fuck"></Pagination>
-
-                </div>
-            )
+          })
         }
-
-
-    }
+      </ul>
+    );
+  }
 }

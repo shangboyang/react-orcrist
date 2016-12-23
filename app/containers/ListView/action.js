@@ -1,7 +1,11 @@
 // Action 是一个对象。其中的type属性是必须的，表示 Action 的名称。 TYPE唯一
 import {
     LIST_ADD,
-    LIST_DEL
+    LIST_DEL,
+    GET_ARTICLE_LIST_INIT,
+    GET_ARTICLE_LIST_LOAD,
+    GET_ARTICLE_LIST_SUCCESS,
+    GET_ARTICLE_LIST_ERROR
 } from './constant';
 /*
 const action = {
@@ -31,6 +35,38 @@ export function delTodo(text) {
         text,
         payload: 2
     }
+}
+
+export function articleListInit(pageNo) {
+  return {
+    type: GET_ARTICLE_LIST_INIT,
+    pageNo,
+    loadStatus: 0
+  }
+}
+
+export function articleListLoad(pageNo) {
+  return {
+    type: GET_ARTICLE_LIST_LOAD,
+    pageNo,
+    loadStatus: 1
+  }
+}
+
+export function articleListSuccess(pageNo) {
+  return {
+    type: GET_ARTICLE_LIST_SUCCESS,
+    text,
+    loadStatus: 2
+  }
+}
+
+export function articleListError(pageNo) {
+  return {
+    type: GET_ARTICLE_LIST_ERROR,
+    text,
+    loadStatus: 3
+  }
 }
 
 // const action = addTodo('Learn Redux');

@@ -3,31 +3,30 @@ import './style.less';
 
 class BottomLoading extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        console.log(this.props);
-        return (
-            <div className={'load load-status-' + this.props.status}>
-                <div className="load-msg">{this.props.msg}</div>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className={'load load-status-' + this.props.status}>
+          <div className="load-msg">{this.props.msg}</div>
+      </div>
+    )
+  }
 }
 
 class Loading extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <div>
-                Loading
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+          Loading
+      </div>
+    )
+  }
 }
 
 export {Loading, BottomLoading};

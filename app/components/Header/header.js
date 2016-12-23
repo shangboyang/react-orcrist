@@ -11,7 +11,7 @@ export default class Header extends Component {
     }
 
     componentDidMount() {
-        console.log('Header', this);
+        // console.log('Header', this);
         // console.log('Header:::componentDidMount', this);
     }
 

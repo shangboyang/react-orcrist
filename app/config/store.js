@@ -4,8 +4,6 @@ import listViewReducer from '../containers/ListView/reducer';
 import loadReducer from '../containers/Loading/reducer';
 import thunk from 'redux-thunk';
 
-console.log('reducer', reducer);
-
 const reducer = {listViewReducer, loadReducer}
 
 // Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。

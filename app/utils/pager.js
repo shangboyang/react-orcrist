@@ -15,6 +15,8 @@
 
     function Pager(selector, option) {
 
+console.log('Page option', option);
+
         this.el = this.queryElements(selector);
 
         this.isLoading = false;
@@ -26,6 +28,8 @@
         this.right = this.option.right || 0; //元素在右边伸出的距离才加载
         this.bottom = this.option.bottom || 0; //元素在底部伸出的距离才加载
         this.left = this.option.left || 0; //元素在左边伸出的距离才加载
+        // 获取数据列表
+        this.fetchData = this.option.callback || function() { console.log('fetchData:::::::::::::::::::::::::::::::'); };
 
         // listen
         this.monitorEvents = [
@@ -91,14 +95,10 @@
         self.isLoading = true; // 开始执行execute
         clearTimeout(self.timer);
         self.timer = setTimeout(function() {
-            console.log('loading::::::::::::start');
-            console.log('loading::::::::::::1');
-            console.log('loading::::::::::::2');
-            console.log('loading::::::::::::3');
-            console.log('loading::::::::::::end');
+            self.fetchData();
             self.isLoading = false;
             clearTimeout(self.timer);
-        }, 5000);
+        }, 3000);
     };
 
 
@@ -126,7 +126,7 @@
             new Error('Selector not found...');
             return;
         }
-        console.log('selector', selector);
+        // console.log('selector', selector);
         switch (typeof selector) {
             case 'string':
                 return document.querySelectorAll(selector);
