@@ -15,12 +15,11 @@
 
     function Pager(selector, option) {
 
-console.log('Page option', option);
-
         this.el = this.queryElements(selector);
 
         this.isLoading = false;
         this.hasMore = false;
+        this.pageNo = 1;
 
         // 元素在可视区位置，符合其中一个条件就会触发加载机制
         this.option = option || {};
@@ -30,7 +29,6 @@ console.log('Page option', option);
         this.left = this.option.left || 0; //元素在左边伸出的距离才加载
         // 获取数据列表
         this.fetchData = this.option.callback || function() { console.log('fetchData:::::::::::::::::::::::::::::::'); };
-
         // listen
         this.monitorEvents = [
             'DOMContentLoaded', 'load', 'click',
@@ -45,13 +43,7 @@ console.log('Page option', option);
     }
 
     Pager.prototype.init = function() {
-
         var self = this;
-
-        // callback
-        // self.success = self.option.success || function() {};
-        // self.error = self.option.error || function() {};
-
         self.eachDOM = self.eachDOM.bind(this);
         self.addEventsListener(self.monitorEvents);
     }
@@ -80,25 +72,26 @@ console.log('Page option', option);
 
         for (var i = 0, len = this.el.length; i < len; i++) {
             if (this.isInCurrentScreen(this.el[i])) {
-                // this.getNextData(this.el[i]);
-                console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
+                // console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
                 this.execute();
                 return;
             }
         }
 
-
     }
 
     Pager.prototype.execute = function() {
         var self = this;
+
         self.isLoading = true; // 开始执行execute
-        clearTimeout(self.timer);
-        self.timer = setTimeout(function() {
-            self.fetchData();
-            self.isLoading = false;
-            clearTimeout(self.timer);
-        }, 3000);
+console.log('SELF PageNo in:::'  + self.pageNo);
+        self.fetchData(self.pageNo, function(pageNo) {
+          self.pageNo = pageNo;
+
+          self.isLoading = false;
+
+console.log('SELF PageNo out:::'  + self.pageNo);
+        });
     };
 
 

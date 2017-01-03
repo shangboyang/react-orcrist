@@ -29,8 +29,9 @@ export default class ListView extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      loading: true,
+      loadStatus: 0,
       error: null,
       value: null,
     }
@@ -62,7 +63,6 @@ export default class ListView extends Component {
       })
     */
 
-
   }
 
   clickImageHandler(e) {
@@ -74,18 +74,20 @@ export default class ListView extends Component {
     });
 
     this.setState({
-      loading: false,
+      loadStatus: 1,
       value
     });
 
   }
 
-  getArticleList(pageNo) {
+  getArticleList(pageNo, callback) {
 
-    console.log('getMoreData handler ++++++++++++++++++');
-
-    let data = this.state.value || [];
+    const data = this.state.value || [];
     pageNo = this.state.pageNo || 0;
+
+    this.setState({
+      loadStatus: 1
+    });
 
     request('get', '/api/groupRT.php', {
       pageNo
@@ -97,7 +99,7 @@ export default class ListView extends Component {
       }
 
       this.setState({
-        loading: false,
+        loadStatus: 0,
         value: data.concat(value),
         pageNo: pageNo + 1
       });
@@ -109,35 +111,41 @@ export default class ListView extends Component {
       }
 
       store.dispatch(articleListInit(this.state.pageNo));
-      console.log('Store', store.getState());
+      // console.log('Store', store.getState());
 
       return this;
     })
     .then((listView) => {
+      typeof callback === 'function' && callback(this.state.pageNo);
       store.dispatch(addTodo('what a shit~'));
     })
     .catch((err) => {
+      typeof callback === 'function' && callback(this.state.pageNo);
       store.dispatch(articleListError(this.state.pageNo));
     })
     .done();
   }
 
   render() {
-    console.log('listView:::render++++++++++++++++++++++++++++++++++');
-    if (this.state.loading) {
-    /* loading 展示页 */
+
+    if (!this.state.value) {
+
       return (
+
         <div>
           <Header
-          title='Loading'
-          backHandler={this.backHandler}
-          optionHandler={this.optionHandler}
-          rightText={'Option'}
-          ></Header>
+            title='Loading'
+            backHandler={this.backHandler}
+            optionHandler={this.optionHandler}
+            rightText={'Option'}
+          >
+          </Header>
           <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
           <div>Loading</div>
         </div>
+
       )
+
     } else {
 
       let list = this.state.value;
@@ -172,7 +180,7 @@ class ArticleList extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('ArticleList::: shouldComponentUpdate~~~~~');
+    // console.log('ArticleList::: shouldComponentUpdate~~~~~');
     return !(this.props == nextProps);
   }
 

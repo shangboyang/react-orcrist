@@ -12,14 +12,10 @@ export default class Pagination extends Component {
     this.state = {
       loadStatus: 0
     };
-
-
-    console.log('Pagination', props);
-    console.log(status);
   }
 
   componentWillMount() {
-    console.log('hello componentWillMount');
+    // console.log('hello componentWillMount');
   }
 
   componentDidMount() {
@@ -30,14 +26,14 @@ export default class Pagination extends Component {
       callback
     });
 
-    console.log('componentDidMount loadStatus::::', this.state.loadStatus);
+    // console.log('componentDidMount loadStatus::::', this.state.loadStatus);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
 
-    if (nextState.loadStatus > 0) {
-      return false;
-    }
+    // if (nextState.loadStatus > 0) {
+    //   return false;
+    // }
 
     return true;
 
@@ -45,22 +41,20 @@ export default class Pagination extends Component {
 
   render() {
 
-    const { uri, pageNo, pageSize } = this.props;
+    const { loadStatus } = this.props;
+    // console.log('LOAD_STATUS::::' + loadStatus);
 
     return (
       <div className="pager pager-line" ref="pager">
         {this.props.text}
-        <BottomLoading status="0" msg="上拉加载更多"></BottomLoading>
+        <BottomLoading status={loadStatus} msg="上拉加载更多"></BottomLoading>
       </div>
     )
   }
 
 };
 
-/*
 Pagination.propTypes = {
-  uri   : PropTypes.string.isRequired,
-  pageNo: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired
+  loadStatus: PropTypes.number.isRequired,
+  callback: PropTypes.func.isRequired
 };
-*/
