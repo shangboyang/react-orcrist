@@ -13,28 +13,38 @@ import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
 
-const headerCfg = {
-  optionFlag: false,
-  backHandler: () => {
-    console.log('backHandler for ListView');
-  },
-  optionHandler: () => {
-    console.log('optionHandler for ListView');
-  }
-}
-
 // console.log('Pagination', Pagination);
 
 export default class ListView extends Component {
 
-  constructor(props) {
-    super(props);
+  state = {
+    loadStatus: 0,
+    error: null,
+    value: null,
+  }
 
-    this.state = {
-      loadStatus: 0,
-      error: null,
-      value: null,
+  static defaultProps = {
+    // header config
+    header: {
+      title: 'Endless List',
+      optionFlag: false,
+      backHandler: () => {
+        console.log('backHandler for ListView');
+      },
+      optionHandler: () => {
+        console.log('optionHandler for ListView');
+      }
     }
+
+  };
+
+  static propTypes = {
+    header: React.PropTypes.object.isRequired
+  };
+
+  constructor(props) {
+
+    super(props);
 
     this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
@@ -155,17 +165,19 @@ export default class ListView extends Component {
       return (
         <div>
           <Header
-            title='智慧人社通1111'
-            backHandler={this.backHandler}
-            optionHandler={this.optionHandler}
+            title={this.props.header.title}
+            backHandler={this.props.header.backHandler}
+            optionHandler={this.props.header.optionHandler}
             rightText={'Option'}
           />
           <img className="loading-ace" src={IMG_DAO}/>
-          <div>道</div>
           <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
-
           <ArticleList articles={list}></ArticleList>
-          <Pagination loadStatus={loadStatus} callback={this.getArticleList} pageNo={pageNo}></Pagination>
+          <Pagination
+            loadStatus={loadStatus}
+            callback={this.getArticleList}
+            pageNo={pageNo}>
+          </Pagination>
 
         </div>
       )

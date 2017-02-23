@@ -56,7 +56,9 @@ module.exports = {
                 exclude: /^node_modules$/,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015', 'react']
+                    presets: ['es2015', 'react'],
+                    // es2016 polyfill (http://babeljs.io/docs/plugins/transform-class-properties/)
+                    plugins: ['transform-class-properties']
                 }
             }
         ]
