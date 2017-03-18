@@ -3,12 +3,10 @@ var path = require("path");
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var projectRoot = path.resolve(__dirname, '../');
 
-// console.log('ProjectRoot', projectRoot);
-// console.log('output PATH:::' + path.resolve(__dirname, '../dist/static'));
-
 module.exports = {
     entry: {
-        app: './app/app.js', //编译的入口文件
+        app: './app/app.js', //编译的入口文件,
+        vendor: ["react", 'react-dom', 'react-redux', 'lodash'],
     },
     output: {
         // publicPath: '../dist/', //服务器根路径
@@ -63,15 +61,4 @@ module.exports = {
             }
         ]
     }
-    /*
-    plugins: [
-        new webpack.DefinePlugin({ //编译成生产版本
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        new ExtractTextPlugin('[name].css')
-    ],
-    */
-
 };

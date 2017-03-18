@@ -1,7 +1,6 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseConfig = require('./webpack.base.conf')
-// var cssLoaders = require('./css-loaders')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -15,16 +14,16 @@ module.exports = merge(baseConfig, {
   output: {
     // naming output files with hashes for better caching.
     // dist/index.html will be auto-generated with correct URLs.
+    // filename: '[name].[chunkhash].js',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].js'
   },
-  // vue: {
-  //   loaders: cssLoaders({
-  //     sourceMap: SOURCE_MAP,
-  //     extract: true
-  //   })
-  // },
   plugins: [
+    // Files Chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ["vendor"],
+      filename: 'vendor.js'
+    }),
     // http://vuejs.github.io/vue-loader/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {

@@ -13,8 +13,6 @@ import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
 
-// console.log('Pagination', Pagination);
-
 export default class ListView extends Component {
 
   state = {
@@ -29,6 +27,7 @@ export default class ListView extends Component {
       title: 'Endless List',
       optionFlag: false,
       backHandler: () => {
+        history.back()
         console.log('backHandler for ListView');
       },
       optionHandler: () => {
@@ -49,29 +48,13 @@ export default class ListView extends Component {
     this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
   }
-
+  componentWillMount() {
+    this.getArticleList(1);
+  }
   // render()调用后执行
   componentDidMount() {
 
-    this.getArticleList(1);
 
-    /*
-    fetch('/api/groupRT.php')
-      .then(response => response.json)
-      .then(value => {
-        console.log(value);
-        this.setState({
-          loading: false,
-          value
-        })
-      })
-      .catch(error => {
-        this.setState({
-          loading: false,
-          error
-        })
-      })
-    */
 
   }
 
@@ -99,7 +82,7 @@ export default class ListView extends Component {
       loadStatus: 1
     });
 
-    request('get', '/api/groupRT.php', {
+    request('get', '/api', {
       pageNo
     })
     .then((value) => {
@@ -142,12 +125,12 @@ export default class ListView extends Component {
 
       return (
 
-        <div>
+        <div style={this.props.style}>
           <Header
-            title='Loading'
+            title={this.props.header.title}
             backHandler={this.backHandler}
             optionHandler={this.optionHandler}
-            rightText={'Option'}
+            optionText={'操作'}
           >
           </Header>
           <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
@@ -163,12 +146,12 @@ export default class ListView extends Component {
       let pageNo = this.state.pageNo;
 
       return (
-        <div>
+        <div style={this.props.style}>
           <Header
             title={this.props.header.title}
             backHandler={this.props.header.backHandler}
             optionHandler={this.props.header.optionHandler}
-            rightText={'Option'}
+            optionText={'操作'}
           />
           <img className="loading-ace" src={IMG_DAO}/>
           <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
