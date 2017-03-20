@@ -1,16 +1,22 @@
 import React, {Component} from 'react'
 // import RouteTransition from '../../utils/routeTransition'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import './style.less'
+import '../../css/common.less'
 console.log('ReactCSSTransitionGroup', ReactCSSTransitionGroup);
-export default class Main extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props)
   }
-  componentWillEnter() {
-    console.log('componentWillEnter');
+
+  componentWillEnter(sss) {
+    console.log('componentWillEnter', sss);
   }
+
+  componentWillLeave(status) {
+    console.log('componentWillLeave', status);
+  }
+
   componentWillMount() {
     document.body.style.margin = "0px";
     // 这是防止页面被拖拽
@@ -20,19 +26,34 @@ export default class Main extends Component {
   }
 
   render() {
+
     return (
         <ReactCSSTransitionGroup
           component="div"
-          transitionName="example"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionName={ true ? 'left' : 'right'}
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={600}>
           <div key={this.props.location.pathname}
-               style={{position:"absolute", width: "100%"}}>
-              {
-                  this.props.children
-              }
+               style={{position:"absolute", width: "100%"}}
+          >
+              <Main ref='mainDom' children={this.props.children}/>
           </div>
+
         </ReactCSSTransitionGroup>
+    )
+    
+  }
+}
+
+class Main extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+
+  render() {
+    return (
+      <div>{this.props.children}</div>
     )
   }
 }

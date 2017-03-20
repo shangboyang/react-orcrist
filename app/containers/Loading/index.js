@@ -20,7 +20,7 @@ export default class Loading extends Component {
 
   render() {
     return (
-      <div style={this.props.style}>
+      <div>
         <Header
           title={headerCfg.title}
           backHandler={headerCfg.backHandler}

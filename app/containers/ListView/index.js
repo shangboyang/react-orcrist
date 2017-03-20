@@ -52,11 +52,7 @@ export default class ListView extends Component {
     this.getArticleList(1);
   }
   // render()调用后执行
-  componentDidMount() {
-
-
-
-  }
+  componentDidMount() {}
 
   clickImageHandler(e) {
 
@@ -82,15 +78,14 @@ export default class ListView extends Component {
       loadStatus: 1
     });
 
-    request('get', '/api', {
+    let articlePromise = request('get', '/api', {
       pageNo
     })
-    .then((value) => {
+    articlePromise.promise.then((value) => {
 
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
-
       this.setState({
         loadStatus: 0,
         value: data.concat(value),
@@ -125,7 +120,7 @@ export default class ListView extends Component {
 
       return (
 
-        <div style={this.props.style}>
+        <div ref="listDom" style={this.props.style}>
           <Header
             title={this.props.header.title}
             backHandler={this.backHandler}
@@ -146,7 +141,7 @@ export default class ListView extends Component {
       let pageNo = this.state.pageNo;
 
       return (
-        <div style={this.props.style}>
+        <div ref='listDom' style={this.props.style}>
           <Header
             title={this.props.header.title}
             backHandler={this.props.header.backHandler}

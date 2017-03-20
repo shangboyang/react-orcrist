@@ -10,6 +10,7 @@ import Promise from 'es6-promise';
 Promise.prototype.done = function(onFulfilled, onRejected) {
     this.then(onFulfilled)
     .catch(function(reason) {
+      console.log(reason);
         setTimeout(() => {
             throw reason;
         }, 0)
@@ -17,6 +18,8 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
 };
 
 const request = (type, url) => {
+
+    let hasCanceled_ = false;
 
     let promise = new Promise((resolve, reject) => {
 
@@ -41,7 +44,23 @@ const request = (type, url) => {
 
     })
 
-    return promise;
+    promise.then((val) =>
+      hasCanceled_ ? reject({isCanceled: true}) : resolve(val)
+    );
+
+    promise.catch((error) =>
+      hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+    );
+
+
+    return {
+      promise: promise,
+      cancel() {
+        hasCanceled_ = true;
+      }
+    };
+
+  //  return promise;
 
 }
 
