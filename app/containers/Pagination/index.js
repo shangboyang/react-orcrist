@@ -43,7 +43,6 @@ export default class Pagination extends Component {
 
     const { loadStatus } = this.props;
     // console.log('LOAD_STATUS::::' + loadStatus);
-
     return (
       <div className="pager pager-line" ref="pager">
         {this.props.text}

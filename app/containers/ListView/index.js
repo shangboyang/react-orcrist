@@ -6,7 +6,9 @@ import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
 import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
-import './style.less';
+
+import '../../css/common.less'
+import './style.less'
 // images
 import IMG_LUFFY from './images/luffy.jpg';
 import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
@@ -86,9 +88,10 @@ export default class ListView extends Component {
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
+      console.log('value', value);
       this.setState({
         loadStatus: 0,
-        value: data.concat(value),
+        value: data.concat(value.body.dataList),
         pageNo: pageNo + 1
       });
 
@@ -130,6 +133,7 @@ export default class ListView extends Component {
           </Header>
           <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
           <div>Loading</div>
+          <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
         </div>
 
       )
@@ -149,7 +153,7 @@ export default class ListView extends Component {
             optionText={'操作'}
           />
           <img className="loading-ace" src={IMG_DAO}/>
-          <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
+
           <ArticleList articles={list}></ArticleList>
           <Pagination
             loadStatus={loadStatus}
@@ -181,7 +185,7 @@ class ArticleList extends Component {
         {
           articles.map((val, idx) => {
             return (
-              <li className="arcticle-item" key={idx}>{val.name}</li>
+              <li className="arcticle-item" key={idx}>{val.title}</li>
             )
           })
         }

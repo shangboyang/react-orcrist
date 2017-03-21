@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-// import RouteTransition from '../../utils/routeTransition'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 import '../../css/common.less'
-console.log('ReactCSSTransitionGroup', ReactCSSTransitionGroup);
+
 export default class App extends Component {
 
   constructor(props) {
@@ -41,7 +41,7 @@ export default class App extends Component {
 
         </ReactCSSTransitionGroup>
     )
-    
+
   }
 }
 
