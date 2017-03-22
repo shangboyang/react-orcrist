@@ -20,9 +20,9 @@ export default class App extends Component {
   componentWillMount() {
     document.body.style.margin = "0px";
     // 这是防止页面被拖拽
-    document.body.addEventListener('touchmove', (ev) => {
-      ev.preventDefault();
-    });
+    // document.body.addEventListener('touchmove', (ev) => {
+    //   ev.preventDefault();
+    // });
   }
 
   render() {
@@ -32,7 +32,7 @@ export default class App extends Component {
           component="div"
           transitionName={ true ? 'left' : 'right'}
           transitionEnterTimeout={1000}
-          transitionLeaveTimeout={600}>
+          transitionLeaveTimeout={300}>
           <div key={this.props.location.pathname}
                style={{position:"absolute", width: "100%"}}
           >

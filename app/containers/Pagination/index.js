@@ -44,7 +44,8 @@ export default class Pagination extends Component {
     const { loadStatus } = this.props;
     // console.log('LOAD_STATUS::::' + loadStatus);
     return (
-      <div className="pager pager-line" ref="pager">
+      <div className="pager" ref="pager">
+        <div className="pager-line"></div>
         {this.props.text}
         <BottomLoading status={loadStatus} msg="上拉加载更多"></BottomLoading>
       </div>
