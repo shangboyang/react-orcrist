@@ -6,7 +6,7 @@ var projectRoot = path.resolve(__dirname, '../');
 module.exports = {
     entry: {
         app: './app/app.js', //编译的入口文件,
-        vendor: ["react", 'react-dom', 'react-redux', 'lodash'],
+        vendor: ["react", 'react-dom', 'react-router', 'react-redux', 'redux-thunk'],
     },
     output: {
         // publicPath: '../dist/', //服务器根路径

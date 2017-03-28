@@ -7,7 +7,7 @@ import IMG_ACE from './images/ace.jpg';
 
 
 const headerCfg = {
-  title: 'Loading',
+  title: 'City Main',
   optionHandler: (e) => {
     console.log('i want it option');
   },
@@ -27,11 +27,11 @@ export default class Loading extends Component {
           optionFlag={true}
           optionHandler={headerCfg.optionHandler.bind(this)}
         />
-        <div className="loading">
-          <div>Loading.........</div>
+        <div className="main">
+          <div>我是首页</div>
           <img className="loading-ace" src={IMG_ACE}/>
           <Link to='list' activeStyle={{color: 'red'}}>ListView</Link>
-          <Link to='load' activeStyle={{color: 'red'}}>Loading</Link>
+          &nbsp;&nbsp;&nbsp;
         </div>
         <ul>
           <li>12321</li>

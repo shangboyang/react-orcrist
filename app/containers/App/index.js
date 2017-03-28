@@ -9,14 +9,6 @@ export default class App extends Component {
     super(props)
   }
 
-  componentWillEnter(sss) {
-    console.log('componentWillEnter', sss);
-  }
-
-  componentWillLeave(status) {
-    console.log('componentWillLeave', status);
-  }
-
   componentWillMount() {
     document.body.style.margin = "0px";
     // 这是防止页面被拖拽
@@ -36,24 +28,11 @@ export default class App extends Component {
           <div key={this.props.location.pathname}
                style={{position:"absolute", width: "100%"}}
           >
-              <Main ref='mainDom' children={this.props.children}/>
+              {this.props.children}
           </div>
 
         </ReactCSSTransitionGroup>
     )
 
-  }
-}
-
-class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
-  render() {
-    return (
-      <div>{this.props.children}</div>
-    )
   }
 }

@@ -1,10 +1,10 @@
 
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import listViewReducer from '../containers/ListView/reducer';
-import loadReducer from '../containers/Loading/reducer';
+import mainReducer from '../containers/Main/reducer';
 import thunk from 'redux-thunk';
 
-const reducer = {listViewReducer, loadReducer}
+const reducer = {listViewReducer, mainReducer}
 
 // Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
 // let { subscribe, dispatch, getState } = createStore

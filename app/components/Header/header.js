@@ -12,8 +12,8 @@ export default class Header extends Component {
   }
 
   constructor(props) {
-    console.log('PropTypes', React.PropTypes);
-    console.log('Header Super Props', props);
+    // console.log('PropTypes', React.PropTypes);
+    // console.log('Header Super Props', props);
     super(props);
     this.optionHandler = this.optionHandler.bind(this); // 1 selector
     this.backHandler = this.backHandler.bind(this); // 1 selector
@@ -40,14 +40,25 @@ export default class Header extends Component {
   }
 
   render() {
-    return (
-      <div className="ost-header">
-        <div className="ost-header-left" onClick={this.props.backHandler || this.backHandler}>返回</div>
-        <div className="ost-header-main">{this.props.title}</div>
-        <div className="ost-header-right"
-          onClick={this.props.optionHandler || this.optionHandler}>{this.props.optionText}
+
+    if (this.props.optionFlag) {
+      return (
+        <div ref="header" className="ost-header">
+          <div className="ost-header-left" onClick={this.props.backHandler || this.backHandler}>返回</div>
+          <div className="ost-header-main">{this.props.title}</div>
+          <div className="ost-header-right"
+            onClick={this.props.optionHandler || this.optionHandler}>{this.props.optionText}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div ref="header" className="ost-header">
+          <div className="ost-header-left" onClick={this.props.backHandler || this.backHandler}>返回</div>
+          <div className="ost-header-main">{this.props.title}</div>
+          <div className="ost-header-right"></div>
+        </div>
+      )
+    }
   }
 }

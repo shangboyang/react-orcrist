@@ -18,6 +18,9 @@ module.exports = merge(baseConfig, {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].js'
   },
+  externals: {
+     'react': 'React'
+  },
   plugins: [
     // Files Chunk
     new webpack.optimize.CommonsChunkPlugin({

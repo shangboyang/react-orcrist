@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import route from './config/route';
+
 import './css/resets.less';
 
+import route from './config/route';
 import store from './config/store';
 
 // require('es6-promise').polyfill();

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from '../../components/Header/Header';
-import {BottomLoading} from '../../components/Loading/index';
 import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
@@ -50,6 +49,7 @@ export default class ListView extends Component {
     this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
   }
+
   componentWillMount() {
     this.getArticleList(1);
   }
@@ -65,7 +65,7 @@ export default class ListView extends Component {
     });
 
     this.setState({
-      loadStatus: 1,
+      loadStatus: 0,
       value
     });
 
@@ -76,6 +76,7 @@ export default class ListView extends Component {
     const data = this.state.value || [];
     pageNo = this.state.pageNo || 0;
 
+    // BottomLoading start loading
     this.setState({
       loadStatus: 1
     });
@@ -83,14 +84,15 @@ export default class ListView extends Component {
     let articlePromise = request('get', '/api', {
       pageNo
     })
+
     articlePromise.promise.then((value) => {
 
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
-      console.log('value', value);
+
       this.setState({
-        loadStatus: 0,
+        loadStatus: 0, // close Loading
         value: data.concat(value.body.dataList),
         pageNo: pageNo + 1
       });
@@ -102,19 +104,19 @@ export default class ListView extends Component {
       }
 
       store.dispatch(articleListInit(this.state.pageNo));
-      // console.log('Store', store.getState());
 
       return this;
     })
     .then((listView) => {
       typeof callback === 'function' && callback(this.state.pageNo);
-      store.dispatch(addTodo('what a shit~'));
+      console.log('cb', callback);
     })
     .catch((err) => {
       typeof callback === 'function' && callback(this.state.pageNo);
       store.dispatch(articleListError(this.state.pageNo));
     })
     .done();
+
   }
 
   render() {
@@ -143,7 +145,7 @@ export default class ListView extends Component {
       let list = this.state.value;
       let loadStatus = this.state.loadStatus;
       let pageNo = this.state.pageNo;
-
+      console.log('this.getArticleList', this.getArticleList);
       return (
         <div ref='listDom' style={this.props.style}>
           <Header

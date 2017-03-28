@@ -1,7 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import Pager from '../../utils/pager';
-import request from '../../utils/request';
-import {BottomLoading} from '../../components/Loading/index';
+import React, {Component, PropTypes} from 'react'
+import Pager from '../../utils/pager'
+import request from '../../utils/request'
 import './style.less';
 
 export default class Pagination extends Component {
@@ -14,9 +13,7 @@ export default class Pagination extends Component {
     };
   }
 
-  componentWillMount() {
-    // console.log('hello componentWillMount');
-  }
+  componentWillMount() {}
 
   componentDidMount() {
 
@@ -26,27 +23,18 @@ export default class Pagination extends Component {
       callback
     });
 
-    // console.log('componentDidMount loadStatus::::', this.state.loadStatus);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-
-    // if (nextState.loadStatus > 0) {
-    //   return false;
-    // }
-
     return true;
-
   }
 
   render() {
 
-    const { loadStatus } = this.props;
-    // console.log('LOAD_STATUS::::' + loadStatus);
+    const { loadStatus, text } = this.props;
     return (
       <div className="pager" ref="pager">
         <div className="pager-line"></div>
-        {this.props.text}
         <BottomLoading status={loadStatus} msg="上拉加载更多"></BottomLoading>
       </div>
     )
@@ -58,3 +46,20 @@ Pagination.propTypes = {
   loadStatus: PropTypes.number.isRequired,
   callback: PropTypes.func.isRequired
 };
+
+class BottomLoading extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    console.log('BottomLoading props', this.props);
+    return (
+      <div className={'load load-status-' + this.props.status}>
+          <div className="load-msg">{this.props.msg}</div>
+      </div>
+    )
+  }
+  
+}
