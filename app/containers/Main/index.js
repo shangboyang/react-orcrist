@@ -32,6 +32,7 @@ export default class Loading extends Component {
           <img className="loading-ace" src={IMG_ACE}/>
           <Link to='list' activeStyle={{color: 'red'}}>ListView</Link>
           &nbsp;&nbsp;&nbsp;
+          <Link to='test' activeStyle={{color: 'red'}}>Test Parents</Link>
         </div>
         <ul>
           <li>12321</li>
