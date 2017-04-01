@@ -1,15 +1,30 @@
 import React, { Component } from 'react' 
-import './style.less'
+import styles from './style.less'
 
+/*
+	子组件向父组件传值
+*/
 export default class Flight extends Component{
+
 	constructor(props) {
 		super(props)
+	}
+
+	state = {
+		price: 0
+	}
+
+	handleChange = (price) => {
+		this.setState({
+			price: price
+		})
 	}
 
   render() {
 		return (
 		  <div>
-		    <Item />
+		    <Item changePrice={this.handleChange}/>
+		    <div className='item'>{this.state.price}</div>
 		  </div>
 		)
   }
@@ -18,47 +33,50 @@ export default class Flight extends Component{
 class Item extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      names: ["（1）免费行李","2","3"],
-      values: ["1","2","3"],
-      selectName: '',
-      prices: '0'
-    }
+  }
+
+  state = {
+  	names: ["Tom","Li Lei","Han Meimei"],
+    values: ["1","2","3"],
+    selectName: '',
+    prices: '0'
   }
 
   handleChange = (e) => {
+
+    let value = e.target.value;
+    let price = 800;
     
-    var value = e.target.value;
-    var price = 800;
-    if(value == "1"){
+    if (value == "1"){
       price = 0
-    }else{
+    } else {
       price = (value - 1) * price
     }
+    
     this.setState({
       selectName: value,
       prices: price
     })
-    //这个值怎么传给父组件
-    console.log(price)
+    
+    this.props.changePrice(price)
   }
 
   render() {
-    var options = [];
-    var prices = this.state.prices;
-    for (var option in this.state.names) {
+    
+    let options = [];
+    
+    for (let option in this.state.names) {
       options.push(
         <option key={this.state.values[option]} value={this.state.values[option]}> {this.state.names[option]}</option>
       )
     };
-    return (
 
-          <div className={styles.item}>
-              <select className={styles.select} onChange={this.handleChange.bind(this)}> 
-               {options}
-              </select>
-             <p>{prices}</p>
-          </div>
-        )
+    return (
+      <div className={styles.item}>
+          <select className={styles.select} onChange={this.handleChange.bind(this)}> 
+           {options}
+          </select>
+      </div>
+    )
   }
 }

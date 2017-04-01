@@ -6,7 +6,7 @@ var projectRoot = path.resolve(__dirname, '../');
 module.exports = {
     entry: {
         app: './app/app.js', //编译的入口文件,
-        vendor: ["react", 'react-dom', 'react-router', 'react-redux', 'redux-thunk'],
+        vendor: ["react", 'react-dom', 'react-router', 'react-redux'],
     },
     output: {
         // publicPath: '../dist/', //服务器根路径
@@ -48,7 +48,7 @@ module.exports = {
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: /^node_modules$/,
-                loader: 'url?limit=220000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                loader: 'url?limit=100000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             }, {
                 test: /\.js[x]?$/,
                 exclude: /^node_modules$/,
