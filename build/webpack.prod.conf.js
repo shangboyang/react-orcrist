@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
     chunkFilename: '[id].[chunkhash].js'
   },
   externals: {
-     'react': 'React'
+    //  'react': 'React'
   },
   plugins: [
     // Files Chunk
