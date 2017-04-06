@@ -19,6 +19,7 @@ module.exports = merge(baseConfig, {
     chunkFilename: '[id].[chunkhash].js'
   },
   externals: {
+    //   未来直接引入 http lib
     //  'react': 'React'
   },
   plugins: [

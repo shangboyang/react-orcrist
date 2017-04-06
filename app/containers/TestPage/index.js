@@ -1,5 +1,5 @@
-import React, { Component } from 'react' 
-import styles from './style.less'
+import React, { Component } from 'react'
+import style from './style.css'
 
 /*
 	子组件向父组件传值
@@ -14,68 +14,78 @@ export default class Flight extends Component{
 		price: 0
 	}
 
-	handleChange = (price) => {
+	getCarsHandler = (price) => {
+
 		this.setState({
 			price: price
 		})
+
 	}
 
   render() {
 		return (
 		  <div>
-		    <Item changePrice={this.handleChange}/>
-		    <div className='item'>{this.state.price}</div>
+		    <Item getCarsHandler={this.getCarsHandler}/>
+		    <div className={style.item}>父Component: {this.state.price}</div>
 		  </div>
 		)
   }
 }
 
 class Item extends Component {
-  constructor(props) {
+
+	constructor(props) {
     super(props);
   }
 
   state = {
-  	names: ["Tom","Li Lei","Han Meimei"],
-    values: ["1","2","3"],
-    selectName: '',
-    prices: '0'
+		options: [
+			{ name: '请选择车型', value: 0 },
+			{ name: '兰博基尼', value: 5600 },
+			{ name: '法拉利', value: 3300 },
+			{ name: '玛莎拉蒂', value: 12000 },
+			{ name: '蝙蝠车', value: 99999 },
+		],
+		selectedValue: 5600, // default 1
+    prices: 0
   }
 
-  handleChange = (e) => {
+  changePriceHandler = (e) => {
 
     let value = e.target.value;
-    let price = 800;
-    
-    if (value == "1"){
-      price = 0
-    } else {
-      price = (value - 1) * price
-    }
-    
-    this.setState({
-      selectName: value,
+		let price = 0;
+
+    if (e.target.name != '蝙蝠车') {
+			price = 9 * value
+		} else {
+			price = 1 * value
+		}
+
+		this.setState({
+			selectedValue: value, // single value
       prices: price
     })
-    
-    this.props.changePrice(price)
+
+		// call the Parents handler
+    this.props.getCarsHandler(price)
   }
 
   render() {
-    
-    let options = [];
-    
-    for (let option in this.state.names) {
-      options.push(
-        <option key={this.state.values[option]} value={this.state.values[option]}> {this.state.names[option]}</option>
-      )
-    };
+
+    const options = this.state.options;
 
     return (
-      <div className={styles.item}>
-          <select className={styles.select} onChange={this.handleChange.bind(this)}> 
-           {options}
+      <div className={style.item}>
+          <select className={style.select} onChange={this.changePriceHandler}>
+          {
+						options.map((item, idx) => {
+						 	return (
+								<option key={item.value} value={item.value}>{item.name}</option>
+							)
+						})
+				 	}
           </select>
+					<div>子Component: {this.state.selectedValue}</div>
       </div>
     )
   }

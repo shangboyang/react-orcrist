@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var path = require("path");
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var projectRoot = path.resolve(__dirname, '../');
+// css-modules
+var values = require('postcss-modules-values');
 
 module.exports = {
     entry: {
@@ -36,7 +38,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /^node_modules$/,
-                loader: 'style-loader!css-loader'
+                loader: 'style-loader!css-loader?modules!postcss-loader'
             }, {
                 test: /\.less/,
                 exclude: /^node_modules$/,
@@ -60,5 +62,8 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    postcss: [
+        values
+    ]
 };
