@@ -1,0 +1,41 @@
+.item {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 100%;
+	background: #ccc;
+	font-family: 'microsoft yahei';
+}
+option {
+	width: 100%;
+	height: 50px;
+}
+
+.select {
+	display: flex;
+	flex: 1;
+	width: 100%;
+	height: 100px;
+	background: #b0d5e6;
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.child {
+	display: flex;
+	flex: 1;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	font-weight: bold;
+	background: #e0b2af;
+}
+
+.parent {
+	height: 100px;
+	color: #000;
+	font-weight: bold;
+	font-size: 20px;
+	background: #c5bac7;
+}

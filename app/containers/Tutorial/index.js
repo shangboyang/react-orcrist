@@ -2,31 +2,44 @@ import React, { Component } from 'react'
 import style from './style.css'
 
 /*
-	子组件向父组件传值
+	父子组件通信
 */
-export default class Flight extends Component{
+export default class SelectBox extends Component{
 
 	constructor(props) {
-		super(props)
+		super(props) // es6 super关键字
 	}
 
 	state = {
-		price: 0
+		content: ''
 	}
-
+	// callback
 	getCarsHandler = (price) => {
 
+		const content = price >= 99999 ? '“我是布鲁斯韦恩老爷, 只有我的车是最棒的，其它车都是玩具！”' : '”这辆不错”'
+
 		this.setState({
-			price: price
+			content: content
 		})
 
 	}
 
+	showMoreDetailHandler = () => {
+
+		console.log('克里弗兰贝尔的蝙蝠侠最帅');
+
+	}
+
   render() {
+
 		return (
 		  <div>
-		    <Item getCarsHandler={this.getCarsHandler}/>
-		    <div className={style.item}>父Component: {this.state.price}</div>
+
+				<Item getCarsHandler={this.getCarsHandler} />
+
+
+
+				<div className={style.parent} onClick={this.showMoreDetailHandler}>【父组件里的广告】：{this.state.content}</div>
 		  </div>
 		)
   }
@@ -36,41 +49,35 @@ class Item extends Component {
 
 	constructor(props) {
     super(props);
+
+		console.log('props', props);
   }
 
   state = {
 		options: [
-			{ name: '请选择车型', value: 0 },
+			{ name: '哪款车最酷', value: 0 },
 			{ name: '兰博基尼', value: 5600 },
 			{ name: '法拉利', value: 3300 },
 			{ name: '玛莎拉蒂', value: 12000 },
 			{ name: '蝙蝠车', value: 99999 },
 		],
-		selectedValue: 5600, // default 1
-    prices: 0
+		selectedValue: 0, // default 1
   }
 
   changePriceHandler = (e) => {
 
     let value = e.target.value;
-		let price = 0;
-
-    if (e.target.name != '蝙蝠车') {
-			price = 9 * value
-		} else {
-			price = 1 * value
-		}
 
 		this.setState({
 			selectedValue: value, // single value
-      prices: price
     })
 
 		// call the Parents handler
-    this.props.getCarsHandler(price)
+   this.props.getCarsHandler(value)
   }
 
   render() {
+
 
     const options = this.state.options;
 
@@ -80,12 +87,12 @@ class Item extends Component {
           {
 						options.map((item, idx) => {
 						 	return (
-								<option key={item.value} value={item.value}>{item.name}</option>
+								<option key={idx} value={item.value}>{item.name}</option>
 							)
 						})
 				 	}
           </select>
-					<div>子Component: {this.state.selectedValue}</div>
+					<div className={style.child}>【子组件里的单价】：{this.state.selectedValue}</div>
       </div>
     )
   }

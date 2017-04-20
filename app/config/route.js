@@ -4,7 +4,7 @@ import { useScroll } from 'react-router-scroll';
 import App from '../containers/App/index';
 import ListView from '../containers/ListView/index';
 import Main from '../containers/Main/index';
-import TestPage from '../containers/TestPage/index'
+import Tutorial from '../containers/Tutorial/index'
 
 const config = [
     {
@@ -17,7 +17,7 @@ const config = [
         childRoutes: [
             { path: '/list', name: 'list', component: ListView },
             { path: '/main', name: 'main', component: Main },
-            { path: '/test', name: 'test', component: TestPage}
+            { path: '/test', name: 'test', component: Tutorial}
         ]
     }
 ];
