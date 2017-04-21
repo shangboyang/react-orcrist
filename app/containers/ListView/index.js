@@ -50,11 +50,10 @@ export default class ListView extends Component {
     this.getArticleList = this.getArticleList.bind(this);
   }
 
-  componentWillMount() {
+  // render()调用后执行
+  componentDidMount() {
     this.getArticleList(1);
   }
-  // render()调用后执行
-  componentDidMount() {}
 
   clickImageHandler(e) {
 
@@ -81,7 +80,19 @@ export default class ListView extends Component {
       loadStatus: 1
     });
 
-    let articlePromise = request('get', '/api', {
+    // let articlePromise = request('get', '/api', {
+    //   pageNo
+    // })
+
+    // let articlePromise = request('get', '/cms/open/newArticles', {
+    //   pageNo
+    // })
+    //
+    // let articlePromise = request('post', '/api', {
+    //   pageNo
+    // })
+    //
+    let articlePromise = request('post', '/cms/open/newArticles', {
       pageNo
     })
 
@@ -108,12 +119,12 @@ export default class ListView extends Component {
       return this;
     })
     .then((listView) => {
-      typeof callback === 'function' && callback(this.state.pageNo);
-      console.log('cb', callback);
+      // typeof callback === 'function' && callback(this.state.pageNo);
+      // console.log('cb', callback);
     })
     .catch((err) => {
-      typeof callback === 'function' && callback(this.state.pageNo);
-      store.dispatch(articleListError(this.state.pageNo));
+      // typeof callback === 'function' && callback(this.state.pageNo);
+      // store.dispatch(articleListError(this.state.pageNo));
     })
     .done();
 
@@ -145,7 +156,7 @@ export default class ListView extends Component {
       let list = this.state.value;
       let loadStatus = this.state.loadStatus;
       let pageNo = this.state.pageNo;
-      console.log('this.getArticleList', this.getArticleList);
+
       return (
         <div ref='listDom' style={this.props.style}>
           <Header

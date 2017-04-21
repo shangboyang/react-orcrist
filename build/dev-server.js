@@ -14,7 +14,7 @@ var compiler = webpack(config)
 var proxyTable = {
     '/api': {
         // target: 'http://apptest.zsgjs.com/X0-Testing/Testing/rabbitmq-stomp/',
-        target: 'http://localhost:7709/cms/open/newArticles?inforType=1',
+        target: 'http://localhost:7709/cms/open/newArticles',
         changeOrigin: true,
         pathRewrite: {
             '^/api': ''
