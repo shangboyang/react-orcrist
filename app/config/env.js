@@ -16,4 +16,5 @@ export const env = server.mock;
 // export const env = server.native;
 ///////////////////////////////////////////////
 
+// add token
 export const token = 'sfdasfefeefe';

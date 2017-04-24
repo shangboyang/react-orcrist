@@ -32,19 +32,28 @@ const request = (type, url, params) => {
       p += o + '=' + params[o] + '&';
     }
     p = p.slice(0, -1);
-
+    // get & http
     if (currHost.match(/http/g)) {
       url = currHost + url + '?' + p;
     }
 
-  } else {
+    // native...
 
+    // proxy...
+
+  } else {
+    // post & http
     if (currHost.match(/http/g)) {
       url = currHost + url;
     }
 
+    // native...
+
+    // proxy...
+
   }
 
+  // http promise flag
   let hasCanceled_ = false;
 
   let promise = new Promise((resolve, reject) => {
@@ -63,7 +72,7 @@ const request = (type, url, params) => {
     client.open(type, url);
     client.onreadystatechange = handler;
     client.responseType = 'json';
-    // client.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  
+    // client.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     client.setRequestHeader('Accept', 'application/json');
     client.send(type === 'POST' ? JSON.stringify(params) : null);
 
