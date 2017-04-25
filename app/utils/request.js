@@ -5,19 +5,7 @@ import '../3rd/seed'
 
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
-console.log('currEnv', currEnv, 'currHost', currHost);
 const isNative = window.App; // naitve flag
-
-/*
-var requestBody = {
-    'url': url,
-    'type': type,
-    'data': data,
-    'success': successPromiseFuncWrapper,
-    'error': errorPromiseFuncWrapper
-};
-isNative && typeof $$.Native.request === 'function' && $$.Native.request(requestBody);
- */
 
 /**
  * 为Promise扩充done 总是处于回调链最底端 保证抛出任何可能出现的异常
@@ -129,7 +117,6 @@ const request = (type, url, params) => {
   promise.catch((error) =>
     hasCanceled_ ? reject({hasCanceled_: true}) : reject(error)
   );
-
 
   return {
     promise: promise,
