@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Pager from '../../utils/pager'
 import request from '../../utils/request'
-import './style.less';
+import './style.less'
 
 export default class Pagination extends Component {
 
@@ -12,8 +12,6 @@ export default class Pagination extends Component {
       loadStatus: 0
     };
   }
-
-  componentWillMount() {}
 
   componentDidMount() {
 
@@ -54,12 +52,11 @@ class BottomLoading extends Component {
   }
 
   render() {
-    console.log('BottomLoading props', this.props);
     return (
       <div className={'load load-status-' + this.props.status}>
           <div className="load-msg">{this.props.msg}</div>
       </div>
     )
   }
-  
+
 }

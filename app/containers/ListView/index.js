@@ -52,7 +52,7 @@ export default class ListView extends Component {
 
   // render()调用后执行
   componentDidMount() {
-    this.getArticleList(1);
+    this.getArticleList();
   }
 
   clickImageHandler(e) {
@@ -74,7 +74,7 @@ export default class ListView extends Component {
 
     const data = this.state.value || [];
     pageNo = this.state.pageNo || 0;
-
+console.log('pageNo::' + pageNo);
     // BottomLoading start loading
     this.setState({
       loadStatus: 1
@@ -94,8 +94,15 @@ export default class ListView extends Component {
     //
     let articlePromise = request('post', '/cms/open/newArticles', {
       pageNo
-    })
 
+      // success callback
+    }, (data) => {
+      console.log(data);
+      console.log('this', this);
+    }, (error) => {
+      console.log('this', this);
+    });
+console.log(articlePromise.promise);
     articlePromise.promise.then((value) => {
 
       if (typeof value === 'string') {
@@ -115,12 +122,11 @@ export default class ListView extends Component {
       }
 
       store.dispatch(articleListInit(this.state.pageNo));
+      console.log(articlePromise.promise);
+      // 分页调用
+      typeof callback === 'function' && callback(this.state.pageNo);
 
       return this;
-    })
-    .then((listView) => {
-      // typeof callback === 'function' && callback(this.state.pageNo);
-      // console.log('cb', callback);
     })
     .catch((err) => {
       // typeof callback === 'function' && callback(this.state.pageNo);

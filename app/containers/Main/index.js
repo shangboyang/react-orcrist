@@ -5,27 +5,30 @@ import '../../components/Header/Header.less';
 import './style.less';
 import IMG_ACE from './images/ace.jpg';
 
-
-const headerCfg = {
-  title: 'City Main',
-  optionHandler: (e) => {
-    console.log('i want it option');
-  },
-  backHandler: (e) => {
-    console.log('i want it back');
-  }
-};
-
 export default class Loading extends Component {
+
+  static defaultProps = {
+    // header config
+    header: {
+      title: 'React Ocrist',
+      optionFlag: false,
+      optionHandler: (e) => {
+        console.log('i want it option---by 首页');
+      },
+      backHandler: (e) => {
+        console.log('i want it back ---by 首页');
+      }
+    }
+  };
 
   render() {
     return (
       <div>
         <Header
-          title={headerCfg.title}
-          backHandler={headerCfg.backHandler}
-          optionFlag={true}
-          optionHandler={headerCfg.optionHandler.bind(this)}
+          title={this.props.header.title}
+          backHandler={this.props.header.backHandler}
+          optionFlag={this.props.header.optionFlag}
+          optionHandler={this.props.header.optionHandler}
         />
         <div className="main">
           <div>我是首页</div>

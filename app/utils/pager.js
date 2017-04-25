@@ -81,15 +81,14 @@
     }
 
     Pager.prototype.execute = function() {
+
         var self = this;
 
         self.isLoading = true; // 开始执行execute
 console.log('SELF PageNo in:::'  + self.pageNo);
         self.fetchData(self.pageNo, function(pageNo) {
           self.pageNo = pageNo;
-
-          self.isLoading = false;
-
+          self.isLoading = false; //
 console.log('SELF PageNo out:::'  + self.pageNo);
         });
     };

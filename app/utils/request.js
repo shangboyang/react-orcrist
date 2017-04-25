@@ -1,9 +1,23 @@
 // es6 Promise polyfill
 import Promise from 'es6-promise'
 import {env, token} from '../config/env'
-
+import '../3rd/seed'
+console.log(window.$$)
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
+console.log('currEnv', currEnv, 'currHost', currHost);
+const isNative = window.App; // naitve flag
+
+/*
+var requestBody = {
+    'url': url,
+    'type': type,
+    'data': data,
+    'success': successPromiseFuncWrapper,
+    'error': errorPromiseFuncWrapper
+};
+isNative && typeof $$.Native.request === 'function' && $$.Native.request(requestBody);
+ */
 
 /**
  * 为Promise扩充done 总是处于回调链最底端 保证抛出任何可能出现的异常
@@ -22,68 +36,98 @@ Promise.prototype.done = function(onFulfilled, onRejected) {
 
 const request = (type, url, params) => {
 
-  type = typeof type === 'string' && type.toUpperCase();
-  params = params || {};
-
-  if (type === 'GET') {
-
-    let p = '';
-    for (let o in params) {
-      p += o + '=' + params[o] + '&';
-    }
-    p = p.slice(0, -1);
-    // get & http
-    if (currHost.match(/http/g)) {
-      url = currHost + url + '?' + p;
-    }
-
-    // native...
-
-    // proxy...
-
-  } else {
-    // post & http
-    if (currHost.match(/http/g)) {
-      url = currHost + url;
-    }
-
-    // native...
-
-    // proxy...
-
-  }
-
   // http promise flag
   let hasCanceled_ = false;
 
   let promise = new Promise((resolve, reject) => {
 
-    const handler = function() {
+    type = typeof type === 'string' && type.toUpperCase();
+    params = params || {};
 
-      if (this.readyState !== 4) return;
+    // url type
+    if (type === 'GET' && currEnv !== 'native') {
 
-      if (this.status === 200) {
-        resolve(this.response);
+      let p = '';
+      for (let o in params) {
+        p += o + '=' + params[o] + '&';
+      }
+      p = p.slice(0, -1);
+      // get & http
+      if (currHost.match(/http/g)) {
+        url = currHost + url + '?' + p;
       }
 
-    };
+      // proxy...
 
-    let client = new XMLHttpRequest();
-    client.open(type, url);
-    client.onreadystatechange = handler;
-    client.responseType = 'json';
-    // client.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    client.setRequestHeader('Accept', 'application/json');
-    client.send(type === 'POST' ? JSON.stringify(params) : null);
+    }
+
+    if (type === 'POST') {
+      // post & http
+      if (currHost.match(/http/g)) {
+        url = currHost + url;
+      }
+      // proxy...
+    }
+    /**
+     * 区分环境执行Request 
+     */
+    const execute = () => {
+
+      if (isNative) {
+
+        const reqBody = {
+          url    : url,
+          type   : type,
+          data   : params,
+          success: resolve,
+          error  : reject
+        }
+
+        typeof $$.Native.request === 'function' && $$.Native.request(reqBody);
+
+      } else {
+
+        const handler = function() {
+
+          if (this.readyState !== 4) return;
+
+          if (this.status === 200) {
+            console.log(resolve);
+            resolve(this.response);
+          } else {
+            reject({hasCanceled_: true, msg: this.status.Text})
+          }
+
+        };
+
+        let client = new XMLHttpRequest();
+        client.open(type, url);
+        client.onreadystatechange = handler;
+        client.responseType = 'json';
+        // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        client.setRequestHeader('Accept', 'application/json');
+        client.send(type === 'POST' ? JSON.stringify(params) : null);
+
+      }
+    }
+
+    execute();
+
 
   })
 
-  promise.then((val) =>
-    hasCanceled_ ? reject({isCanceled: true}) : resolve(val)
+  const getURL = () => {
+
+  }
+
+
+
+  promise.then((data) =>
+    hasCanceled_ ? reject({hasCanceled_: true}) : resolve(data)
   );
 
   promise.catch((error) =>
-    hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+    hasCanceled_ ? reject({hasCanceled_: true}) : reject(error)
   );
 
 

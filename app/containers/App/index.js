@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
 import '../../css/common.less'
 
 export default class App extends Component {
@@ -18,21 +17,20 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
-        <ReactCSSTransitionGroup
-          component="div"
-          transitionName={ true ? 'left' : 'right'}
-          transitionEnterTimeout={1000}
-          transitionLeaveTimeout={300}>
-          <div key={this.props.location.pathname}
-               style={{position:"absolute", width: "100%"}}
-          >
-              {this.props.children}
-          </div>
+      <ReactCSSTransitionGroup
+        component="div"
+        transitionName={ true ? 'left' : 'right'}
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={300}>
 
-        </ReactCSSTransitionGroup>
+        <div
+          key={this.props.location.pathname}
+          style={{position:"absolute", width: "100%"}}>
+          {this.props.children}
+        </div>
+
+      </ReactCSSTransitionGroup>
     )
-
   }
 }
