@@ -98,8 +98,8 @@ const request = (type, url, params) => {
         // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         client.setRequestHeader('Accept', 'application/json');
-        // client.setRequestHeader('Token', token);
-        // client.setRequestHeader('zoneCode', zoneCode);
+        client.setRequestHeader('Token', token);
+        client.setRequestHeader('zoneCode', zoneCode);
         client.send(type === 'POST' ? JSON.stringify(params) : null);
 
       }
