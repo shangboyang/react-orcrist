@@ -56,7 +56,6 @@ const request = (type, url, params) => {
         break;
 
       default:
-
     }
 
     /**
@@ -86,7 +85,7 @@ const request = (type, url, params) => {
             console.log(resolve);
             resolve(this.response);
           } else {
-            reject({hasCanceled_: true, msg: this.status.Text})
+            reject({hasCanceled_: true, msg: this.statusText})
           }
 
         };
@@ -106,7 +105,6 @@ const request = (type, url, params) => {
     }
 
     execute();
-
 
   })
 
