@@ -1,8 +1,8 @@
 // es6 Promise polyfill
 import Promise from 'es6-promise'
-import {env, token} from '../config/env'
+import {env, token, zoneCode} from '../config/env'
 import '../3rd/seed'
-console.log(window.$$)
+
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
 console.log('currEnv', currEnv, 'currHost', currHost);
@@ -43,33 +43,36 @@ const request = (type, url, params) => {
 
     type = typeof type === 'string' && type.toUpperCase();
     params = params || {};
+    // select request type
+    switch (true) {
+      case type === 'GET' && currEnv !== 'native':
 
-    // url type
-    if (type === 'GET' && currEnv !== 'native') {
+        let p = '?'; // ‘?a=xxx&b=yyy’
+        for (let o in params) {
+          p += o + '=' + params[o] + '&';
+        }
+        p = p.slice(0, -1);
+        // get & http
+        if (currHost.match(/http/g)) {
+          url = currHost + url + p;
+        }
+        // proxy && native 不做任何处理
+        break;
 
-      let p = '';
-      for (let o in params) {
-        p += o + '=' + params[o] + '&';
-      }
-      p = p.slice(0, -1);
-      // get & http
-      if (currHost.match(/http/g)) {
-        url = currHost + url + '?' + p;
-      }
+      case type === 'POST':
+        // post & http
+        if (currHost.match(/http/g)) {
+          url = currHost + url;
+        }
+        // proxy && native 不做任何处理
+        break;
 
-      // proxy...
+      default:
 
     }
 
-    if (type === 'POST') {
-      // post & http
-      if (currHost.match(/http/g)) {
-        url = currHost + url;
-      }
-      // proxy...
-    }
     /**
-     * 区分环境执行Request 
+     * 区分环境执行Request
      */
     const execute = () => {
 
@@ -105,7 +108,10 @@ const request = (type, url, params) => {
         client.onreadystatechange = handler;
         client.responseType = 'json';
         // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         client.setRequestHeader('Accept', 'application/json');
+        // client.setRequestHeader('Token', token);
+        // client.setRequestHeader('zoneCode', zoneCode);
         client.send(type === 'POST' ? JSON.stringify(params) : null);
 
       }
@@ -115,12 +121,6 @@ const request = (type, url, params) => {
 
 
   })
-
-  const getURL = () => {
-
-  }
-
-
 
   promise.then((data) =>
     hasCanceled_ ? reject({hasCanceled_: true}) : resolve(data)

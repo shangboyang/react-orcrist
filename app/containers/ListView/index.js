@@ -5,10 +5,8 @@ import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
 import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
-
 import '../../css/common.less'
 import './style.less'
-// images
 import IMG_LUFFY from './images/luffy.jpg';
 import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
@@ -74,7 +72,6 @@ export default class ListView extends Component {
 
     const data = this.state.value || [];
     pageNo = this.state.pageNo || 0;
-console.log('pageNo::' + pageNo);
     // BottomLoading start loading
     this.setState({
       loadStatus: 1
@@ -87,22 +84,15 @@ console.log('pageNo::' + pageNo);
     // let articlePromise = request('get', '/cms/open/newArticles', {
     //   pageNo
     // })
-    //
-    // let articlePromise = request('post', '/api', {
+    
+    let articlePromise = request('get', '/mhis-siapp/security/accountQuery/accountQuery.do', {
+      pageNo
+    })
+
+    // let articlePromise = request('get', '/cms/open/newArticles', {
     //   pageNo
     // })
-    //
-    let articlePromise = request('post', '/cms/open/newArticles', {
-      pageNo
 
-      // success callback
-    }, (data) => {
-      console.log(data);
-      console.log('this', this);
-    }, (error) => {
-      console.log('this', this);
-    });
-console.log(articlePromise.promise);
     articlePromise.promise.then((value) => {
 
       if (typeof value === 'string') {
@@ -122,15 +112,13 @@ console.log(articlePromise.promise);
       }
 
       store.dispatch(articleListInit(this.state.pageNo));
-      console.log(articlePromise.promise);
       // 分页调用
       typeof callback === 'function' && callback(this.state.pageNo);
 
       return this;
     })
     .catch((err) => {
-      // typeof callback === 'function' && callback(this.state.pageNo);
-      // store.dispatch(articleListError(this.state.pageNo));
+      store.dispatch(articleListError(this.state.pageNo));
     })
     .done();
 
@@ -193,7 +181,6 @@ class ArticleList extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('ArticleList::: shouldComponentUpdate~~~~~');
     return !(this.props == nextProps);
   }
 

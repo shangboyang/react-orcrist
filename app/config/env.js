@@ -1,7 +1,7 @@
 // http server host
 const server = {
   mock  : 'mock;http://localhost:7709',
-  stage : 'stage;https://test-mhis-siapp.pingan.com.cn:57743',
+  stage : 'stage;https://test-mhis-siapp.pingan.com.cn:57443',
   prod  : 'prod;https://ehs.pingan.com.cn',
   proxy : 'proxy;', // webpack http-proxy-middleware
   native: 'native;',
@@ -17,4 +17,5 @@ export const env = server.mock;
 ///////////////////////////////////////////////
 
 // add token
-export const token = 'sfdasfefeefe';
+export const token = '4c9fa540de3347df9ddb91907114fa57';
+export const zoneCode = '0575';
