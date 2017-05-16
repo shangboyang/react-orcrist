@@ -3,6 +3,7 @@ import Pager from '../../utils/pager'
 import request from '../../utils/request'
 import './style.less'
 
+
 export default class Pagination extends Component {
 
   constructor(props) {

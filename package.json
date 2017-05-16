@@ -6,7 +6,7 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
-  "author": "Mengwen Li <yang8701@gmail.com>",
+  "author": "Boyang Shang <yang8701@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "antd": "^2.4.3",

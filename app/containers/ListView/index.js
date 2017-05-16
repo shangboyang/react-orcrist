@@ -1,10 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import Header from '../../components/Header/Header';
 import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
 import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
+
+import * as ListActions from './action'
+
 import '../../css/common.less'
 import './style.less'
 import IMG_LUFFY from './images/luffy.jpg';
@@ -12,7 +18,9 @@ import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
 
-export default class ListView extends Component {
+
+
+class ListView extends Component {
 
   state = {
     loadStatus: 0,
@@ -44,7 +52,7 @@ export default class ListView extends Component {
 
     super(props);
 
-    this.clickImageHandler = this.clickImageHandler.bind(this);
+    // this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
   }
 
@@ -53,20 +61,20 @@ export default class ListView extends Component {
     this.getArticleList();
   }
 
-  clickImageHandler(e) {
-
-    const value = this.state.value;
-    // console.log('hello', value);
-    value.push({
-      name: 'Saint Seiya'
-    });
-
-    this.setState({
-      loadStatus: 0,
-      value
-    });
-
-  }
+  // clickImageHandler(e) {
+  //
+  //   const value = this.state.value;
+  //   // console.log('hello', value);
+  //   value.push({
+  //     name: 'Saint Seiya'
+  //   });
+  //
+  //   this.setState({
+  //     loadStatus: 0,
+  //     value
+  //   });
+  //
+  // }
 
   getArticleList(pageNo, callback) {
 
@@ -84,14 +92,14 @@ export default class ListView extends Component {
     // let articlePromise = request('get', '/cms/open/newArticles', {
     //   pageNo
     // })
-    
-    let articlePromise = request('get', '/mhis-siapp/security/accountQuery/accountQuery.do', {
-      pageNo
-    })
 
-    // let articlePromise = request('get', '/cms/open/newArticles', {
+    // let articlePromise = request('get', '/mhis-siapp/security/accountQuery/accountQuery.do', {
     //   pageNo
     // })
+    console.log('store', store.getState());
+    let articlePromise = request('get', '/cms/open/newArticles', {
+      pageNo
+    })
 
     articlePromise.promise.then((value) => {
 
@@ -151,6 +159,13 @@ export default class ListView extends Component {
       let loadStatus = this.state.loadStatus;
       let pageNo = this.state.pageNo;
 
+      let action = {
+        a: 1,
+        b: 2,
+        c: 3
+      }
+
+console.log('action', action);
       return (
         <div ref='listDom' style={this.props.style}>
           <Header
@@ -161,7 +176,7 @@ export default class ListView extends Component {
           />
           <img className="loading-ace" src={IMG_DAO}/>
 
-          <ArticleList articles={list}></ArticleList>
+          <ArticleList articles={list} {...action}></ArticleList>
           <Pagination
             loadStatus={loadStatus}
             callback={this.getArticleList}
@@ -178,6 +193,8 @@ class ArticleList extends Component {
 
   constructor(props) {
     super(props);
+
+    console.log('this prop', props);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -199,3 +216,21 @@ class ArticleList extends Component {
     );
   }
 }
+// redux ‘s state 非 react state
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    list: state.value
+  }
+}
+
+function mapActionToProps(dispatch) {
+  return {
+    actions: bindActionCreators(ListActions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(ListView)
