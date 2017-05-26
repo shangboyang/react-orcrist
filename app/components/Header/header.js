@@ -1,64 +1,29 @@
 import React, {Component} from 'react';
 import './Header.less';
 
-export default class Header extends Component {
+/**
+ * Header Stateless Component
+ */
+const Header = ({title, back, option}) => {
 
-  static defaultProps = {
-    optionFlag: false
+  const backHandler = () => {
+    history.back()
   }
 
-  static propTypes = {
-    optionFlag: React.PropTypes.bool.isRequired
-  }
+  return <div className="ost-header">
+    <div className="ost-header-left" onClick={ back || backHandler }>返回</div>
+    <div className="ost-header-main">{title}</div>
+    <div className="ost-header-right"
+      onClick={ option && option.handler ? option.handler : '' }>{ option && option.text ? option.text : '' }
+    </div>
+  </div>
 
-  constructor(props) {
-    // console.log('PropTypes', React.PropTypes);
-    // console.log('Header Super Props', props);
-    super(props);
-    this.optionHandler = this.optionHandler.bind(this); // 1 selector
-    this.backHandler = this.backHandler.bind(this); // 1 selector
-
-  }
-
-  componentDidMount() {
-    // console.log('Header', this);
-    // console.log('Header:::componentDidMount', this);
-  }
-
-  backHandler(e) {
-    history.back();
-  }
-
-  optionHandler(e) {
-
-    if (this.props.optionFlag) {
-      console.log('option handler');
-    } else {
-      console.log('Nothing');
-    }
-
-  }
-
-  render() {
-
-    if (this.props.optionFlag) {
-      return (
-        <div ref="header" className="ost-header">
-          <div className="ost-header-left" onClick={this.props.backHandler || this.backHandler}>返回</div>
-          <div className="ost-header-main">{this.props.title}</div>
-          <div className="ost-header-right"
-            onClick={this.props.optionHandler || this.optionHandler}>{this.props.optionText}
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div ref="header" className="ost-header">
-          <div className="ost-header-left" onClick={this.props.backHandler || this.backHandler}>返回</div>
-          <div className="ost-header-main">{this.props.title}</div>
-          <div className="ost-header-right"></div>
-        </div>
-      )
-    }
-  }
 }
+
+Header.propTypes = {
+  title: React.PropTypes.string,
+  back: React.PropTypes.func,
+  option: React.PropTypes.object,
+}
+
+export default Header;

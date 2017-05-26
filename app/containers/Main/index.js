@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import '../../components/Header/Header.less';
 import './style.less';
 import IMG_ACE from './images/ace.jpg';
+import IMG_LUFFY from './images/luffy.jpg';
 
 export default class Loading extends Component {
 
@@ -11,13 +12,6 @@ export default class Loading extends Component {
     // header config
     header: {
       title: 'React Ocrist',
-      optionFlag: false,
-      optionHandler: (e) => {
-        console.log('i want it option---by 首页');
-      },
-      backHandler: (e) => {
-        console.log('i want it back ---by 首页');
-      }
     }
   };
 
@@ -26,12 +20,9 @@ export default class Loading extends Component {
       <div>
         <Header
           title={this.props.header.title}
-          backHandler={this.props.header.backHandler}
-          optionFlag={this.props.header.optionFlag}
-          optionHandler={this.props.header.optionHandler}
         />
         <div className="main">
-          <div>我是首页</div>
+          <img className="loading-ace" src={IMG_LUFFY}/>
           <img className="loading-ace" src={IMG_ACE}/>
           <Link to='list' activeStyle={{color: 'red'}}>ListView</Link>
           &nbsp;&nbsp;&nbsp;

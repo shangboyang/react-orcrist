@@ -1,23 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import Header from '../../components/Header/Header';
 import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
 import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
-
 import * as ListActions from './action'
-
 import '../../css/common.less'
 import './style.less'
 import IMG_LUFFY from './images/luffy.jpg';
 import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
 import IMG_DAO from './images/dao.jpg';
-
 
 
 class ListView extends Component {
@@ -49,9 +45,7 @@ class ListView extends Component {
   };
 
   constructor(props) {
-
     super(props);
-
     // this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
   }
@@ -102,7 +96,7 @@ class ListView extends Component {
     })
 
     articlePromise.promise.then((value) => {
-
+console.log('value', value);
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
@@ -126,7 +120,9 @@ class ListView extends Component {
       return this;
     })
     .catch((err) => {
-      store.dispatch(articleListError(this.state.pageNo));
+      console.log(err)
+      console.log(this.state);
+      // store.dispatch(articleListError(this.state.pageNo));
     })
     .done();
 
@@ -135,7 +131,7 @@ class ListView extends Component {
   render() {
 
     if (!this.state.value) {
-
+console.log(this.state.value);
       return (
 
         <div ref="listDom" style={this.props.style}>

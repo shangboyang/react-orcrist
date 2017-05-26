@@ -19,7 +19,6 @@
 
         this.isLoading = false;
         this.hasMore = false;
-        this.pageNo = 1;
 
         // 元素在可视区位置，符合其中一个条件就会触发加载机制
         this.option = option || {};
@@ -27,6 +26,13 @@
         this.right = this.option.right || 0; //元素在右边伸出的距离才加载
         this.bottom = this.option.bottom || 0; //元素在底部伸出的距离才加载
         this.left = this.option.left || 0; //元素在左边伸出的距离才加载
+
+        // 1=页码数分规则
+        this.pageNo = this.option.pageNo || 1;
+        // 2-数据条下标位规则
+        this.pageStart = this.option.start || 0;
+        this.pageLimit = this.option.limit;
+
         // 获取数据列表
         this.fetchData = this.option.callback || function() { console.log('fetchData:::::::::::::::::::::::::::::::'); };
         // listen
@@ -65,7 +71,6 @@
 
     /**
      * 遍历DOM是否符合加载条件
-     * @return {[type]} [description]
      */
     Pager.prototype.eachDOM = function() {
         if (this.isLoading) return;
@@ -79,25 +84,40 @@
         }
 
     }
-
+    /**
+     * 执行分页request回调
+     */
     Pager.prototype.execute = function() {
 
         var self = this;
+        var callback = null;
+
+        if (self.limit > 0) {
+          console.log('SELF PageStart in:::'  + self.pageStart);
+          callback = function(start) {
+            self.pageStart = start;
+            self.isLoading = false; //
+            console.log('SELF PageStart out:::'  + self.pageStart);
+          }
+
+        } else {
+          console.log('SELF PageNo in:::'  + self.pageNo);
+          callback = function(pageNo) {
+            self.pageNo = pageNo;
+            self.isLoading = false;
+            console.log('SELF PageNo out:::'  + self.pageNo);
+          }
+
+        }
 
         self.isLoading = true; // 开始执行execute
-console.log('SELF PageNo in:::'  + self.pageNo);
-        self.fetchData(self.pageNo, function(pageNo) {
-          self.pageNo = pageNo;
-          self.isLoading = false; //
-console.log('SELF PageNo out:::'  + self.pageNo);
-        });
+        self.fetchData(self.pageNo, callback);
+
     };
 
 
     /**
      * 判断元素是否在可视区
-     * @param  {[type]} el [description]
-     * @return {[type]}    [description]
      */
     Pager.prototype.isInCurrentScreen = function(el) {
 

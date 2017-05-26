@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import BottomLoading from '../../components/BottomLoading/loading'
 import Pager from '../../utils/pager'
 import request from '../../utils/request'
 import './style.less'
@@ -16,10 +17,13 @@ export default class Pagination extends Component {
 
   componentDidMount() {
 
-    const { loadStatus, callback } = this.props;
+    const { pageNo, start, limit, callback } = this.props;
 
     const pager = new Pager(this.refs.pager, {
-      callback
+      pageNo,
+      start,
+      limit,
+      callback,
     });
 
   }
@@ -45,19 +49,3 @@ Pagination.propTypes = {
   loadStatus: PropTypes.number.isRequired,
   callback: PropTypes.func.isRequired
 };
-
-class BottomLoading extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className={'load load-status-' + this.props.status}>
-          <div className="load-msg">{this.props.msg}</div>
-      </div>
-    )
-  }
-
-}
