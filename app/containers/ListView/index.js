@@ -6,7 +6,6 @@ import Pagination from '../Pagination/index';
 import request from '../../utils/request';
 import Pager from '../../utils/pager';
 import store from '../../config/store';
-import {addTodo, articleListInit, articleListLoad, articleListError} from './action';
 import * as ListActions from './action'
 import '../../css/common.less'
 import './style.less'
@@ -20,7 +19,6 @@ class ListView extends Component {
 
   state = {
     loadStatus: 0,
-    error: null,
     value: null,
   }
 
@@ -79,6 +77,9 @@ class ListView extends Component {
       loadStatus: 1
     });
 
+    // 初始化进入BottomLoading-loading状态
+console.log(this.props);
+    console.log(store.getState);
     // let articlePromise = request('get', '/api', {
     //   pageNo
     // })
@@ -90,17 +91,18 @@ class ListView extends Component {
     // let articlePromise = request('get', '/mhis-siapp/security/accountQuery/accountQuery.do', {
     //   pageNo
     // })
-    console.log('store', store.getState());
+    // console.log('store', store.getState());
+
     let articlePromise = request('get', '/cms/open/newArticles', {
       pageNo
     })
 
     articlePromise.promise.then((value) => {
-console.log('value', value);
+// console.log('value', value);
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
-      
+
       this.setState({
         loadStatus: 0, // close Loading
         value: data.concat(value.body.dataList),
@@ -215,9 +217,10 @@ class ArticleList extends Component {
 }
 // redux ‘s state 非 react state
 function mapStateToProps(state) {
-  console.log(state);
+  console.log('State', state);
   return {
-    list: state.value
+    loadStatus: state.loadStatus,
+    list: state.value,
   }
 }
 
