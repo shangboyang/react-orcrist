@@ -100,20 +100,21 @@ console.log('value', value);
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
-
+      
       this.setState({
         loadStatus: 0, // close Loading
         value: data.concat(value.body.dataList),
         pageNo: pageNo + 1
       });
 
-      if (pageNo === 1) {
-        store.dispatch(articleListInit(this.state.pageNo));
-      } else {
-        store.dispatch(articleListLoad(this.state.pageNo));
-      }
+      // if (pageNo === 1) {
+      //   store.dispatch(articleListInit(this.state.pageNo));
+      // } else {
+      //   store.dispatch(articleListLoad(this.state.pageNo));
+      // }
 
-      store.dispatch(articleListInit(this.state.pageNo));
+
+      // store.dispatch(articleListInit(this.state.pageNo));
       // 分页调用
       typeof callback === 'function' && callback(this.state.pageNo);
 

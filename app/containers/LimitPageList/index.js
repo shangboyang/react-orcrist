@@ -92,7 +92,7 @@ export default class LimitPageList extends Component {
       let list = this.state.value;
       let loadStatus = this.state.loadStatus;
       let start = this.state.start;
-      
+
       return (
         <div ref='listDom' style={this.props.style}>
           <Header
@@ -103,8 +103,9 @@ export default class LimitPageList extends Component {
             loadStatus={loadStatus}
             callback={this.getArticleList}
             start={start}
-            limit={this.props.pager.limit}>
-          </Pagination>
+            limit={this.props.pager.limit}
+            {...this.props}
+          />
 
         </div>
       )

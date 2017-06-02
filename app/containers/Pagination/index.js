@@ -33,12 +33,10 @@ export default class Pagination extends Component {
   }
 
   render() {
-
-    const { loadStatus, text } = this.props;
     return (
       <div className="pager" ref="pager">
         <div className="pager-line"></div>
-        <BottomLoading status={loadStatus} msg="上拉加载更多"></BottomLoading>
+        <BottomLoading {...this.props}></BottomLoading>
       </div>
     )
   }
