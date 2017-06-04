@@ -52,6 +52,7 @@
     "lodash": "^4.16.6",
     "ora": "^0.3.0",
     "postcss-loader": "^1.1.0",
+    "redux-logger": "^3.0.6",
     "request": "^2.76.0",
     "shelljs": "^0.7.5",
     "style-loader": "^0.13.1",

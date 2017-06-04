@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import Header from '../../components/Header/Header';
 import Pagination from '../Pagination/index';
 import request from '../../utils/request';
-import Pager from '../../utils/pager';
-import store from '../../config/store';
 import * as ListActions from './action'
 import '../../css/common.less'
 import './style.less'
@@ -17,10 +15,6 @@ import IMG_DAO from './images/dao.jpg';
 
 class ListView extends Component {
 
-  state = {
-    loadStatus: 0,
-    value: null,
-  }
 
   static defaultProps = {
     // header config
@@ -46,95 +40,29 @@ class ListView extends Component {
     super(props);
     // this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
+
   }
 
   // render()调用后执行
   componentDidMount() {
+
+    const { dispatch, requestData } = this.props
+
+    console.log('Props', this.props)
+
+    console.log('d', dispatch, 'requestData', requestData);
+
     this.getArticleList();
   }
 
-  // clickImageHandler(e) {
-  //
-  //   const value = this.state.value;
-  //   // console.log('hello', value);
-  //   value.push({
-  //     name: 'Saint Seiya'
-  //   });
-  //
-  //   this.setState({
-  //     loadStatus: 0,
-  //     value
-  //   });
-  //
-  // }
 
   getArticleList(pageNo, callback) {
-
-    const data = this.state.value || [];
-    pageNo = this.state.pageNo || 0;
-    // BottomLoading start loading
-    this.setState({
-      loadStatus: 1
-    });
-
-    // 初始化进入BottomLoading-loading状态
-console.log(this.props);
-    console.log(store.getState);
-    // let articlePromise = request('get', '/api', {
-    //   pageNo
-    // })
-
-    // let articlePromise = request('get', '/cms/open/newArticles', {
-    //   pageNo
-    // })
-
-    // let articlePromise = request('get', '/mhis-siapp/security/accountQuery/accountQuery.do', {
-    //   pageNo
-    // })
-    // console.log('store', store.getState());
-
-    let articlePromise = request('get', '/cms/open/newArticles', {
-      pageNo
-    })
-
-    articlePromise.promise.then((value) => {
-// console.log('value', value);
-      if (typeof value === 'string') {
-        value = JSON.parse(value);
-      }
-
-      this.setState({
-        loadStatus: 0, // close Loading
-        value: data.concat(value.body.dataList),
-        pageNo: pageNo + 1
-      });
-
-      // if (pageNo === 1) {
-      //   store.dispatch(articleListInit(this.state.pageNo));
-      // } else {
-      //   store.dispatch(articleListLoad(this.state.pageNo));
-      // }
-
-
-      // store.dispatch(articleListInit(this.state.pageNo));
-      // 分页调用
-      typeof callback === 'function' && callback(this.state.pageNo);
-
-      return this;
-    })
-    .catch((err) => {
-      console.log(err)
-      console.log(this.state);
-      // store.dispatch(articleListError(this.state.pageNo));
-    })
-    .done();
 
   }
 
   render() {
 
-    if (!this.state.value) {
-console.log(this.state.value);
+    if (!false) {
       return (
 
         <div ref="listDom" style={this.props.style}>
@@ -164,7 +92,6 @@ console.log(this.state.value);
         c: 3
       }
 
-console.log('action', action);
       return (
         <div ref='listDom' style={this.props.style}>
           <Header
@@ -220,17 +147,21 @@ function mapStateToProps(state) {
   console.log('State', state);
   return {
     loadStatus: state.loadStatus,
-    list: state.value,
+    list: state.data,
   }
 }
 
 function mapActionToProps(dispatch) {
+  const action = bindActionCreators(ListActions, dispatch)
+  console.log('action:::', action);
+  const handler = () => console.log('hello')
+  handler()
   return {
-    actions: bindActionCreators(ListActions, dispatch)
+    action
   }
 }
 
 export default connect(
   mapStateToProps,
-  mapActionToProps
+  mapActionToProps,
 )(ListView)
