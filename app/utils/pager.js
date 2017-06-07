@@ -110,7 +110,7 @@
     }
 
     self.isLoading = true; // 开始执行execute
-    self.fetchData(self.pageNo, callback);
+    self.fetchData(callback);
 
   };
 

@@ -33,11 +33,11 @@ export default class LimitPageList extends Component {
     this.getArticleList();
   }
 
-  getArticleList(start, callback) {
+  getArticleList(callback) {
 
     const data = this.state.value || [];
     const limit = this.props.pager.limit;
-    start = this.state.start || 0;
+    const start = this.state.start || 0;
 
     // BottomLoading start loading
     this.setState({

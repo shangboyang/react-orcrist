@@ -38,9 +38,9 @@ class ListView extends Component {
 
   constructor(props) {
     super(props);
-    console.log('eee');
+    // console.log('eee');
     // this.clickImageHandler = this.clickImageHandler.bind(this);
-    this.getArticleList = this.getArticleList.bind(this);
+    // this.getArticleList = this.getArticleList.bind(this);
 
   }
 
@@ -52,7 +52,7 @@ class ListView extends Component {
   }
 
 
-  getArticleList(pageNo, callback) {}
+  // getArticleList(pageNo, callback) {}
 
   render() {
 
@@ -118,6 +118,7 @@ function mapStateToProps(state) {
     data: listViewReducer.data, // 当前request data
     list: listViewReducer.list || [], // 所有列表数据
     pageNo: listViewReducer.pageNo,
+    isFetching: listViewReducer.isFetching,
   }
 }
 

@@ -23,6 +23,7 @@ const initialState = {
   loadStatus: 0,
   list: null,
   pageNo: 1,
+  isFetching: false,
 }; // 可以是Number 或者字符串 或对象
 
 const listViewReducer = (state = initialState, action) => {
@@ -31,6 +32,7 @@ const listViewReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         loadStatus: 1,
         pageNo: action.pageNo || state.pageNo,
+        isFetching: action.isFetching,
       })
     case END_REQUEST_LISTVIEW:
       return Object.assign({}, state, {
@@ -38,6 +40,7 @@ const listViewReducer = (state = initialState, action) => {
         pageNo: action.pageNo,
         data: action.data,
         list: action.list,
+        isFetching: action.isFetching,
       })
     default:
       return state;
