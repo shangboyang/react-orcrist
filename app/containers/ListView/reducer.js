@@ -1,11 +1,9 @@
 /************************************************/
 /********** Reducer 控制State——业务逻辑 ***********/
 /************************************************/
-
-import { startLoadData, finishLoadData } from './action';
 import {
-  START_LOAD_LISTVIEW,
-  FINISH_LOAD_LISTVIEW
+  START_REQUEST_LISTVIEW,
+  END_REQUEST_LISTVIEW
 } from './constant';
 
 /*
@@ -24,18 +22,23 @@ const initialState = {
 const initialState = {
   loadStatus: 0,
   list: null,
+  pageNo: 1,
 }; // 可以是Number 或者字符串 或对象
 
 const listViewReducer = (state = initialState, action) => {
-  // console.log('init reducer', action);
   switch (action.type) {
-    case START_LOAD_LISTVIEW:
-    console.log('EEESfdsafds');
-      state.loadStatus = 1;
-      return state.loadStatus
-    case FINISH_LOAD_LISTVIEW:
-      state.loadStatus = 0;
-      return state.loadStatus
+    case START_REQUEST_LISTVIEW:
+      return Object.assign({}, state, {
+        loadStatus: 1,
+        pageNo: action.pageNo || state.pageNo,
+      })
+    case END_REQUEST_LISTVIEW:
+      return Object.assign({}, state, {
+        loadStatus: 0,
+        pageNo: action.pageNo,
+        data: action.data,
+        list: action.list,
+      })
     default:
       return state;
   }

@@ -9,10 +9,6 @@ export default class Pagination extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      loadStatus: 0
-    };
   }
 
   componentDidMount() {

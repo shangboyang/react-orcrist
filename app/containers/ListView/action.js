@@ -1,61 +1,62 @@
 
 import request from '../../utils/request';
 import {
-    START_LOAD_LISTVIEW,
-    FINISH_LOAD_LISTVIEW,
-    REQUEST_DATA,
+    START_REQUEST_LISTVIEW,
+    END_REQUEST_LISTVIEW,
 } from './constant';
 
 
 // action Creator 包含编写所有action同步请求等动作
 // Action 返回一个对象。其中的type属性是必须的，表示 Action 的名称。 TYPE唯一
-export function startLoadData() {
+export function startRequest(pageNo) {
   return {
-    type: START_LOAD_LISTVIEW
+    type: START_REQUEST_LISTVIEW,
+    pageNo,
   }
 }
 
-export function finishLoadData() {
+export function endRequest(pageNo, data, list) {
   return {
-    type: FINISH_LOAD_LISTVIEW
+    type: END_REQUEST_LISTVIEW,
+    pageNo,
+    data,
+    list,
   }
 }
 
-export function requestData() {
-  return {
-    type: REQUEST_DATA
-  }
-}
+export function requestArticleList(pageOpt, callback) {
+  return (dispatch, getState) => {
 
-function fetchArticleList() {
-  return dispatch => {
+    let pageNo = getState().listViewReducer.pageNo || 1
+
+    dispatch(startRequest(pageNo))
+
     let articlePromise = request('get', '/cms/open/newArticles', {
       pageNo
     })
 
-    articlePromise.promise.then((data) => {
+    return articlePromise.promise.then((data) => {
+
+      let pageNo = getState().listViewReducer.pageNo || 1
+      let list = getState().listViewReducer.list || []
 
       if (typeof data === 'string') {
-        value = JSON.parse(data);
+        data = JSON.parse(data);
       }
 
-      this.setState({
-        loadStatus: 0, // close Loading
-        value: data.concat(value.body.dataList),
-        pageNo: pageNo + 1
-      });
-
+      list = list.concat(data.body.dataList);
+      pageNo++;
+      
       // 分页调用
-      // typeof callback === 'function' && callback(this.state.pageNo);
+      typeof callback === 'function' && callback(pageNo);
 
-      return this;
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .done();
 
-    return
+      dispatch(endRequest(pageNo, data, list));
+
+    })
+    .catch(err => {})
+    .done()
+
   }
 }
 

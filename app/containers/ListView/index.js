@@ -38,6 +38,7 @@ class ListView extends Component {
 
   constructor(props) {
     super(props);
+    console.log('eee');
     // this.clickImageHandler = this.clickImageHandler.bind(this);
     this.getArticleList = this.getArticleList.bind(this);
 
@@ -45,73 +46,42 @@ class ListView extends Component {
 
   // render()调用后执行
   componentDidMount() {
+    const { action } = this.props
 
-    const { dispatch, requestData } = this.props
-
-    console.log('Props', this.props)
-
-    console.log('d', dispatch, 'requestData', requestData);
-
-    this.getArticleList();
+    action.requestArticleList() // action
   }
 
 
-  getArticleList(pageNo, callback) {
-
-  }
+  getArticleList(pageNo, callback) {}
 
   render() {
 
-    if (!false) {
-      return (
+    const { loadStatus, list, pageNo, action } = this.props
 
-        <div ref="listDom" style={this.props.style}>
-          <Header
-            title={this.props.header.title}
-            backHandler={this.backHandler}
-            optionHandler={this.optionHandler}
-            optionText={'操作'}
-          >
-          </Header>
-          <img className="loading-ace" src={IMG_YOUR_NAME_1}/>
-          <div>Loading</div>
-          <div className="button" onClick={this.clickImageHandler}>ADD_TODO</div>
-        </div>
-
-      )
-
-    } else {
-
-      let list = this.state.value;
-      let loadStatus = this.state.loadStatus;
-      let pageNo = this.state.pageNo;
-
-      let action = {
-        a: 1,
-        b: 2,
-        c: 3
-      }
-
-      return (
-        <div ref='listDom' style={this.props.style}>
-          <Header
-            title={this.props.header.title}
-            backHandler={this.props.header.backHandler}
-            optionHandler={this.props.header.optionHandler}
-            optionText={'操作'}
-          />
-          <img className="loading-ace" src={IMG_DAO}/>
-
-          <ArticleList articles={list} {...action}></ArticleList>
-          <Pagination
+    return (
+      <div ref='listDom' style={this.props.style}>
+        <Header
+          title={this.props.header.title}
+          backHandler={this.props.header.backHandler}
+          optionHandler={this.props.header.optionHandler}
+          optionText={'操作'}
+        />
+        {
+          list.length > 0 &&
+          <ArticleList articles={list}></ArticleList>
+        }
+        {
+          list.length > 0 && loadStatus > -1 && <Pagination
             loadStatus={loadStatus}
-            callback={this.getArticleList}
-            pageNo={pageNo}>
+            callback={action.requestArticleList}
+            pageNo={pageNo}
+            {...action}>
           </Pagination>
+        }
 
-        </div>
-      )
-    }
+      </div>
+    )
+
   }
 }
 
@@ -119,8 +89,6 @@ class ArticleList extends Component {
 
   constructor(props) {
     super(props);
-
-    console.log('this prop', props);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -144,21 +112,20 @@ class ArticleList extends Component {
 }
 // redux ‘s state 非 react state
 function mapStateToProps(state) {
-  console.log('State', state);
+  const { listViewReducer } = state
   return {
-    loadStatus: state.loadStatus,
-    list: state.data,
+    loadStatus: listViewReducer.loadStatus,
+    data: listViewReducer.data, // 当前request data
+    list: listViewReducer.list || [], // 所有列表数据
+    pageNo: listViewReducer.pageNo,
   }
 }
 
 function mapActionToProps(dispatch) {
-  const action = bindActionCreators(ListActions, dispatch)
-  console.log('action:::', action);
-  const handler = () => console.log('hello')
-  handler()
   return {
-    action
+    action: bindActionCreators(ListActions, dispatch)
   }
+
 }
 
 export default connect(
