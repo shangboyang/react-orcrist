@@ -22,11 +22,12 @@ export default class App extends Component {
         component="div"
         transitionName={ true ? 'left' : 'right'}
         transitionEnterTimeout={1000}
-        transitionLeaveTimeout={300}>
+        transitionLeaveTimeout={300}
+        style={{height:"100%", width: "100%"}}>
 
         <div
           key={this.props.location.pathname}
-          style={{position:"absolute", width: "100%"}}>
+          style={{height:"100%", width: "100%"}}>
           {this.props.children}
         </div>
 

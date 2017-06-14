@@ -51,13 +51,14 @@
   Pager.prototype.init = function() {
     var self = this;
     self.eachDOM = self.eachDOM.bind(this);
+console.log(self.eachDOM);
     self.addEventsListener(self.monitorEvents);
   }
 
   Pager.prototype.addEventsListener = function(events) {
     var self = this;
     for (var i = 0, len = events.length; i < len; i++) {
-    window.addEventListener(events[i], self.eachDOM, false);
+      window.addEventListener(events[i], self.eachDOM, false);
     }
     self.eachDOM();
   };
@@ -74,10 +75,10 @@
   */
   Pager.prototype.eachDOM = function() {
     if (this.isLoading) return;
-
+    console.log('this el:::', this.el);
     for (var i = 0, len = this.el.length; i < len; i++) {
       if (this.isInCurrentScreen(this.el[i])) {
-        // console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
+        console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
         this.execute();
         return;
       }

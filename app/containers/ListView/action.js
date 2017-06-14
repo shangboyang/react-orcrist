@@ -35,31 +35,36 @@ export function requestArticleList(callback) {
       let pageNo = getState().listViewReducer.pageNo || 1
 
       dispatch(startRequest(pageNo, isFetching = true))
+      // Test bottom loadding
+      setTimeout(function() {
 
-      let articlePromise = request('get', '/cms/open/newArticles', {
-        pageNo
-      })
+        let articlePromise = request('get', '/cms/open/newArticles', {
+          pageNo
+        })
 
-      return articlePromise.promise.then((data) => {
+        return articlePromise.promise.then((data) => {
 
-        let pageNo = getState().listViewReducer.pageNo || 1
-        let list = getState().listViewReducer.list || []
+          let pageNo = getState().listViewReducer.pageNo || 1
+          let list = getState().listViewReducer.list || []
 
-        if (typeof data === 'string') {
-          data = JSON.parse(data);
-        }
+          if (typeof data === 'string') {
+            data = JSON.parse(data);
+          }
 
-        list = list.concat(data.body.dataList);
-        pageNo++;
+          list = list.concat(data.body.dataList);
+          pageNo++;
 
-        // 分页调用
-        typeof callback === 'function' && callback(pageNo);
+          // 分页调用
+          typeof callback === 'function' && callback(pageNo);
 
-        dispatch(endRequest(pageNo, data, list, isFetching = false));
+          dispatch(endRequest(pageNo, data, list, isFetching = false));
 
-      })
-      .catch(err => {})
-      .done()
+        })
+        .catch(err => {})
+        .done()
+
+
+      }, 800)
 
     }
   }

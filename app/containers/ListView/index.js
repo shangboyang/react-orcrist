@@ -59,7 +59,7 @@ class ListView extends Component {
     const { loadStatus, list, pageNo, action } = this.props
 
     return (
-      <div ref='listDom' style={this.props.style}>
+      <div ref='listDom' style={{height:"100%", width: "100%"}} >
         <Header
           title={this.props.header.title}
           backHandler={this.props.header.backHandler}
@@ -68,21 +68,13 @@ class ListView extends Component {
         />
         {
           list.length > 0 &&
-          <ArticleList articles={list}></ArticleList>
+          <ArticleList articles={list} {...this.props}></ArticleList>
         }
-        {
-          list.length > 0 && loadStatus > -1 && <Pagination
-            loadStatus={loadStatus}
-            callback={action.requestArticleList}
-            pageNo={pageNo}
-            {...action}>
-          </Pagination>
-        }
-
       </div>
     )
 
   }
+
 }
 
 class ArticleList extends Component {
@@ -91,22 +83,28 @@ class ArticleList extends Component {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(this.props == nextProps);
-  }
-
   render() {
-    let { articles } = this.props;
+    const { articles, loadStatus, pageNo, action } = this.props
     return (
-      <ul>
+      <div>
+        <div className="art-list">
+          {
+            articles.map((val, idx) => {
+              return (
+                <div className="arcticle-item" key={idx}>{val.title}</div>
+              )
+            })
+          }
+        </div>
         {
-          articles.map((val, idx) => {
-            return (
-              <li className="arcticle-item" key={idx}>{val.title}</li>
-            )
-          })
+          articles.length > 0 && loadStatus > -1 && <Pagination
+            loadStatus={loadStatus}
+            callback={action.requestArticleList}
+            pageNo={pageNo}
+            {...action}>
+          </Pagination>
         }
-      </ul>
+      </div>
     );
   }
 }
