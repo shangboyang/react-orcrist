@@ -14,8 +14,8 @@ export default class Pagination extends Component {
   componentDidMount() {
 
     const { pageNo, start, limit, callback } = this.props;
-
-    const pager = new Pager(this.refs.pager, {
+    // domObj or selector
+    const pager = new Pager('.pager-line', {
       pageNo,
       start,
       limit,
@@ -36,6 +36,7 @@ export default class Pagination extends Component {
       </div>
     )
   }
+
 
 };
 

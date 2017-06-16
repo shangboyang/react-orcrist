@@ -80,16 +80,18 @@ const request = (type, url, params) => {
         const handler = function() {
 
           if (this.readyState !== 4) return;
+            console.log('XMLHttpRequest::: ', this);
 
           if (this.status === 200) {
-            console.log(resolve);
             resolve(this.response);
           } else {
+            // alert('this.status:::' + this.status)
+            // alert(JSON.stringify(this));
             reject({hasCanceled_: true, msg: this.statusText})
           }
 
         };
-
+// alert('url:::' + url)
         let client = new XMLHttpRequest();
         client.open(type, url);
         client.onreadystatechange = handler;
@@ -113,7 +115,7 @@ const request = (type, url, params) => {
   );
 
   promise.catch((error) =>
-    hasCanceled_ ? reject({hasCanceled_: true}) : reject(error)
+    hasCanceled_ ? reject({hasCanceled_: true, error}) : reject(error)
   );
 
   return {

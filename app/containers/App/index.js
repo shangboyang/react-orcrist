@@ -10,10 +10,6 @@ export default class App extends Component {
 
   componentWillMount() {
     document.body.style.margin = "0px";
-    // 这是防止页面被拖拽
-    // document.body.addEventListener('touchmove', (ev) => {
-    //   ev.preventDefault();
-    // });
   }
 
   render() {

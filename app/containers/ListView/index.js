@@ -38,10 +38,6 @@ class ListView extends Component {
 
   constructor(props) {
     super(props);
-    // console.log('eee');
-    // this.clickImageHandler = this.clickImageHandler.bind(this);
-    // this.getArticleList = this.getArticleList.bind(this);
-
   }
 
   // render()调用后执行
@@ -83,15 +79,23 @@ class ArticleList extends Component {
     super(props);
   }
 
+  goDetailHandler(...param) {
+    this.props.router.push('/props-callback')
+  }
+
   render() {
     const { articles, loadStatus, pageNo, action } = this.props
     return (
       <div>
         <div className="art-list">
           {
-            articles.map((val, idx) => {
+            articles.map((obj, idx) => {
               return (
-                <div className="arcticle-item" key={idx}>{val.title}</div>
+                <div className="arcticle-item"
+                  key={idx}
+                  onClick={this.goDetailHandler.bind(this, obj, idx)}>
+                  {obj.title}
+                </div>
               )
             })
           }

@@ -1,5 +1,5 @@
 
-import request from '../../utils/request';
+import request from '../../utils/request'
 import {
     START_REQUEST_LISTVIEW,
     END_REQUEST_LISTVIEW,
@@ -27,23 +27,23 @@ export function endRequest(pageNo, data, list, isFetching) {
 }
 
 export function requestArticleList(callback) {
+
   return (dispatch, getState) => {
 
     let isFetching = getState().listViewReducer.isFetching
     // 必须再结束上次请求
     if (!isFetching) {
       let pageNo = getState().listViewReducer.pageNo || 1
-
+      let regions = '440300' // 深圳
       dispatch(startRequest(pageNo, isFetching = true))
+
       // Test bottom loadding
+      let articlePromise = request('get', '/siapp-sms/open/getArticles.do', {
+        regions,
+        pageNo
+      })
       setTimeout(function() {
-
-        let articlePromise = request('get', '/cms/open/newArticles', {
-          pageNo
-        })
-
         return articlePromise.promise.then((data) => {
-
           let pageNo = getState().listViewReducer.pageNo || 1
           let list = getState().listViewReducer.list || []
 
@@ -51,20 +51,26 @@ export function requestArticleList(callback) {
             data = JSON.parse(data);
           }
 
-          list = list.concat(data.body.dataList);
-          pageNo++;
+          if (data.body && data.body.articles) {
+            list = list.concat(data.body.articles);
+            pageNo++;
 
-          // 分页调用
-          typeof callback === 'function' && callback(pageNo);
+            // 分页调用
+            typeof callback === 'function' && callback(pageNo);
+          }
+          // 没有更多数据
+          if (data.body && data.body.articles && pageNo > 1) {
+
+          }
 
           dispatch(endRequest(pageNo, data, list, isFetching = false));
-
         })
-        .catch(err => {})
+        .catch(err => {
+          console.log(err);
+        })
         .done()
 
-
-      }, 800)
+      }, 3000)
 
     }
   }

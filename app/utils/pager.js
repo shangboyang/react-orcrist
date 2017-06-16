@@ -51,7 +51,6 @@
   Pager.prototype.init = function() {
     var self = this;
     self.eachDOM = self.eachDOM.bind(this);
-console.log(self.eachDOM);
     self.addEventsListener(self.monitorEvents);
   }
 
@@ -75,10 +74,8 @@ console.log(self.eachDOM);
   */
   Pager.prototype.eachDOM = function() {
     if (this.isLoading) return;
-    console.log('this el:::', this.el);
     for (var i = 0, len = this.el.length; i < len; i++) {
       if (this.isInCurrentScreen(this.el[i])) {
-        console.log('getNextPage:::::::::::::::::::::::::::::::::::::::');
         this.execute();
         return;
       }
