@@ -10,7 +10,7 @@ import LimitPageList from '../containers/LimitPageList/index'
 const config = [
   {
     path: '/',
-    component: App,
+    component: App, 
     // default index
     indexRoute: {
       component: Main
