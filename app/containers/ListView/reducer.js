@@ -18,7 +18,7 @@ const initialState = {
     data: []
 }
 */
-
+ 
 const initialState = {
   loadStatus: 0,
   list: null,
