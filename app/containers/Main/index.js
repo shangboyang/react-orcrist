@@ -6,6 +6,8 @@ import './style.less';
 import IMG_ACE from './images/ace.jpg';
 import IMG_LUFFY from './images/luffy.jpg';
 
+import { Button } from 'antd'
+
 export default class Loading extends Component {
 
   static defaultProps = {
@@ -26,7 +28,10 @@ export default class Loading extends Component {
           <img className="loading-ace" src={IMG_ACE}/>
           <Link to='list' activeStyle={{color: 'red'}}>ListView</Link>
           &nbsp;&nbsp;&nbsp;
-          <Link to='test' activeStyle={{color: 'red'}}>Test Parents</Link>
+          <Link to='limit' activeStyle={{color: 'red'}}>ListView by limit</Link>
+          <Link to='propsCb' activeStyle={{color: 'red'}}>父子组件调用</Link>
+          <Button>按钮</Button>
+          <Button className="btn" type="primary">primary 按钮</Button>
         </div>
         <ul>
           <li>12321</li>

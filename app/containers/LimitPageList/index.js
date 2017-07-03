@@ -44,7 +44,7 @@ export default class LimitPageList extends Component {
       loadStatus: 1
     });
 
-    let articlePromise = request('get', '/cms/open/newArticles', {
+    let articlePromise = request('get', '/siapp-sms/open/getArticles.do', {
       start,
       limit,
     })
@@ -54,10 +54,10 @@ export default class LimitPageList extends Component {
       if (typeof value === 'string') {
         value = JSON.parse(value);
       }
-
+console.log(value);
       this.setState({
         loadStatus: 0, // close Loading
-        value: data.concat(value.body.dataList),
+        value: data.concat(value.body.articles),
         start: start + limit,
       });
 
