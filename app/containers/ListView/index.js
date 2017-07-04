@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Header from '../../components/Header/Header';
-import Pagination from '../Pagination/index';
-import request from '../../utils/request';
+import Header from '../../components/Header/Header'
+import Pagination from '../Pagination/index'
+import request from '../../utils/request'
+import * as AppActions from '../App/action'
 import * as ListActions from './action'
 import '../../css/common.less'
 import './style.less'
-import IMG_LUFFY from './images/luffy.jpg';
-import IMG_YOUR_NAME_1 from './images/your_name_1.jpg';
-import IMG_YOUR_NAME_2 from './images/your_name_2.jpg';
-import IMG_DAO from './images/dao.jpg';
+import IMG_LUFFY from './images/luffy.jpg'
+import IMG_YOUR_NAME_1 from './images/your_name_1.jpg'
+import IMG_YOUR_NAME_2 from './images/your_name_2.jpg'
+import IMG_DAO from './images/dao.jpg'
 
 
 class ListView extends Component {
@@ -43,7 +44,6 @@ class ListView extends Component {
   // render()调用后执行
   componentDidMount() {
     const { action } = this.props
-
     action.requestArticleList() // action
   }
 
@@ -53,12 +53,15 @@ class ListView extends Component {
   render() {
 
     const { loadStatus, list, pageNo, action } = this.props
-
+    console.log('list props', this.props);
     return (
       <div ref='listDom' style={{height:"100%", width: "100%"}} >
         <Header
           title={this.props.header.title}
-          backHandler={this.props.header.backHandler}
+          back={()=> {
+            action.transRight()
+            this.props.header.backHandler()
+          }}
           optionHandler={this.props.header.optionHandler}
           optionText={'操作'}
         />

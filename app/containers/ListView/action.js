@@ -1,9 +1,13 @@
 
 import request from '../../utils/request'
 import {
-    START_REQUEST_LISTVIEW,
-    END_REQUEST_LISTVIEW,
+  START_REQUEST_LISTVIEW,
+  END_REQUEST_LISTVIEW,
 } from './constant';
+import {
+  TRANSITION_LEFT,
+  TRANSITION_RIGHT,
+} from '../App/constant'
 
 
 // action Creator 包含编写所有action同步请求等动作
@@ -76,8 +80,14 @@ export function requestArticleList(callback) {
   }
 }
 
-/************************************************************/
-/* Action Creator 包含编写所有action同步请求等动作 */
-/* Normal ActionCreater return {}，Special ActionCreater return function */
-/* 使用redux-thunk polyfill
-/************************************************************/
+export function transLeft() {
+  return {
+    type: TRANSITION_LEFT,
+  }
+}
+
+export function transRight() {
+  return {
+    type: TRANSITION_RIGHT,
+  }
+}
