@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import './style.less'
 import '../../css/common.less'
 
 class App extends Component {
@@ -35,10 +36,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-
   const { transReducer } = state
-  console.log('transReducer', transReducer);
-
   return {
     transName: transReducer.transName,
   }

@@ -4,11 +4,6 @@ import {
   START_REQUEST_LISTVIEW,
   END_REQUEST_LISTVIEW,
 } from './constant';
-import {
-  TRANSITION_LEFT,
-  TRANSITION_RIGHT,
-} from '../App/constant'
-
 
 // action Creator 包含编写所有action同步请求等动作
 // Action 返回一个对象。其中的type属性是必须的，表示 Action 的名称，TYPE唯一
@@ -62,7 +57,7 @@ export function requestArticleList(callback) {
             // 分页调用
             typeof callback === 'function' && callback(pageNo);
           }
-          // 没有更多数据
+          // 没有更多数据??????
           if (data.body && data.body.articles && pageNo > 1) {
 
           }
@@ -77,17 +72,5 @@ export function requestArticleList(callback) {
       }, 3000)
 
     }
-  }
-}
-
-export function transLeft() {
-  return {
-    type: TRANSITION_LEFT,
-  }
-}
-
-export function transRight() {
-  return {
-    type: TRANSITION_RIGHT,
   }
 }

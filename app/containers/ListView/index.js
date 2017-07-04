@@ -6,13 +6,15 @@ import Pagination from '../Pagination/index'
 import request from '../../utils/request'
 import * as AppActions from '../App/action'
 import * as ListActions from './action'
-import '../../css/common.less'
+
 import './style.less'
 import IMG_LUFFY from './images/luffy.jpg'
 import IMG_YOUR_NAME_1 from './images/your_name_1.jpg'
 import IMG_YOUR_NAME_2 from './images/your_name_2.jpg'
 import IMG_DAO from './images/dao.jpg'
 
+// 合并所有Action
+const ListViewActions = Object.assign({}, AppActions, ListActions)
 
 class ListView extends Component {
 
@@ -129,7 +131,7 @@ function mapStateToProps(state) {
 
 function mapActionToProps(dispatch) {
   return {
-    action: bindActionCreators(ListActions, dispatch)
+    action: bindActionCreators(ListViewActions, dispatch)
   }
 
 }
