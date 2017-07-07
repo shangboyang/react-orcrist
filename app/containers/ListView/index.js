@@ -67,9 +67,7 @@ class ListView extends Component {
         />
         {
           list.length > 0 &&
-          <ArticleList articles={list} {...this.props}>
-            <Nav></Nav>
-          </ArticleList>
+          <ArticleList articles={list} {...this.props}></ArticleList>
         }
       </div>
     )
