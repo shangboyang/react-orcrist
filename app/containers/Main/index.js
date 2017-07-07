@@ -6,7 +6,7 @@ import './style.less';
 import IMG_ACE from './images/ace.jpg';
 import IMG_LUFFY from './images/luffy.jpg';
 
-import { Button } from 'antd'
+import { Button } from 'antd-mobile';
 
 export default class Loading extends Component {
 

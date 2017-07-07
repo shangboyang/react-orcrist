@@ -20,11 +20,12 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', 'json', '.css', '.less'], //后缀名自动补全
+        extensions: ['', '.web.js', '.js', '.json', '.jsx', '.css', '.less'], //后缀名自动补全
         fallback: [path.join(__dirname, '../node_modules'), path.join(__dirname, '../src/styles')],
         alias: {
           'src': path.resolve(__dirname, '../app')
-        }
+        },
+        modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
     },
     resolveLoader: {
         fallback: [

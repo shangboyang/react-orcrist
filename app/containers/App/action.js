@@ -1,5 +1,4 @@
 
-import request from '../../utils/request'
 import {
   TRANSITION_LEFT,
   TRANSITION_RIGHT,

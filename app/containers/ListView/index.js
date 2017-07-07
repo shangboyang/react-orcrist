@@ -6,7 +6,6 @@ import Pagination from '../Pagination/index'
 import request from '../../utils/request'
 import * as AppActions from '../App/action'
 import * as ListActions from './action'
-
 import './style.less'
 import IMG_LUFFY from './images/luffy.jpg'
 import IMG_YOUR_NAME_1 from './images/your_name_1.jpg'
@@ -47,15 +46,13 @@ class ListView extends Component {
   componentDidMount() {
     const { action } = this.props
     action.requestArticleList() // action
+
   }
-
-
-  // getArticleList(pageNo, callback) {}
 
   render() {
 
     const { loadStatus, list, pageNo, action } = this.props
-    console.log('list props', this.props);
+
     return (
       <div ref='listDom' style={{height:"100%", width: "100%"}} >
         <Header
@@ -66,10 +63,13 @@ class ListView extends Component {
           }}
           optionHandler={this.props.header.optionHandler}
           optionText={'操作'}
+          {...action}
         />
         {
           list.length > 0 &&
-          <ArticleList articles={list} {...this.props}></ArticleList>
+          <ArticleList articles={list} {...this.props}>
+            <Nav></Nav>
+          </ArticleList>
         }
       </div>
     )
