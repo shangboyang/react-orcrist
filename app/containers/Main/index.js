@@ -6,7 +6,7 @@ import './style.less';
 import IMG_ACE from './images/ace.jpg';
 import IMG_LUFFY from './images/luffy.jpg';
 
-import { Button } from 'antd-mobile';
+import { Button, NavBar, Icon } from 'antd-mobile';
 
 export default class Loading extends Component {
 
@@ -23,6 +23,14 @@ export default class Loading extends Component {
         <Header
           title={this.props.header.title}
         />
+        <NavBar leftContent="back"
+          mode="light"
+          onLeftClick={() => console.log('onLeftClick')}
+          rightContent={[
+            <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
+            <Icon key="1" type="ellipsis" />,
+          ]}
+        >NavBar</NavBar>
         <div className="main">
           <img className="loading-ace" src={IMG_LUFFY}/>
           <img className="loading-ace" src={IMG_ACE}/>
