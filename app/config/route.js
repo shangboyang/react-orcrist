@@ -6,11 +6,12 @@ import ListView from '../containers/ListView/index'
 import Main from '../containers/Main/index'
 import PropsCallback from '../containers/PropsCallback/index'
 import LimitPageList from '../containers/LimitPageList/index'
+import Mycnt from '../containers/Mycnt/index'
 
 const config = [
   {
     path: '/',
-    component: App, 
+    component: App,
     // default index
     indexRoute: {
       component: Main
@@ -20,6 +21,7 @@ const config = [
       { path: '/main', name: 'main', component: Main },
       { path: '/props-callback', name: 'propsCb', component: PropsCallback },
       { path: '/limit', name: 'limit', component: LimitPageList },
+      { path: '/mycnt', name: 'mycnt', component: Mycnt },
     ]
   }
 ]

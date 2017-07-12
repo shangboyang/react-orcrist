@@ -1,26 +1,34 @@
 .ost-header {
-    display: flex;
-    position: fixed;
-    width: 100%;
-    height: 0.88rem;
-    background-color: #54caff;
-    color: #fff;
-
-    div {
-        flex: 1;
-        line-height: 0.88rem;
+    .hd-top{
+        display: flex;
+        width: 100%;
+        height: 20px;
+        color: #fff;
+    }
+    .hd-cnt{
+        display: flex;
+        width: 100%;
+        height: 44px;
+        color: #fff;
     }
     .ost-header-left {
-        position: relative;
-        left: 0.2rem;
+        width: 15%;
+        display: flex;
+        justify-content:flex-start;
+        align-items: center;
+        padding-left: 4%;
     }
     .ost-header-main {
-        flex: 2;
-        text-align: center;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .ost-header-right {
-        position: relative;
-        text-align: right;
-        right: 0.2rem;
+        width: 15%;
+        display: flex;
+        justify-content:flex-end;
+        align-items: center;
+        padding-right: 4%;
     }
 }

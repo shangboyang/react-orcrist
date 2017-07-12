@@ -40,6 +40,8 @@ export default class Loading extends Component {
           <Link to='propsCb' activeStyle={{color: 'red'}}>父子组件调用</Link>
           <Button>按钮</Button>
           <Button className="btn" type="primary">primary 按钮</Button>
+          <Link to='mycnt' activeStyle={{color: 'red'}}>Test Parents</Link>
+
         </div>
         <ul>
           <li>12321</li>
