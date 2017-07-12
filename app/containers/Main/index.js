@@ -6,7 +6,7 @@ import './style.less';
 import IMG_ACE from './images/ace.jpg';
 import IMG_LUFFY from './images/luffy.jpg';
 
-import { Button, NavBar, Icon } from 'antd-mobile';
+import { Button, NavBar, Icon, NoticeBar } from 'antd-mobile';
 
 export default class Loading extends Component {
 
@@ -43,10 +43,9 @@ export default class Loading extends Component {
           <Link to='mycnt' activeStyle={{color: 'red'}}>Test Parents</Link>
 
         </div>
-        <ul>
-          <li>12321</li>
-          <li>12321</li>
-        </ul>
+        <NoticeBar mode="closable" icon={<Icon type="check-circle-o" size="xxs" />}>
+          Customized icon.
+        </NoticeBar>
       </div>
     )
   }

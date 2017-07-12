@@ -27,13 +27,9 @@ module.exports = {
     vendor: ["react", 'react-dom', 'react-router', 'react-redux'],
   },
   output: {
-    // publicPath: '../dist/', //服务器根路径
-    // path: path.resolve(__dirname, '../dist'), //编译到当前目录
-    // filename: '[name].js' //编译后的文件名字
-
-    path: path.resolve(__dirname, '../dist/static'),
-    publicPath: './static/',
-    filename: '[name].js'
+    path: path.resolve(__dirname, '../dist/static'), //编译到当前目录
+    publicPath: './static/', //服务器根路径
+    filename: '[name].js' //编译后的文件名字
   },
   resolve: {
     extensions: ['', '.web.js', '.js', '.json'], //后缀名自动补全
@@ -67,7 +63,7 @@ module.exports = {
         exclude: /^node_modules$/,
         loader: 'style-loader!css-loader!less-loader'
       }, {
-        test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
+        test: /\.(eot|woff|ttf|woff2|gif|appcache)(\?|$)/,
         exclude: /^node_modules$/,
         loader: 'file-loader?name=[name].[ext]'
       }, {
@@ -83,7 +79,11 @@ module.exports = {
           // es2016 polyfill (http://babeljs.io/docs/plugins/transform-class-properties/)
           plugins: ['transform-class-properties']
         }
-      }
+      }, {
+        test: /\.(svg)$/i,
+        loader: 'svg-sprite',
+        include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+      },
     ]
   },
   // rucksackCss
