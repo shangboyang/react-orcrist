@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import BottomLoading from '../../components/BottomLoading/loading'
+import BottomLoading from '../BottomLoading'
 import Pager from '../../utils/pager'
 import request from '../../utils/request'
 import './style.less'
@@ -21,10 +21,6 @@ export default class Pagination extends Component {
       callback,
     });
 
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
   }
 
   render() {

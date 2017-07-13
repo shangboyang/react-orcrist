@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Header.less';
+import './style.less';
 
 /**
  * Header Stateless Component

@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Header from '../../components/Header/Header';
-import Pagination from '../Pagination/index';
-import '../../components/Header/Header.less';
+import Header from '../../components/Header';
+import Pagination from '../../components/Pagination/index';
+import Content from '../../components/Content'
 import request from '../../utils/request';
 import * as ListActions from './action'
-import Content from '../../components/Content/Content'
-import '../../components/Content/Content.less'
+
 import './style.less';
 class Mycnt extends Component {
     static defaultProps = {

@@ -1,12 +1,12 @@
 import React, {Component } from 'react'
 import { Router, Route, IndexRoute, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router'
 import { useScroll } from 'react-router-scroll'
-import App from '../containers/App/index'
-import ListView from '../containers/ListView/index'
-import Main from '../containers/Main/index'
-import PropsCallback from '../containers/PropsCallback/index'
-import LimitPageList from '../containers/LimitPageList/index'
-import Mycnt from '../containers/Mycnt/index'
+import App from '../containers/App'
+import ListView from '../containers/ListView'
+import Main from '../containers/Main'
+import PropsCallback from '../containers/PropsCallback'
+import LimitPageList from '../containers/LimitPageList'
+import Mycnt from '../containers/Mycnt'
 
 const config = [
   {

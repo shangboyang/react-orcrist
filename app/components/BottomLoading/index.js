@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './loading.less'
+import './style.less'
 
 const BottomLoading = ({loadStatus, msg, ...props}) => {
   // 还差没有更多了

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import Header from '../../components/Header/Header'
-import Pagination from '../Pagination/index'
+import Header from '../../components/Header'
+import Pagination from '../../components/Pagination'
 import request from '../../utils/request'
 import Pager from '../../utils/pager'
+import ReactPullToRefresh from '../../components/ReactPullToRefresh'
+
 
 /**
  * Limit分页列表
@@ -98,6 +100,7 @@ console.log(value);
           <Header
             title={this.props.header.title}
           />
+          <ReactPullToRefresh/>
           <ArticleList articles={list}></ArticleList>
           <Pagination
             loadStatus={loadStatus}
