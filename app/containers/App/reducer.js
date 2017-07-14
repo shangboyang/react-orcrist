@@ -7,7 +7,7 @@ import {
 } from './constant';
 
 const initialState = {
-  transName: 'left'
+  transName: 'right'
 }; // 可以是Number 或者字符串 或对象
 
 const transReducer = (state = initialState, action) => {

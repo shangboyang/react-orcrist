@@ -6,7 +6,6 @@ class Content extends Component {
         super(props)
     }
     render() {
-        console.log('1', this.props);
         return (
             <div className={'content ' + this.props.type}>
                 {this.props.children}

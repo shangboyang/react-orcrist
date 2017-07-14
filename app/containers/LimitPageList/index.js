@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Header from '../../components/Header'
 import Pagination from '../../components/Pagination'
 import request from '../../utils/request'
 import Pager from '../../utils/pager'
-import ReactPullToRefresh from '../../components/ReactPullToRefresh'
+import PullToRefresh from '../../components/PullToRefresh'
+import * as AppActions from '../App/action'
 
-
+console.log('AppActions', AppActions);
 /**
  * Limit分页列表
  */
-export default class LimitPageList extends Component {
+class LimitPageList extends Component {
 
   state = {
     loadStatus: 0,
@@ -74,19 +77,348 @@ console.log(value);
     .done();
 
   }
-
+  handleRefresh(resolve, reject) {
+    // do some async code here
+    if (true) {
+      console.log('resolve~~~~~~~');
+      // resolve();
+    } else {
+      console.log('reject~~~~~~')
+      // reject();
+    }
+  }
 
   render() {
-
+    const { ListActions } = this.props
     if (!this.state.value) {
       return (
         <div>
           <Header
             title={this.props.header.title}
           />
-          <div>
-            Loading...............
-          </div>
+          <PullToRefresh
+            onRefresh={this.handleRefresh}
+            className="your-own-class-if-you-want"
+            style={{textAlign: 'center'}}>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+            <div>
+              Loading...............
+            </div>
+          </PullToRefresh>
         </div>
       )
     } else {
@@ -99,17 +431,24 @@ console.log(value);
         <div ref='listDom' style={this.props.style}>
           <Header
             title={this.props.header.title}
+            back={() => {
+              ListActions.transRight()
+              history.back()
+            }}
           />
-          <ReactPullToRefresh/>
-          <ArticleList articles={list}></ArticleList>
-          <Pagination
-            loadStatus={loadStatus}
-            callback={this.getArticleList}
-            start={start}
-            limit={this.props.pager.limit}
-            {...this.props}
-          />
-
+          <PullToRefresh
+            onRefresh={this.handleRefresh}
+            className="your-own-class-if-you-want"
+            style={{textAlign: 'center'}}>
+            <ArticleList articles={list}></ArticleList>
+            <Pagination
+              loadStatus={loadStatus}
+              callback={this.getArticleList}
+              start={start}
+              limit={this.props.pager.limit}
+              {...this.props}
+            />
+          </PullToRefresh>
         </div>
       )
     }
@@ -142,3 +481,10 @@ class ArticleList extends Component {
     );
   }
 }
+export default connect(function(state) {
+  return {}
+}, function(dispatch) {
+  return {
+    ListActions: bindActionCreators(AppActions, dispatch)
+  }
+})(LimitPageList)

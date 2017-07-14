@@ -16,6 +16,7 @@ class App extends Component {
 
   render() {
     const transName = this.props.transName
+    console.log('transName', transName);
     return (
       <ReactCSSTransitionGroup
         component="div"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import WebPullToRefresh from '../../utils/wptr.1.1';
 
-export default class ReactPullToRefresh extends Component {
+export default class PullToRefresh extends Component {
 
   constructor(props) {
     super(props);
@@ -86,7 +86,7 @@ export default class ReactPullToRefresh extends Component {
   }
 }
 
-ReactPullToRefresh.propTypes = {
+PullToRefresh.propTypes = {
   onRefresh: React.PropTypes.func.isRequired,
   icon: React.PropTypes.element,
   loading: React.PropTypes.element,

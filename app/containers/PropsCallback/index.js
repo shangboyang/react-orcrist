@@ -34,11 +34,7 @@ export default class SelectBox extends Component{
 
 		return (
 		  <div>
-
 				<Item getCarsHandler={this.getCarsHandler} />
-
-
-
 				<div className={style.parent} onClick={this.showMoreDetailHandler}>【父组件里的广告】：{this.state.content}</div>
 		  </div>
 		)

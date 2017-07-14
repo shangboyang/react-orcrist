@@ -11,6 +11,7 @@ export function transLeft() {
 }
 
 export function transRight() {
+  console.log('transRight');
   return {
     type: TRANSITION_RIGHT,
   }
