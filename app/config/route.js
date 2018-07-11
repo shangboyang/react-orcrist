@@ -1,12 +1,13 @@
-import React, {Component } from 'react'
-import { Router, Route, IndexRoute, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router'
-import { useScroll } from 'react-router-scroll'
-import App from '../containers/App'
-import ListView from '../containers/ListView'
-import Main from '../containers/Main'
-import PropsCallback from '../containers/PropsCallback'
-import LimitPageList from '../containers/LimitPageList'
-import Mycnt from '../containers/Mycnt'
+import React from 'react';
+import {
+  Router, hashHistory, applyRouterMiddleware
+} from 'react-router';
+import { useScroll } from 'react-router-scroll';
+import App from '../containers/App';
+import ListView from '../containers/ListView';
+import Main from '../containers/Main';
+import PropsCallback from '../containers/PropsCallback';
+import LimitPageList from '../containers/LimitPageList';
 
 const config = [
   {
@@ -24,7 +25,7 @@ const config = [
       { path: '/mycnt', name: 'mycnt', component: Mycnt },
     ]
   }
-]
+];
 
 const route = (
   <Router
@@ -32,7 +33,7 @@ const route = (
     routes={config}
     render={applyRouterMiddleware(useScroll())}>
   </Router>
-)
+);
 
 
-export default route
+export default route;

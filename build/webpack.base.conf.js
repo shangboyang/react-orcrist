@@ -38,7 +38,7 @@ module.exports = {
       path.join(__dirname, '../src/styles')
     ],
     alias: {
-      'src': path.resolve(__dirname, '../app')
+      '@': path.resolve(__dirname, '../app')
     },
     modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
   },

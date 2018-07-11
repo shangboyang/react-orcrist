@@ -6,13 +6,12 @@ import route from './config/route';
 import configureStore from './config/store';
 
 
-const store = configureStore()
+const store = configureStore();
 // 添加Global订阅事件
-store.subscribe(function () {
-    // console.log('subscribe...::::....' + store.getState());
+store.subscribe(() => {
 });
 
 ReactDOM.render(
-    <Provider store={store}>{route}</Provider>,
-    document.getElementById('app')
-)
+  <Provider store={store}>{route}</Provider>,
+  document.getElementById('app')
+);

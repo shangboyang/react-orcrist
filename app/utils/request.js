@@ -1,7 +1,8 @@
 // es6 Promise polyfill
-import Promise from 'es6-promise'
-import {env, token, zoneCode} from '../config/env'
-import '../3rd/seed'
+import Promise from 'es6-promise';
+import {
+  env
+} from '../config/env';
 
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
@@ -13,118 +14,108 @@ const isNative = window.App; // naitve flag
  * @param  {[type]} onRejected  [description]
  * @return {[type]}             [description]
  */
-Promise.prototype.done = function(onFulfilled, onRejected) {
-  this.then(onFulfilled)
-  .catch(function(reason) {
-    setTimeout(() => {
+Promise.prototype.done = function done(onFulfilled, onRejected) {
+  this.then(onFulfilled, onRejected)
+    .catch((reason) => {
+      setTimeout(() => {
         throw reason;
-    }, 0)
-  })
+      }, 0);
+    });
 };
 
 const request = (type, url, params) => {
-
   // http promise flag
-  let hasCanceled_ = false;
+  let hasCanceled = false;
+  let reqURL = url;
 
-  let promise = new Promise((resolve, reject) => {
-
-    type = typeof type === 'string' && type.toUpperCase();
-    params = params || {};
+  const promise = new Promise((resolve, reject) => {
+    const reqType = typeof type === 'string' && type.toUpperCase();
+    const reqParams = params || {};
     // select request type
-    switch (true) {
-      case type === 'GET' && currEnv !== 'native':
-
-        let p = '?'; // ‘?a=xxx&b=yyy’
-        for (let o in params) {
-          p += o + '=' + params[o] + '&';
+    if (reqType === 'GET' && currEnv !== 'native') {
+      let p = '?'; // ‘?a=xxx&b=yyy’
+      for (const o in reqParams) {
+        if (Object.prototype.hasOwnProperty.call(reqParams, o)) {
+          p += `${o}=${reqParams[o]}&`;
         }
-        p = p.slice(0, -1);
-        // get & http
-        if (currHost.match(/http/g)) {
-          url = currHost + url + p;
-        }
-        // proxy && native 不做任何处理
-        break;
-
-      case type === 'POST':
-        // post & http
-        if (currHost.match(/http/g)) {
-          url = currHost + url;
-        }
-        // proxy && native 不做任何处理
-        break;
-
-      default:
+      }
+      p = p.slice(0, -1);
+      // get & http
+      if (currHost.match(/http/g)) {
+        reqURL = currHost + reqURL + p;
+      }
+      // proxy && native 不做任何处理
+    } else if (reqType === 'POST') {
+      if (currHost.match(/http/g)) {
+        reqURL = currHost + reqURL;
+      }
     }
 
     /**
      * 区分环境执行Request
      */
     const execute = () => {
-
       if (isNative) {
-
         const reqBody = {
-          url    : url,
-          type   : type,
-          data   : params,
+          reqURL,
+          reqType,
+          data: reqParams,
           success: resolve,
-          error  : reject
-        }
+          error: reject,
+        };
 
         typeof $$.Native.request === 'function' && $$.Native.request(reqBody);
-
       } else {
-
-        const handler = function() {
-
+        const handler = function handler() {
           if (this.readyState !== 4) return;
-            console.log('XMLHttpRequest::: ', this);
 
           if (this.status === 200) {
             resolve(this.response);
           } else {
-            // alert('this.status:::' + this.status)
-            // alert(JSON.stringify(this));
-            reject({hasCanceled_: true, msg: this.statusText})
+            reject(this.statusText);
           }
-
         };
-// alert('url:::' + url)
-        let client = new XMLHttpRequest();
+
+
+        const client = new XMLHttpRequest();
+        const currToken = window.sessionStorage.getItem('CITY_MALL_TOKEN');
         client.open(type, url);
         client.onreadystatechange = handler;
         client.responseType = 'json';
         // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         client.setRequestHeader('Accept', 'application/json');
-        // client.setRequestHeader('Token', token);
+        client.setRequestHeader('Content-Type', 'application/json');
+        client.setRequestHeader('token', currToken);
+        client.setRequestHeader('requestID', `REQ_${currToken}${+new Date()}`);
+
         // client.setRequestHeader('zoneCode', zoneCode);
         client.send(type === 'POST' ? JSON.stringify(params) : null);
-
       }
-    }
+    };
 
     execute();
+  });
 
-  })
+  promise.then(data => (hasCanceled
+    ? promise.reject({
+      hasCanceled: true
+    })
+    : promise.resolve(data)));
 
-  promise.then((data) =>
-    hasCanceled_ ? reject({hasCanceled_: true}) : resolve(data)
-  );
-
-  promise.catch((error) =>
-    hasCanceled_ ? reject({hasCanceled_: true, error}) : reject(error)
-  );
+  promise.catch(error => (hasCanceled
+    ? promise.reject({
+      hasCanceled: true,
+      error
+    })
+    : promise.reject(error)));
 
   return {
-    promise: promise,
+    promise,
     cancel() {
-      hasCanceled_ = true;
-    }
+      hasCanceled = true;
+    },
   };
-
-}
+};
 
 export default request;
