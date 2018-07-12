@@ -3,9 +3,9 @@ import {
   Router, hashHistory, applyRouterMiddleware
 } from 'react-router';
 import { useScroll } from 'react-router-scroll';
-import App from '../containers/App';
+import App from '@/containers/App';
+import Main from '@/containers/Main';
 import ListView from '../containers/ListView';
-import Main from '../containers/Main';
 import PropsCallback from '../containers/PropsCallback';
 import LimitPageList from '../containers/LimitPageList';
 

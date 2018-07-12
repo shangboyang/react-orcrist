@@ -1,7 +1,7 @@
 {
   "name": "react-orcrist",
-  "version": "1.0.0",
-  "description": "siapp",
+  "version": "1.1.0",
+  "description": "react-ost client-side-render ver.",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"

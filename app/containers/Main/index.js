@@ -1,23 +1,21 @@
-import React, {Component} from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import Header from '../../components/Header'
-import Content from '../../components/Content'
-import './style.less'
-import IMG_ACE from './images/ace.jpg'
-import IMG_LUFFY from './images/luffy.jpg'
-import * as AppActions from '../App/action'
-
-import { Button, NavBar, Icon, NoticeBar, Accordion, List } from 'antd-mobile';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {
+  NavBar,
+  Icon,
+  NoticeBar,
+  Accordion,
+  List
+} from 'antd-mobile';
+import Content from '../../components/Content';
+import * as AppActions from '../App/action';
+import IMG_ACE from './images/ace.jpg';
+import './style.less';
 
 class Main extends Component {
-
-  static defaultProps = {};
-
   render() {
-
-    const { MainActions } = this.props
+    const { MainActions } = this.props;
 
     return (
       <div>
@@ -72,20 +70,19 @@ class Main extends Component {
         </Content>
 
       </div>
-    )
+    );
   }
 }
 
 // redux ‘s state 非 react state
-function mapStateToProps(state) {
-  return {}
+function mapStateToProps() {
+  return {};
 }
 
 function mapActionToProps(dispatch) {
   return {
     MainActions: bindActionCreators(AppActions, dispatch)
-  }
-
+  };
 }
 
-export default connect(mapStateToProps, mapActionToProps)(Main)
+export default connect(mapStateToProps, mapActionToProps)(Main);
