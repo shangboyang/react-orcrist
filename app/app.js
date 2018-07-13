@@ -10,8 +10,7 @@ require('es6-object-assign').polyfill();
 
 const store = configureStore();
 // 添加Global订阅事件
-store.subscribe(() => {
-});
+store.subscribe(() => {});
 
 ReactDOM.render(
   <Provider store={store}>{route}</Provider>,
