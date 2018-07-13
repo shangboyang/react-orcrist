@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Pagination from '@/components/Pagination';
 import request from '@/utils/request';
 
-import * as AppActions from '../App/action';
+import * as AppActions from '../App/actions';
 
 
 /**
@@ -124,6 +124,7 @@ class ArticleList extends Component {
     );
   }
 }
+
 export default connect(() => ({}), dispatch => ({
   ListActions: bindActionCreators(AppActions, dispatch)
 }))(LimitPageList);

@@ -4,7 +4,7 @@
 import {
   TRANSITION_LEFT,
   TRANSITION_RIGHT
-} from './constant';
+} from '@/containers/App/constants';
 
 const initialState = {
   transName: 'right'

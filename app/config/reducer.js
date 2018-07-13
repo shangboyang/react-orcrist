@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import transReducer from '@/containers/App/reducer';
+import transReducer from '@/containers/App/reducers';
 import listViewReducer from '@/containers/ListView/reducer';
 
 

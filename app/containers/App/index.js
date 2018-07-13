@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import './style.less';
-import '../../css/common.less';
+import Connect from '@/containers/App/connect';
+import '@/containers/App/style.less';
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
   
-
   render() {
     const { transName } = this.props;
     return (
@@ -31,13 +29,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { transReducer } = state;
-  return {
-    transName: transReducer.transName,
-  };
-}
 
-export default connect(
-  mapStateToProps
-)(App);
+export default Connect(App);

@@ -76,6 +76,7 @@ module.exports = {
     "react/prop-types": 0, // react prop-types
     "import/no-unresolved": 0,
     "no-new": 0,
+    "react/no-string-refs": 0
   },
   "settings": {
     "react": {

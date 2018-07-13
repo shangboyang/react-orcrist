@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   NavBar,
@@ -8,10 +8,10 @@ import {
   Accordion,
   List
 } from 'antd-mobile';
-import Content from '../../components/Content';
-import * as AppActions from '../App/action';
-import IMG_ACE from './images/ace.jpg';
-import './style.less';
+import Content from '@/components/Content';
+import * as AppActions from '@/containers/App/actions';
+import IMG_ACE from '@/containers/Main/images/ace.jpg';
+import '@/containers/Main/style.less';
 
 class Main extends Component {
   render() {
@@ -19,7 +19,6 @@ class Main extends Component {
 
     return (
       <div>
-
         <NavBar
           mode="light"
           onLeftClick={() => console.log('onLeftClick')}
@@ -30,7 +29,7 @@ class Main extends Component {
         <Content>
 
           <NoticeBar mode="closable" icon={<Icon type="check-circle-o" size="xxs" />}>
-            Orcrist是一个React样板工程.
+            React-Orcrist是一个React样板工程.
           </NoticeBar>
           <img className="loading-ace" src={IMG_ACE}/>
 
