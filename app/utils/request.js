@@ -1,8 +1,8 @@
 // es6 Promise polyfill
 import Promise from 'es6-promise';
-import {
-  env
-} from '@/config/env';
+import env from '@/config/env';
+
+console.log(env);
 
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];

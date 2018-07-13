@@ -16,6 +16,4 @@ const server = {
 // export const env = server.proxy;
 // export const env = server.native;
 // /////////////////////////////////////////////
-export default {
-  env: server.mock
-};
+export default server.mock;
