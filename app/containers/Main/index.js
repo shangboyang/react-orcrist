@@ -6,7 +6,9 @@ import {
 import Connect from '@/containers/Main/connect'
 import Content from '@/components/Content';
 import '@/containers/Main/style.less';
-
+import IMG_ACE from '@/containers/Man/images/ace.jpg';
+console.log(Connect)
+console.log(Content)
 class Main extends Component {
   render() {
     // const { MainActions } = this.props;
@@ -21,8 +23,8 @@ class Main extends Component {
           ]}
         >Orcrist Boilerplate</NavBar>
         <Content>
-
-          <div class="content">Welcome to use react-orcrist!</div>
+          <img src={IMG_ACE}></img>
+          <div className="content">Welcome to use react-orcrist!</div>
 
         </Content>
 

@@ -4,7 +4,7 @@ import {
 import {
   bindActionCreators
 } from 'redux';
-import * as AppActions from '@/containers/App/action';
+import * as AppActions from '@/containers/App/actions';
 import * as MainAction from '@/containers/Main/actions';
 
 
