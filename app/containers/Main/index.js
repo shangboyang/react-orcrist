@@ -6,7 +6,7 @@ import {
 import Connect from '@/containers/Main/connect'
 import Content from '@/components/Content';
 import '@/containers/Main/style.less';
-import IMG_ACE from '@/containers/Man/images/ace.jpg';
+import IMG_ACE from '@/containers/Main/images/ace.jpg';
 console.log(Connect)
 console.log(Content)
 class Main extends Component {
@@ -24,7 +24,7 @@ class Main extends Component {
         >Orcrist Boilerplate</NavBar>
         <Content>
           <img src={IMG_ACE}></img>
-          <div className="content">Welcome to use react-orcrist!</div>
+          <div className="content-text">Welcome to use react-orcrist!</div>
 
         </Content>
 
