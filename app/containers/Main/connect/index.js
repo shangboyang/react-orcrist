@@ -1,6 +1,6 @@
 import {
   connect
-} from '../../../../../../Library/Caches/typescript/2.9/node_modules/@types/react-redux';
+} from 'react-redux';
 import {
   bindActionCreators
 } from 'redux';
