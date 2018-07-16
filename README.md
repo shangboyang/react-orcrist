@@ -6,7 +6,7 @@
 
 ### React-Cli 
 The `react-orcrist`'s boilerplate has been used in `react-ost`'s cli, 
-please see the detail[react-ost](https://github.com/shangboyang/vue-cli/blob/dev/docs/README.md).
+please see the detail[react-ost](https://github.com/shangboyang/react-ost/blob/master/README.md).
 
 
 ### Quickstart
