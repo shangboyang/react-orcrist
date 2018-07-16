@@ -1,19 +1,29 @@
 // http server host
-const server = {
-  mock: 'mock;http://localhost:7709',
-  stage: 'stage;https://test-mhis-siapp.pingan.com.cn:57443',
-  prod: 'prod;https://ehs.pingan.com.cn',
-  proxy: 'proxy;', // webpack http-proxy-middleware
-  native: 'native;',
+// const server = {
+//   proxy: 'proxy;', // webpack http-proxy-middleware
+//   native: 'native;', // hybirdApp
+// };
+
+const autoServer = () => {
+  let env = '';
+  if (navigator.userAgent.match(/NATIVE_APP/ig)) { // hybirdApp env
+    env = 'native;';
+  } else {
+    switch (true) {
+      case !!location.host.match(/localhost/ig): // local env
+        env = 'mock;http://localhost:7709';
+        break;
+      case !!location.host.match(/test/ig): // test-dev env
+        env = 'stage;https://test.pa.com.cn';
+        break;
+      case !!location.host.match(/city/ig): // prod env
+        env = 'prod;https://city.pa.com.cn';
+        break;
+      default:
+    }
+  }
+  
+  return env;
 };
 
-
-// /////////////////////////////////////////////
-// 选择调试server
-
-// export const env = server.stage;
-// export const env = server.prod;
-// export const env = server.proxy;
-// export const env = server.native;
-// /////////////////////////////////////////////
-export default server.mock;
+export default autoServer();

@@ -2,8 +2,6 @@
 import Promise from 'es6-promise';
 import env from '@/config/env';
 
-console.log(env);
-
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
 const isNative = window.App; // naitve flag
@@ -76,20 +74,17 @@ const request = (type, url, params) => {
           }
         };
 
-
         const client = new XMLHttpRequest();
-        const currToken = window.sessionStorage.getItem('CITY_MALL_TOKEN');
         client.open(type, url);
         client.onreadystatechange = handler;
         client.responseType = 'json';
-        // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         client.setRequestHeader('Accept', 'application/json');
         client.setRequestHeader('Content-Type', 'application/json');
-        client.setRequestHeader('token', currToken);
-        client.setRequestHeader('requestID', `REQ_${currToken}${+new Date()}`);
-
-        // client.setRequestHeader('zoneCode', zoneCode);
+        
+        // const currToken = window.sessionStorage.getItem('CITY_MALL_TOKEN');
+        // client.setRequestHeader('token', currToken);
+        // client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        // client.setRequestHeader('requestID', `REQ_${currToken}${+new Date()}`);
         client.send(type === 'POST' ? JSON.stringify(params) : null);
       }
     };

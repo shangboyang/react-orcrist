@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   transName: 'right'
-}; // 可以是Number 或者字符串 或对象
+};
 
 const transReducer = (state = initialState, action) => {
   switch (action.type) {
