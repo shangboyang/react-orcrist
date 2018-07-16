@@ -1,7 +1,9 @@
 # react-orcirst 
 
 > React ‘s boilerplate 
+
 > branch:master => react + react-router + redux + redux-thunk + webpack
+
 > branch:lite => react + react-router + webpack
 
 ### React-Cli 
