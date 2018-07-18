@@ -22,8 +22,8 @@ const fetchData = () => (dispatch, getState) => {
   dispatch(fetchStart());
   
   request('post', '/post', {
-    a: 1,
-    b: 2
+    foo: 1,
+    bar: 2
   }).then((data) => {
     console.log(mainData);
     dispatch(fetchEnd(data));
