@@ -5,13 +5,14 @@ import {
   bindActionCreators
 } from 'redux';
 import * as AppActions from '@/containers/App/actions';
-import * as MainAction from '@/containers/Main/actions';
+import MainActions from '@/containers/Main/actions';
 
-
-const mainActions = Object.assign({}, AppActions, MainAction);
+const mainActions = Object.assign({}, AppActions, MainActions);
 const Connect = (Container) => {
   // redux ‘s state 非 react state
   function mapStateToProps(state) {
+    console.log('Main State :::', state);
+    
     return {
       ...state,
     };

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import transReducer from '@/containers/App/reducers';
+import appReducer from '@/containers/App/reducers';
+import mainReducer from '@/containers/Main/reducers';
 
 
 const rootReducer = combineReducers({
-  transReducer,
+  appReducer,
+  mainReducer
 });
 
 export default rootReducer;

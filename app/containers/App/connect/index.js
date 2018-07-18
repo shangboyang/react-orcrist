@@ -7,6 +7,7 @@ const Connect = (Container) => {
     const {
       transReducer
     } = state;
+
     return {
       ...transReducer
     };

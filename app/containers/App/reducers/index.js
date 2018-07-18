@@ -10,19 +10,23 @@ const initialState = {
   transName: 'right'
 };
 
-const transReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action) => {
+  let newState = {};
   switch (action.type) {
     case TRANSITION_LEFT:
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         transName: 'left'
       });
+      break;
     case TRANSITION_RIGHT:
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         transName: 'right'
       });
+      break;
     default:
-      return state;
+      newState = state;
   }
+  return newState;
 };
 
-export default transReducer;
+export default appReducer;

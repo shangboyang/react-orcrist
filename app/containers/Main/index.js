@@ -3,15 +3,26 @@ import {
   NavBar,
   Icon
 } from 'antd-mobile';
-import Connect from '@/containers/Main/connect'
+import Connect from '@/containers/Main/connect';
 import Content from '@/components/Content';
 import '@/containers/Main/style.less';
 import IMG_ACE from '@/containers/Main/images/ace.jpg';
-console.log(Connect)
-console.log(Content)
+
 class Main extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const { Actions } = this.props;
+
+    Actions.fetchData();
+  }
+
   render() {
-    // const { MainActions } = this.props;
+    const {
+      Actions
+    } = this.props;
 
     return (
       <div>
@@ -19,7 +30,9 @@ class Main extends Component {
           mode="light"
           onLeftClick={() => console.log('onLeftClick')}
           rightContent={[
-            <Icon key="1" type="ellipsis" />,
+            <Icon key="1" type="ellipsis" onClick={() => {
+              Actions.fetchData();
+            }} />,
           ]}
         >Orcrist Boilerplate</NavBar>
         <Content>

@@ -10,10 +10,11 @@ class App extends Component {
   
   render() {
     const { transName } = this.props;
+    
     return (
       <ReactCSSTransitionGroup
         component="div"
-        transitionName={ transName }
+        transitionName={ transName || 'right' }
         transitionEnterTimeout={1000}
         transitionLeaveTimeout={300}
         style={{ height: '100%', width: '100%' }}>

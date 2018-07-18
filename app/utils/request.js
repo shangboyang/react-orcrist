@@ -27,6 +27,7 @@ const request = (type, url, params) => {
   let reqURL = url;
 
   const promise = new Promise((resolve, reject) => {
+    console.log(resolve, reject);
     const reqType = typeof type === 'string' && type.toUpperCase();
     const reqParams = params || {};
     // select request type
