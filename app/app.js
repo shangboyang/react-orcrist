@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import route from '@/config/route';
 import configureStore from '@/config/store';
-
 import '@/css/resets.less';
 
-require('es6-object-assign').polyfill();
+require('@/utils/polyfill').execute();
 
 const store = configureStore();
 // 添加Global订阅事件

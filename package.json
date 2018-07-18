@@ -1,6 +1,6 @@
 {
   "name": "react-orcrist",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "react-ost client-side-render ver.",
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -11,11 +11,11 @@
   "dependencies": {
     "antd-mobile": "^1.4.0",
     "babel-runtime": "^6.18.0",
-    "es6-object-assign": "^1.1.0",
-    "es6-promise": "^4.2.4",
     "flex-css-layout": "^1.2.8",
     "history": "^3.2.1",
+    "object-assign": "^4.1.1",
     "postcss-modules-values": "^1.2.2",
+    "promise": "^8.0.1",
     "react": "^16.4.1",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^16.4.1",
@@ -25,9 +25,11 @@
     "react-router-transition": "0.0.6",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
+    "raf": "^3.4.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",

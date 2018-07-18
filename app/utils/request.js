@@ -1,25 +1,8 @@
-// es6 Promise polyfill
-import Promise from 'es6-promise';
 import env from '@/config/env';
 
 const currEnv = env.split(';')[0];
 const currHost = env.split(';')[1];
 const isNative = window.App; // naitve flag
-
-/**
- * 为Promise扩充done 总是处于回调链最底端 保证抛出任何可能出现的异常
- * @param  {[type]} onFulfilled [description]
- * @param  {[type]} onRejected  [description]
- * @return {[type]}             [description]
- */
-Promise.prototype.done = function done(onFulfilled, onRejected) {
-  this.then(onFulfilled, onRejected)
-    .catch((reason) => {
-      setTimeout(() => {
-        throw reason;
-      }, 0);
-    });
-};
 
 const request = (type, url, params) => {
   // http promise flag
