@@ -5,8 +5,6 @@ const currHost = env.split(';')[1];
 const isNative = window.App; // naitve flag
 
 const request = (type, url, params) => {
-  // http promise flag
-  let hasCanceled = false;
   let reqURL = url;
 
   const promise = new Promise((resolve, reject) => {
@@ -76,25 +74,7 @@ const request = (type, url, params) => {
     execute();
   });
 
-  promise.then(data => (hasCanceled
-    ? promise.reject({
-      hasCanceled: true
-    })
-    : promise.resolve(data)));
-
-  promise.catch(error => (hasCanceled
-    ? promise.reject({
-      hasCanceled: true,
-      error
-    })
-    : promise.reject(error)));
-
-  return {
-    promise,
-    cancel() {
-      hasCanceled = true;
-    },
-  };
+  return promise;
 };
 
 export default request;

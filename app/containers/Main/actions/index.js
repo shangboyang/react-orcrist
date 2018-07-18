@@ -24,12 +24,12 @@ const fetchData = () => (dispatch, getState) => {
   request('post', '/post', {
     a: 1,
     b: 2
-  }).promise.then((data) => {
+  }).then((data) => {
     console.log(mainData);
     dispatch(fetchEnd(data));
   }).catch((err) => {
     dispatch(fetchEnd(err));
-  }).done();
+  });
 };
 
 export default {
