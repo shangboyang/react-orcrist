@@ -1,7 +1,6 @@
 // http server host
 // const server = {
 //   proxy: 'proxy;', // webpack http-proxy-middleware
-//   native: 'native;', // hybirdApp
 // };
 
 const autoServer = () => {
@@ -11,13 +10,13 @@ const autoServer = () => {
   } else {
     switch (true) {
       case !!location.host.match(/localhost/ig): // local env
-        env = 'mock;http://localhost:7709';
+        env = 'mock;https://www.bing.com';
         break;
       case !!location.host.match(/test/ig): // test-dev env
-        env = 'stage;https://test.pa.com.cn';
+        env = 'stage;https://test.bing.com.cn';
         break;
       case !!location.host.match(/city/ig): // prod env
-        env = 'prod;https://city.pa.com.cn';
+        env = 'prod;https://city.bing.com.cn';
         break;
       default:
     }
