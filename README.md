@@ -26,7 +26,7 @@ npm run build // 编译打包
 Project structure:
 ```
 my-app
-├── app
+├── src
 │   ├── components
 │   ├── config
 │   ├── containers
