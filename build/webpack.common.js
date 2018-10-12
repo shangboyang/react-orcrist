@@ -37,7 +37,6 @@ module.exports = {
       // exclude: /(node_modules|bower_components)/,
       use: [
         devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-        // MiniCssExtractPlugin.loader,
         'css-loader',
         'postcss-loader',
         'less-loader',
