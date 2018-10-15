@@ -1,34 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Connect from '@/containers/App/connect';
 import '@/containers/App/style.less';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = props => <ReactCSSTransitionGroup
+  component="div"
+  transitionName = {
+    props.transName || 'right'
   }
-  
-  render() {
-    const { transName } = this.props;
-    
-    return (
-      <ReactCSSTransitionGroup
-        component="div"
-        transitionName={ transName || 'right' }
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={300}
-        style={{ height: '100%', width: '100%' }}>
+  transitionEnterTimeout={1000}
+  transitionLeaveTimeout={300}
+  style={{ height: '100%', width: '100%' }}>
 
-        <div
-          key={this.props.location.pathname}
-          style={{ height: '100%', width: '100%' }}>
-          {this.props.children}
-        </div>
+  <div
+    key={props.location.pathname}
+    style={{ height: '100%', width: '100%' }}>
+    {props.children}
+  </div>
 
-      </ReactCSSTransitionGroup>
-    );
-  }
-}
+</ReactCSSTransitionGroup>;
 
 
 export default Connect(App);
