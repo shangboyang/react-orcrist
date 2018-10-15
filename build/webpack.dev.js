@@ -11,7 +11,7 @@ const basePath = path.resolve(__dirname, '../');
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'inline-source-map', // 
   devServer: {
     host: '0.0.0.0', // 支持ip访问
     port: 7799,
