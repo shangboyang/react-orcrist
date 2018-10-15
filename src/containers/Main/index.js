@@ -42,9 +42,11 @@ class Main extends Component {
           <img width="100%" src={IMG_ORCRIST}></img>
           <section className="content-text">
             Orcrist was an Elven sword from Gondolin, the mate of Glamdring, which became the sword of Thorin II Oakenshield during The Quest of Erebor.
+            
+          </section>
+          <section className="content-text">
             It was used by Thorin in The Hobbit, and was feared and called Biter by the Goblins.
           </section>
-
         </Content>
 
       </div>
