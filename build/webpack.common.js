@@ -12,10 +12,6 @@ module.exports = {
     path: path.resolve(basePath, './dist'), //编译到当前目录
     filename: 'static/[name].js' //编译后的文件名字
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-  },
   resolve: {
     extensions: ['.web.js', '.js', '.json'], //后缀名自动补全
     alias: {
