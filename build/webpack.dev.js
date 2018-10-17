@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const common = require('./webpack.common.js');
+const common = require('./webpack.common');
+const assets = require('./assets')
 
 const path = require('path');
 const basePath = path.resolve(__dirname, '../');
@@ -28,11 +29,12 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(['dist'], {
       root: basePath
     }),
-    new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin(Object.assign({
       title: 'react-orcrist',
       inject: true,
       filename: './index.html', // string name
       template: 'index.html', // url
-    })
+      favicon: path.resolve(__dirname, '../favicon.png')
+    }, assets.dev.cdn))
   ]
 })

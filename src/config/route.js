@@ -6,8 +6,6 @@ import { useScroll } from 'react-router-scroll';
 import App from '@/containers/App';
 import Main from '@/containers/Main';
 
-console.log('ddd:: ', useScroll);
-
 const config = [
   {
     path: '/',

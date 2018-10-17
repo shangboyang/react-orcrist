@@ -19,7 +19,7 @@
         "byName": {},
         "bySource": {},
         "usedIds": [
-          1
+          0
         ]
       }
     }
@@ -283,7 +283,13 @@
       "node_modules/babel-loader/lib/index.js??ref--4!src/containers/Main/constants/index.js": 253,
       "node_modules/babel-loader/lib/index.js??ref--4!src/config/route.js 7cfd9391b6daa696b72ff122142a6c0d": 254,
       "node_modules/babel-loader/lib/index.js??ref--4!src/config/store.js e2255c8d06958b5e59429e1093a8a304": 255,
-      "node_modules/babel-loader/lib/index.js??ref--4!src/app.js": 256
+      "node_modules/babel-loader/lib/index.js??ref--4!src/app.js": 256,
+      "external \"React\"": 1,
+      "external \"ReactDOM\"": 37,
+      "node_modules/file-loader/dist/cjs.js!src/containers/Main/images/Thorin.jpg": 67,
+      "node_modules/file-loader/dist/cjs.js!src/containers/Main/images/Orcrist.jpg": 100,
+      "node_modules/scroll-behavior/lib/index.js": 103,
+      "node_modules/scroll-behavior/lib/utils.js": 104
     },
     "usedIds": {
       "0": 0,

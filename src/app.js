@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'; // from CDN
+import ReactDOM from 'react-dom'; // from CDN
 import { Provider } from 'react-redux';
 import route from '@/config/route';
 import configureStore from '@/config/store';
