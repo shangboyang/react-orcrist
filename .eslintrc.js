@@ -59,16 +59,11 @@ module.exports = {
       "object": false, // 强制对象
       "array": false
     }], 
-    
-    "no-trailing-spaces": ["error", {
-      "skipBlankLines": true,
-      "ignoreComments": true
-    }], // 禁用行尾空白 (no-trailing-spaces)
-    // "one-var": ["error", {
-    //   var: "consecutive",
-    //   let: "never",
-    //   const: "never"
-    // }],
+    // 禁用行尾空白 (no-trailing-spaces)
+    // "no-trailing-spaces": ["error", {
+    //   "skipBlankLines": true,
+    //   "ignoreComments": true
+    // }], 
     "max-len": ["warn", {
       "code": 120,
     }],
@@ -79,7 +74,8 @@ module.exports = {
     "react/prop-types": 0, // react prop-types
     "import/no-unresolved": 0,
     "no-new": 0,
-    "react/no-string-refs": 0
+    "react/no-string-refs": 0,
+    "global-require": 0
   },
   "settings": {
     "react": {

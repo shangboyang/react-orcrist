@@ -3,11 +3,9 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from '@/config/reducer';
 
-console.log(require('redux'));
-
 let createStore;
 let applyMiddleware;
-// development 
+// development
 if (process.env.NODE_ENV !== 'production') {
   createStore = require('redux').createStore;
   applyMiddleware = require('redux').applyMiddleware;

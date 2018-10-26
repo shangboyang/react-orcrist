@@ -20,7 +20,7 @@ const fetchData = () => (dispatch, getState) => {
     mainData
   } = getState().mainReducer;
   dispatch(fetchStart());
-  
+
   request('post', '/post', {
     foo: 1,
     bar: 2
