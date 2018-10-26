@@ -13,7 +13,8 @@ module.exports = merge(common, {
   // use cdn for umd Global React vals
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    'reeact-thunk': 'ReactThunk'
   },
   output: {
     path: path.resolve(basePath, './dist'), //编译到当前目录

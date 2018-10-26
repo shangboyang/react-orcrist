@@ -295,7 +295,8 @@
       "external {\"root\":\"thunkMiddleware\"}": 101,
       "external {\"commonjs\":\"thunkMiddleware\",\"amd\":\"thunkMiddleware\",\"root\":\"thunkMiddleware\"}": 101,
       "external {\"commonjs\":\"thunkMiddleware\"}": 101,
-      "node_modules/vconsole/dist/vconsole.min.js": 105
+      "node_modules/vconsole/dist/vconsole.min.js": 105,
+      "external \"ReactRouter\"": 3
     },
     "usedIds": {
       "0": 0,

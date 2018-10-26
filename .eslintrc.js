@@ -75,7 +75,7 @@ module.exports = {
     "import/no-unresolved": 0,
     "no-new": 0,
     "react/no-string-refs": 0,
-    "global-require": 0
+    // "global-require": 0
   },
   "settings": {
     "react": {
