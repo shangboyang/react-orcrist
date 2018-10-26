@@ -1,6 +1,3 @@
-// import {
-//   connect
-// } from 'react-redux';
 import * as AppActions from '@/containers/App/actions';
 import MainActions from '@/containers/Main/actions';
 

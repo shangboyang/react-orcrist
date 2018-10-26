@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // 23k
 import Connect from '@/containers/App/connect';
 import '@/containers/App/style.less';
 
@@ -19,6 +19,5 @@ const App = props => <ReactCSSTransitionGroup
   </div>
 
 </ReactCSSTransitionGroup>;
-
 
 export default Connect(App);
