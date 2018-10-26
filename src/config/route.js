@@ -2,14 +2,15 @@ import React from 'react';
 import { useScroll } from 'react-router-scroll';
 import App from '@/containers/App';
 import Main from '@/containers/Main';
-// development
-const devMode = process.env.NODE_ENV !== 'production';
 // Router
-const Router = devMode ? require('react-router').Router : window.ReactRouter && window.ReactRouter.Router;
+const Router = process.env.NODE_ENV !== 'production'
+  ? require('react-router').Router : window.ReactRouter && window.ReactRouter.Router;
 // hashHistory
-const hashHistory = devMode ? require('react-router').hashHistory : window.ReactRouter && window.ReactRouter.hashHistory;
+const hashHistory = process.env.NODE_ENV !== 'production'
+  ? require('react-router').hashHistory : window.ReactRouter && window.ReactRouter.hashHistory;
 // applyRouterMiddleware
-const applyRouterMiddleware = devMode ? require('react-router').applyRouterMiddleware : window.ReactRouter && window.ReactRouter.applyRouterMiddleware;
+const applyRouterMiddleware = process.env.NODE_ENV !== 'production'
+  ? require('react-router').applyRouterMiddleware : window.ReactRouter && window.ReactRouter.applyRouterMiddleware;
 
 const config = [
   {

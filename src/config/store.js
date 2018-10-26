@@ -1,15 +1,15 @@
 import ReduxThunk from 'redux-thunk'; // use cdn
 import rootReducer from '@/config/reducer';
 
-// development
-const devMode = process.env.NODE_ENV !== 'production';
 // import redux cdn
-const createStore = devMode ? require('redux').createStore : window.Redux && window.Redux.createStore;
-const applyMiddleware = devMode ? require('redux').applyMiddleware : window.Redux && window.Redux.applyMiddleware;
+const createStore = process.env.NODE_ENV !== 'production'
+  ? require('redux').createStore : window.Redux && window.Redux.createStore;
+const applyMiddleware = process.env.NODE_ENV !== 'production'
+  ? require('redux').applyMiddleware : window.Redux && window.Redux.applyMiddleware;
 // apply middleware [ thunk & logger ] cdn
-const createLogger = devMode ? require('redux-logger').createLogger : undefined;
+const createLogger = process.env.NODE_ENV !== 'production' ? require('redux-logger').createLogger : undefined;
 
-const middleware = devMode && createLogger
+const middleware = process.env.NODE_ENV !== 'production' && createLogger
   ? applyMiddleware(ReduxThunk, createLogger()) : applyMiddleware(ReduxThunk);
 
 const createStoreWithMiddleware = middleware(createStore);

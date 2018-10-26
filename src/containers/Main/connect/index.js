@@ -1,9 +1,8 @@
 import * as AppActions from '@/containers/App/actions';
 import MainActions from '@/containers/Main/actions';
 
-const devMode = process.env.NODE_ENV !== 'production';
-const bindActionCreators = devMode ? require('redux').bindActionCreators : window.Redux && window.Redux.bindActionCreators;
-const connect = devMode ? require('react-redux').connect : window.ReactRedux && window.ReactRedux.connect;
+const bindActionCreators = process.env.NODE_ENV !== 'production' ? require('redux').bindActionCreators : window.Redux && window.Redux.bindActionCreators;
+const connect = process.env.NODE_ENV !== 'production' ? require('react-redux').connect : window.ReactRedux && window.ReactRedux.connect;
 
 const mainActions = Object.assign({}, AppActions, MainActions);
 const Connect = (Container) => {
