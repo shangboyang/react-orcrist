@@ -1,4 +1,3 @@
-
 import {
   TRANSITION_LEFT,
   TRANSITION_RIGHT,

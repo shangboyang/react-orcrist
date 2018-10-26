@@ -51,7 +51,6 @@ module.exports = {
   },
   recordsPath: path.join(basePath, 'records.json'),
   optimization: {
-    // runtimeChunk: true, 
     runtimeChunk: {
       name: "manifest",
     },
@@ -62,15 +61,15 @@ module.exports = {
           name: 'vendor',
           chunks: 'all', // async module or not
           test: /[\\/]node_modules[\\/]/,
-          priority: -10, // ???
-          enforce: true // ???
+          priority: -10, // 
+          enforce: true // 
         },
         commons: {
           name: 'commons',
           chunks: 'all',
           test: /src\/containers|src\/components|src\/config|src\/css|src\/utils/,
-          priority: -20, // ???
-          enforce: true // ???
+          priority: -20, // 
+          enforce: true // 
         },
         styles: {
           name: 'styles',

@@ -7,7 +7,6 @@ const initialState = {
   fetching: false,
   mainData: {}
 };
-
 const mainReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
