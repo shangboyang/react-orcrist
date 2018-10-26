@@ -10,18 +10,16 @@ const assets = require('./assets')
 
 module.exports = merge(common, {
   mode: 'production',
+  // use cdn for umd Global React vals
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
+    'react-dom': 'ReactDOM'
   },
   output: {
     path: path.resolve(basePath, './dist'), //编译到当前目录
     filename: 'static/[name].[chunkhash:8].js' //编译后的文件名字
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': 'production'
-    }),
     new CleanWebpackPlugin(['dist'], {
       root: basePath
     }),
@@ -50,5 +48,8 @@ module.exports = merge(common, {
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
-  ]
+  ],
+  optimization: {
+    nodeEnv: 'production' // process.env.NODE_ENV
+  },
 })

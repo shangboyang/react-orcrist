@@ -16,9 +16,13 @@
     <body>
         <div id="app" style="width:100%;height:100%;"></div>
         <!-- 使用CDN加速的JS文件，配置在build/assert.js下 -->
-        <% for (var i in htmlWebpackPlugin.options.js&&htmlWebpackPlugin.options.js) { %>
-        <script src="<%= htmlWebpackPlugin.options.js[i] %>"></script>
-        <% } %>
+        <% 
+        for (var i in htmlWebpackPlugin.options.js&&htmlWebpackPlugin.options.js) { 
+        %>
+            <script src="<%= htmlWebpackPlugin.options.js[i] %>"></script>
+        <% 
+        } 
+        %>
         <!-- built files will be auto injected -->
     </body>
 

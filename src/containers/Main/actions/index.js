@@ -25,7 +25,7 @@ const fetchData = () => (dispatch, getState) => {
     foo: 1,
     bar: 2
   }).then((data) => {
-    console.log(mainData);
+    console.log('MAIN DATA ::: ', mainData);
     dispatch(fetchEnd(data));
   }).catch((err) => {
     dispatch(fetchEnd(err));

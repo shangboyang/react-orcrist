@@ -46,26 +46,29 @@ module.exports = {
       "allowTernary": true
     }],
     "no-restricted-globals": 0, // 禁用特定的全局变量 (no-restricted-globals),
+    // 要求或禁止使用拖尾逗号 (comma-dangle)
     "comma-dangle": ["error", {
       "arrays": "only-multiline",
       "objects": "only-multiline",
       "imports": "only-multiline",
       "exports": "only-multiline",
       "functions": "never"
-    }], // 要求或禁止使用拖尾逗号 (comma-dangle)
+    }], 
+    // 优先使用数组和对象解构 (prefer-destructuring)
     "prefer-destructuring": ["error", {
-      "object": true, // 强制对象
+      "object": false, // 强制对象
       "array": false
-    }], // 优先使用数组和对象解构 (prefer-destructuring)
+    }], 
+    
     "no-trailing-spaces": ["error", {
       "skipBlankLines": true,
       "ignoreComments": true
     }], // 禁用行尾空白 (no-trailing-spaces)
-    "one-var": ["error", {
-      var: "consecutive",
-      let: "never",
-      const: "never"
-    }],
+    // "one-var": ["error", {
+    //   var: "consecutive",
+    //   let: "never",
+    //   const: "never"
+    // }],
     "max-len": ["warn", {
       "code": 120,
     }],

@@ -12,6 +12,11 @@ const basePath = path.resolve(__dirname, '../');
 
 module.exports = merge(common, {
   mode: 'development',
+  // use cdn for umd Global React vals
+  // externals: {
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM',
+  // },
   devtool: 'inline-source-map', // 
   devServer: {
     host: '0.0.0.0', // 支持ip访问
@@ -22,9 +27,9 @@ module.exports = merge(common, {
     contentBase: path.resolve(basePath, '/dist/')
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': 'development'
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': 'development'
+    // }),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(['dist'], {
       root: basePath
@@ -36,5 +41,8 @@ module.exports = merge(common, {
       template: 'index.html', // url
       favicon: path.resolve(__dirname, '../favicon.png')
     }, assets.dev.cdn))
-  ]
+  ],
+  optimization: {
+    nodeEnv: 'development' // process.env.NODE_ENV
+  },
 })
