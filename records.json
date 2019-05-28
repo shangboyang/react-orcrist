@@ -19,7 +19,7 @@
         "byName": {},
         "bySource": {},
         "usedIds": [
-          1
+          0
         ]
       }
     }
@@ -296,7 +296,9 @@
       "external {\"commonjs\":\"thunkMiddleware\",\"amd\":\"thunkMiddleware\",\"root\":\"thunkMiddleware\"}": 101,
       "external {\"commonjs\":\"thunkMiddleware\"}": 101,
       "node_modules/vconsole/dist/vconsole.min.js": 105,
-      "external \"ReactRouter\"": 3
+      "external \"ReactRouter\"": 3,
+      "node_modules/babel-loader/lib/index.js??ref--4!src/config/route.js 60e8520f69ad563c4b719b3cacd36727": 3,
+      "node_modules/babel-loader/lib/index.js??ref--4!src/config/store.js 003c8515daa07d1d9c3ce47c52d322ab": 5
     },
     "usedIds": {
       "0": 0,
