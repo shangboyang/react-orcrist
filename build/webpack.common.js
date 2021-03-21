@@ -1,86 +1,94 @@
-const path = require('path');
-const basePath = path.resolve(__dirname, '../');
+const path = require("path");
+const basePath = path.resolve(__dirname, "../");
 
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== "production";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    app: './src/app.js', //编译的入口文件,
+    app: "./src/app.js" //编译的入口文件,
   },
   output: {
-    path: path.resolve(basePath, './dist'), //编译到当前目录
-    filename: 'static/[name].js' //编译后的文件名字
+    path: path.resolve(basePath, "./dist"), //编译到当前目录
+    filename: "static/[name].js" //编译后的文件名字
   },
   resolve: {
-    extensions: ['.web.js', '.js', '.json'], //后缀名自动补全
+    extensions: [".web.js", ".js", ".json"], //后缀名自动补全
     alias: {
-      '@': path.resolve(basePath, './src')
-    },
+      "@": path.resolve(basePath, "./src")
+    }
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', "@babel/preset-react"],
-          plugins: ['@babel/plugin-transform-runtime', ['import', {
-             "libraryName": "antd-mobile",
-             "style": "css"
-          }]]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: [
+              "@babel/plugin-transform-runtime",
+              "@babel/plugin-syntax-dynamic-import",
+              [
+                "import",
+                {
+                  libraryName: "antd-mobile",
+                  style: "css"
+                }
+              ]
+            ]
+          }
         }
+      },
+      {
+        test: /\.(sa|sc|c|le)ss$/,
+        // exclude: /(node_modules|bower_components)/,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "less-loader"
+          // 'sass-loader',
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ["file-loader"]
       }
-    }, {
-      test: /\.(sa|sc|c|le)ss$/,
-      // exclude: /(node_modules|bower_components)/,
-      use: [
-        devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-        'css-loader',
-        'postcss-loader',
-        'less-loader',
-        // 'sass-loader',
-      ],
-    }, {
-      test: /\.(png|svg|jpg|gif)$/,
-      use: [
-        'file-loader'
-      ]
-    }]
+    ]
   },
-  recordsPath: path.join(basePath, 'records.json'),
   optimization: {
     runtimeChunk: {
-      name: "manifest",
+      name: "manifest"
     },
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
       cacheGroups: {
         vendor: {
-          name: 'vendor',
-          chunks: 'all', // async module or not
+          name: "vendor",
+          chunks: "all", // async module or not
           test: /[\\/]node_modules[\\/]/,
-          priority: -10, // 
-          enforce: true // 
+          priority: -10, //
+          enforce: true //
         },
         commons: {
-          name: 'commons',
-          chunks: 'all',
+          name: "commons",
+          chunks: "all",
           test: /src\/containers|src\/components|src\/config|src\/css|src\/utils/,
-          priority: -20, // 
-          enforce: true // 
+          priority: -20, //
+          enforce: true //
         },
         styles: {
-          name: 'styles',
+          name: "styles",
           test: /\.css$/,
-          chunks: 'all',
+          chunks: "all",
           enforce: true
         }
       }
     }
   }
-}
+};
 
 /*
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;

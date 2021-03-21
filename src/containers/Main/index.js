@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
-import {
-  NavBar,
-  Icon
-} from 'antd-mobile';
-import Connect from '@/containers/Main/connect';
-import Content from '@/components/Content';
-import '@/containers/Main/style.less';
-import IMG_THORIN from '@/containers/Main/images/Thorin.jpg';
-import IMG_ORCRIST from '@/containers/Main/images/Orcrist.jpg';
+import React, { Component } from "react";
+import { NavBar, Icon } from "antd-mobile";
+import Connect from "@/containers/Main/connect";
+import Content from "@/components/Content";
+import "@/containers/Main/style.less";
+import IMG_THORIN from "@/containers/Main/images/Thorin.jpg";
+import IMG_ORCRIST from "@/containers/Main/images/Orcrist.jpg";
+
+// import comp from "@/containers/Main/lib/components.js";
+// const comp1 = require("@/containers/Main/lib/components.js");
+// console.log(NavBar);
+// console.log(`wamuu-ui >>>> `, comp, comp1.default);
+
+import { Header, Footer } from "orcrist-ui";
+// const a = require("./components");
+// console.log(a);
+// import a from "./components";
+// console.log(a);
 
 class Main extends Component {
   constructor(props) {
@@ -21,37 +29,44 @@ class Main extends Component {
   }
 
   render() {
-    const {
-      Actions
-    } = this.props;
+    const { Actions } = this.props;
 
     return (
       <div>
+        <Header />
+        <Footer />
         <NavBar
           mode="light"
-          onLeftClick={() => console.log('onLeftClick')}
+          onLeftClick={() => console.log("onLeftClick")}
           rightContent={[
-            <Icon key="1" type="ellipsis" onClick={() => {
-              Actions.fetchData();
-            }} />,
+            <Icon
+              key="1"
+              type="ellipsis"
+              onClick={() => {
+                Actions.fetchData();
+              }}
+            />
           ]}
-        >Orcrist Boilerplate</NavBar>
+        >
+          Orcrist Boilerplate
+        </NavBar>
         <Content>
           <img width="100%" src={IMG_THORIN}></img>
           <div className="content-title">Welcome to use react-orcrist!</div>
           <img width="100%" src={IMG_ORCRIST}></img>
           <section className="content-text">
-            Orcrist was an Elven sword from Gondolin, the mate of Glamdring, which became the sword of Thorin II Oakenshield during The Quest of Erebor.
+            Orcrist was an Elven sword from Gondolin, the mate of Glamdring,
+            which became the sword of Thorin II Oakenshield during The Quest of
+            Erebor.
           </section>
           <section className="content-text">
-            It was used by Thorin in The Hobbit, and was feared and called Biter by the Goblins.
+            It was used by Thorin in The Hobbit, and was feared and called Biter
+            by the Goblins.
           </section>
         </Content>
-
       </div>
     );
   }
 }
-
 
 export default Connect(Main);
